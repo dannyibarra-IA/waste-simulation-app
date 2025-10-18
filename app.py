@@ -195,26 +195,37 @@ with tab3:
     df_now["Value"] = df_now["Daily_waste_tpd"] if unit == "tons/day" else df_now["Waste_tons_year"]
     cbar_title = "t/day" if unit == "tons/day" else "t/year"
 
-    # Tamaños robustos
+    # Tamaños robustos (no usamos size= de Plotly)
     sizes = bubble_sizes(df_now["Value"])
 
-    # Usamos scatter_mapbox (compatible y estable). NO pasamos size= (evita errores).
+    # ✅ Crear el mapa correctamente (no lo dejes vacío)
     fig_current = px.scatter_mapbox(
-
-        # ❌ NO uses: fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
-
-# ✅ Usa este bloque que detecta el tipo de traza y aplica lo permitido
-for tr in fig_current.data:
-    # Plotly puede devolver 'scattermap' (MapLibre) o 'scattermapbox'
-    if getattr(tr, "type", "") == "scattermapbox":
-        tr.marker.update(size=sizes, opacity=0.9, line=dict(width=1, color="white"))
-    else:
-        # 'scattermap' no soporta marker.line
-        tr.marker.update(size=sizes, opacity=0.9)
+        df_now,
+        lat="lat",
+        lon="lon",
+        color="Value",
+        hover_name="City",
+        hover_data={"Landfill": True, "Population": ":,.0f", "Value": ":,.1f"},
+        color_continuous_scale="Turbo",
+        zoom=5,
+        mapbox_style="open-street-map",
+        title=f"Geographic Distribution • {view_year}"
     )
-    fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
-    fig_current.update_layout(margin=dict(l=0, r=0, t=50, b=0),
-                              coloraxis_colorbar=dict(title=cbar_title, thickness=12, len=0.75, y=0.55))
+
+    # ✅ Aplicar tamaños y (si procede) borde blanco SOLO cuando la traza lo soporta
+    for tr in fig_current.data:
+        if getattr(tr, "type", "") == "scattermapbox":
+            tr.marker.update(size=sizes, opacity=0.9, line=dict(width=1, color="white"))
+        else:
+            # 'scattermap' (MapLibre) no soporta marker.line
+            tr.marker.update(size=sizes, opacity=0.9)
+
+    # ✅ Layout (deja la colorbar bonita)
+    fig_current.update_layout(
+        margin=dict(l=0, r=0, t=50, b=0),
+        coloraxis_colorbar=dict(title=cbar_title, thickness=12, len=0.75, y=0.55)
+    )
+
     st.plotly_chart(fig_current, use_container_width=True)
 
 # ==============================
