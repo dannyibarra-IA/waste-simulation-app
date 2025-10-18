@@ -234,17 +234,18 @@ with tab4:
 
     st.markdown("### Animated Simulation (2025–2050) + **Waste Generation of Ten Cities**")
 
-    # 1) Datos base
+    # Ciudades con datos y rango de años disponible
     cities_ok = cities_available
     years = [y for y in range(2025, 2051) if y in df_waste.index]
 
+    # Tabla base (coords)
     base = pd.DataFrame({
         "City": cities_ok,
         "lat": [city_coords[c][0] for c in cities_ok],
         "lon": [city_coords[c][1] for c in cities_ok],
     })
 
-    # Tabla larga (ciudad-año)
+    # Tabla larga para animación (ciudad-año)
     frames_list = []
     for y in years:
         frames_list.append(pd.DataFrame({
@@ -256,10 +257,10 @@ with tab4:
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
 
-    # Serie nacional (suma 10 ciudades)
+    # Tendencia total (suma de las 10 ciudades) por año
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
-    # 2) Subplots: [0] mapbox + [1] xy
+    # --- Subplots: mapa + línea (comparten frames) ---
     fig = make_subplots(
         rows=1, cols=2,
         specs=[[{"type": "mapbox"}, {"type": "xy"}]],
@@ -268,13 +269,13 @@ with tab4:
         subplot_titles=("Geographic Projection", "Waste Generation of Ten Cities")
     )
 
-    # 3) Estado inicial (primer año) — crea EXACTAMENTE 2 trazas
+    # Estado inicial
     y0 = years[0]
     d0 = df_anim[df_anim["Year"] == y0]
-    sizes0 = bubble_sizes(d0["Waste_tons"])
+    sizes0 = bubble_sizes(d0["Waste_tons"])  # helper definido arriba
     nat0 = national[national["Year"] <= y0]
 
-    # Trace index 0 -> MAPA
+    # Trace 0 (MAPA) - estado inicial
     fig.add_trace(
         go.Scattermapbox(
             lat=d0["lat"], lon=d0["lon"], mode="markers",
@@ -292,7 +293,7 @@ with tab4:
         row=1, col=1
     )
 
-    # Trace index 1 -> LÍNEA
+    # Trace 1 (LÍNEA) - estado inicial
     fig.add_trace(
         go.Scatter(
             x=nat0["Year"].astype(int),
@@ -305,25 +306,16 @@ with tab4:
         ),
         row=1, col=2
     )
-    fig.update_xaxes(
-    row=1, col=2,
-    tickmode="linear", dtick=1,
-    range=[years[0], years[-1]],
-    tickformat="d"
-)
 
-# Escala Y desde 2 millones hasta el máximo + margen visual
-ymax = national["Waste_tons"].max() * 1.05
-fig.update_yaxes(
-    row=1, col=2,
-    tickformat=",.0f",
-    range=[2_000_000, ymax],   # 👈 límite inferior fijo a 2 millones
-    title_text="tons/year"
-)
+    # Frames sincronizados (mapa y línea avanzan juntos)
+    frames = []
+    for y in years:
+        dy = df_anim[df_anim["Year"] == y]
+        ny = national[national["Year"] <= y]
         frames.append(go.Frame(
             name=str(y),
             data=[
-                # Frame data para la traza 0 (mapa)
+                # Mapa para el año y
                 go.Scattermapbox(
                     lat=dy["lat"], lon=dy["lon"], mode="markers",
                     marker=dict(
@@ -337,7 +329,7 @@ fig.update_yaxes(
                     showlegend=False,
                     hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
                 ),
-                # Frame data para la traza 1 (línea)
+                # Línea acumulada hasta y — debe ser la SEGUNDA traza del frame
                 go.Scatter(
                     x=ny["Year"].astype(int),
                     y=ny["Waste_tons"],
@@ -351,7 +343,7 @@ fig.update_yaxes(
         ))
     fig.frames = frames
 
-    # 5) Layout + controles
+    # Layout + controles (Play/Pause + slider)
     fig.update_layout(
         mapbox_style="open-street-map",
         mapbox_zoom=5,
@@ -359,7 +351,6 @@ fig.update_yaxes(
         margin=dict(l=10, r=10, t=60, b=10),
         font=dict(size=13, color="#1d3557"),
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-        # Botones Play/Pause
         updatemenus=[{
             "type": "buttons",
             "direction": "left",
@@ -376,7 +367,6 @@ fig.update_yaxes(
                                    "transition": {"duration": 0}}]}
             ]
         }],
-        # Slider de años
         sliders=[{
             "active": 0, "y": -0.05, "x": 0.12, "len": 0.7,
             "pad": {"b": 10, "t": 10},
@@ -388,9 +378,13 @@ fig.update_yaxes(
         xaxis_title="Year", yaxis_title="tons/year"
     )
 
-    # 6) Ejes limpios para la LÍNEA (subplot derecho)
-    fig.update_xaxes(row=1, col=2, tickmode="linear", dtick=1, range=[years[0], years[-1]], tickformat="d")
-    fig.update_yaxes(row=1, col=2, tickformat=",.0f", rangemode="tozero")
+    # Ejes limpios para la LÍNEA (subplot derecho) + reescala desde 2M
+    fig.update_xaxes(row=1, col=2, tickmode="linear", dtick=1,
+                     range=[years[0], years[-1]], tickformat="d")
+    ymax = float(national["Waste_tons"].max()) * 1.05  # margen 5% arriba
+    fig.update_yaxes(row=1, col=2, tickformat=",.0f",
+                     range=[2_000_000, ymax], rangemode="nonnegative",
+                     title_text="tons/year")
 
     st.plotly_chart(fig, use_container_width=True)
 
