@@ -97,25 +97,46 @@ with tab2:
         st.plotly_chart(fig3, use_container_width=True)
 
 with tab3:
-    st.subheader('Geographic Distribution of Waste Generation (2050)')
+    st.subheader("Geographic Distribution of Waste Generation (2050)")
+
+    # --- Manejar año faltante ---
     if 2050 in df_waste.index:
-        df_2050 = df_waste.loc[2050].reset_index().rename(columns={'index':'City', 2050: 'Waste_tons'})
+        df_2050 = df_waste.loc[2050].reset_index().rename(columns={"index": "City", 2050: "Waste_tons"})
     else:
         last_year = int(df_waste.index.max())
-        df_2050 = df_waste.loc[last_year].reset_index().rename(columns={'index':'City', last_year: 'Waste_tons'})
+        df_2050 = df_waste.loc[last_year].reset_index().rename(columns={"index": "City", last_year: "Waste_tons"})
 
+    # --- Crear DataFrame base con coordenadas ---
     df_map = pd.DataFrame({
-        'City': list(city_coords.keys()),
-        'lat': [v[0] for v in city_coords.values()],
-        'lon': [v[1] for v in city_coords.values()],
-        'Waste_tons': [float(df_2050[df_2050['City']==c][city].values[0]) if c in df_2050['City'].values else None for c in city_coords.keys()]
-            if city in df_2050.columns else [None]*len(city_coords)
+        "City": list(city_coords.keys()),
+        "lat": [v[0] for v in city_coords.values()],
+        "lon": [v[1] for v in city_coords.values()],
     })
 
-    fig_map = px.scatter_mapbox(df_map, lat='lat', lon='lon', size='Waste_tons', color='Waste_tons',
-                                hover_name='City', color_continuous_scale='Viridis',
-                                zoom=5, mapbox_style='carto-positron',
-                                title=f'Simulated Waste Generation in {2050 if 2050 in df_waste.index else int(df_waste.index.max())}')
+    # --- Asignar valores de residuos por ciudad ---
+    df_map["Waste_tons"] = df_map["City"].apply(
+        lambda c: float(df_2050.loc[df_2050["City"] == c, "Waste_tons"].values[0])
+        if c in df_2050["City"].values and not df_2050.loc[df_2050["City"] == c, "Waste_tons"].isna().all()
+        else 0.0
+    )
+
+    # --- Asegurar tipo numérico ---
+    df_map["Waste_tons"] = pd.to_numeric(df_map["Waste_tons"], errors="coerce").fillna(0.0)
+
+    # --- Generar mapa ---
+    fig_map = px.scatter_mapbox(
+        df_map,
+        lat="lat",
+        lon="lon",
+        size="Waste_tons",
+        color="Waste_tons",
+        hover_name="City",
+        color_continuous_scale="Viridis",
+        zoom=5,
+        mapbox_style="carto-positron",
+        title=f"Simulated Waste Generation in {2050 if 2050 in df_waste.index else int(df_waste.index.max())}"
+    )
+
     st.plotly_chart(fig_map, use_container_width=True)
 
 with tab4:
