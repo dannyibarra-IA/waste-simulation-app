@@ -200,13 +200,17 @@ with tab3:
 
     # Usamos scatter_mapbox (compatible y estable). NO pasamos size= (evita errores).
     fig_current = px.scatter_mapbox(
-        df_now, lat="lat", lon="lon",
-        color="Value",
-        hover_name="City",
-        hover_data={"Landfill": True, "Population": ":,.0f", "Value": ":,.1f"},
-        color_continuous_scale="Turbo",
-        zoom=5, mapbox_style="open-street-map",
-        title=f"Geographic Distribution • {view_year}"
+
+        # ❌ NO uses: fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
+
+# ✅ Usa este bloque que detecta el tipo de traza y aplica lo permitido
+for tr in fig_current.data:
+    # Plotly puede devolver 'scattermap' (MapLibre) o 'scattermapbox'
+    if getattr(tr, "type", "") == "scattermapbox":
+        tr.marker.update(size=sizes, opacity=0.9, line=dict(width=1, color="white"))
+    else:
+        # 'scattermap' no soporta marker.line
+        tr.marker.update(size=sizes, opacity=0.9)
     )
     fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
     fig_current.update_layout(margin=dict(l=0, r=0, t=50, b=0),
