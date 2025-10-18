@@ -305,6 +305,21 @@ with tab4:
         ),
         row=1, col=2
     )
+    fig.update_xaxes(
+    row=1, col=2,
+    tickmode="linear", dtick=1,
+    range=[years[0], years[-1]],
+    tickformat="d"
+)
+
+# Escala Y desde 2 millones hasta el máximo + margen visual
+ymax = national["Waste_tons"].max() * 1.05
+fig.update_yaxes(
+    row=1, col=2,
+    tickformat=",.0f",
+    range=[2_000_000, ymax],   # 👈 límite inferior fijo a 2 millones
+    title_text="tons/year"
+)
 
     # 4) FRAMES — Deben traer DOS trazas en el MISMO orden (mapa, luego línea)
     frames = []
