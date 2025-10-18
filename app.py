@@ -320,13 +320,6 @@ fig.update_yaxes(
     range=[2_000_000, ymax],   # 👈 límite inferior fijo a 2 millones
     title_text="tons/year"
 )
-
-    # 4) FRAMES — Deben traer DOS trazas en el MISMO orden (mapa, luego línea)
-    frames = []
-    for y in years:
-        dy = df_anim[df_anim["Year"] == y]
-        ny = national[national["Year"] <= y]
-
         frames.append(go.Frame(
             name=str(y),
             data=[
