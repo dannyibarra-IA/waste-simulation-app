@@ -7,19 +7,32 @@ from pathlib import Path
 import numpy as np
 
 # ==============================
-# PAGE CONFIG
+# PAGE CONFIG & GLOBAL STYLE
 # ==============================
 st.set_page_config(page_title="Urban Waste Simulation and Circularity", layout="wide")
 
+# Modern UI Styling
 st.markdown("""
-# 🌎 Urban Waste Simulation and Circularity Dashboard
-This interactive dashboard shows the simulation of **population growth** and **waste generation**
-in 10 Colombian cities from **2025 to 2050**, integrating **System Dynamics modeling** with
+    <style>
+        [data-testid="stAppViewContainer"] { background-color: #f8f9fb; }
+        [data-testid="stSidebar"] { background-color: #eef2f6; }
+        h1, h2, h3, h4 { color: #1d3557; }
+        .stTabs [data-baseweb="tab"] { font-size:16px; font-weight:600; }
+    </style>
+""", unsafe_allow_html=True)
+
+# ==============================
+# HEADER / BANNER
+# ==============================
+st.markdown("""
+# 🌎 Urban Waste Simulation and Circularity Dashboard  
+This interactive dashboard shows the simulation of **population growth** and **waste generation**  
+in 10 Colombian cities from **2025 to 2050**, integrating **System Dynamics modeling** with  
 **Generative AI** to explore **urban circularity scenarios**.
 """)
 
 # ==============================
-# LOAD REAL DATA (Excel)
+# LOAD DATA (REAL EXCEL)
 # ==============================
 DATA_FILE = "simulacion_residuos_2025_2050.xlsx"
 
@@ -33,22 +46,11 @@ def load_data(path: str):
     waste = pd.read_excel(path, sheet_name="ResiduosTotales_t_anio", index_col=0)
     types = pd.read_excel(path, sheet_name="Residuos_5Tipos_largo")
 
-    # Normalizar: todo numérico y años como int
+    # Numeric & tidy
     pop = pop.apply(pd.to_numeric, errors="coerce")
     waste = waste.apply(pd.to_numeric, errors="coerce")
-
-    # Índices pueden venir como float -> pasarlos a int
-    def to_int_index(df):
-        try:
-            df.index = df.index.astype(float).round().astype(int)
-        except Exception:
-            pass
-        return df
-
-    pop = to_int_index(pop)
-    waste = to_int_index(waste)
-
-    # Quitar espacios accidentales en nombres de columnas/ciudades
+    pop.index = pop.index.astype(float).round().astype(int)
+    waste.index = waste.index.astype(float).round().astype(int)
     pop.columns = pop.columns.str.strip()
     waste.columns = waste.columns.str.strip()
     if "Ciudad" in types.columns:
@@ -59,13 +61,12 @@ def load_data(path: str):
     return pop, waste, types, True
 
 df_pop, df_waste, df_types, has_real_data = load_data(DATA_FILE)
-
 if not has_real_data:
-    st.error("❌ No se encontró **simulacion_residuos_2025_2050.xlsx** en el repositorio. Súbelo al mismo nivel de `app.py`.")
+    st.error("❌ Archivo 'simulacion_residuos_2025_2050.xlsx' no encontrado. Súbelo al mismo nivel del script.")
     st.stop()
 
 # ==============================
-# CONSTANTS (coords & landfills)
+# CONFIG (coords & landfills)
 # ==============================
 city_coords = {
     "Medellín": (6.2442, -75.5812),
@@ -77,35 +78,27 @@ city_coords = {
     "Soledad": (10.9184, -74.7646),
     "Bucaramanga": (7.1254, -73.1198),
     "Bello": (6.3373, -75.5540),
-    "Valledupar": (10.4631, -73.2532),
+    "Valledupar": (10.4631, -73.2532)
 }
 landfills = {
-    "Medellín": "La Pradera",
-    "Santiago de Cali": "Navarro",
-    "Barranquilla": "Los Pocitos",
-    "Cartagena de Indias": "Henequén",
-    "Soacha": "Doña Juana (Bogotá)",
-    "San José de Cúcuta": "Guayabal",
-    "Soledad": "Los Pocitos (Metropolitano)",
-    "Bucaramanga": "El Carrasco",
-    "Bello": "La Pradera",
-    "Valledupar": "Los Corazones",
+    "Medellín": "La Pradera", "Santiago de Cali": "Navarro",
+    "Barranquilla": "Los Pocitos", "Cartagena de Indias": "Henequén",
+    "Soacha": "Doña Juana (Bogotá)", "San José de Cúcuta": "Guayabal",
+    "Soledad": "Los Pocitos (Metropolitano)", "Bucaramanga": "El Carrasco",
+    "Bello": "La Pradera", "Valledupar": "Los Corazones"
 }
 
-# Solo ciudades presentes en el Excel (para asegurar datos reales)
-cities_available = sorted(
-    list(set(df_pop.columns) & set(df_waste.columns) & set(city_coords.keys()))
-)
+# Asegurar que existan datos para estas ciudades
+cities_available = sorted(list(set(df_pop.columns) & set(df_waste.columns) & set(city_coords.keys())))
 if not cities_available:
     st.error("❌ Ninguna ciudad del Excel coincide con las coordenadas configuradas. Revisa nombres/acentos.")
     st.stop()
 
 # ==============================
-# SIDEBAR
+# SIDEBAR CONTROLS
 # ==============================
 st.sidebar.title("Simulation Control")
 city = st.sidebar.selectbox("Select City", cities_available, index=0)
-
 min_year = max(2025, int(min(df_pop.index.min(), df_waste.index.min())))
 max_year = min(2050, int(max(df_pop.index.max(), df_waste.index.max())))
 year_range = st.sidebar.slider("Select Year Range", min_year, max_year, (min_year, max_year))
@@ -142,7 +135,8 @@ with tab1:
 # ==============================
 with tab2:
     st.subheader(f"Waste Composition by Type: {city}")
-    if "Ciudad" in df_types.columns and "Año" in df_types.columns and "Tipo" in df_types.columns and "Toneladas_anio" in df_types.columns:
+    expected_cols = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
+    if expected_cols.issubset(set(df_types.columns)):
         df_city = df_types[(df_types["Ciudad"] == city) &
                            (df_types["Año"].between(year_range[0], year_range[1]))]
         if df_city.empty:
@@ -157,55 +151,53 @@ with tab2:
         st.info("Hoja 'Residuos_5Tipos_largo' no tiene columnas esperadas (Ciudad, Año, Tipo, Toneladas_anio).")
 
 # ==============================
-# TAB 3 — Geographic View (Daily, Population, Landfill)
+# TAB 3 — Geographic View (selector año + toggle unidades)
 # ==============================
 with tab3:
-    st.subheader("Geographic View — Current Daily Waste, Population & Landfill")
+    st.subheader("Geographic View — Daily/Annual Waste, Population & Landfill")
+    # Selector de año y unidades
+    view_year = st.slider("Select year to visualize:", min_value=min_year, max_value=max_year, value=min_year)
+    unit = st.radio("Units:", ["tons/day", "tons/year"], horizontal=True)
 
-    current_year = 2025 if 2025 in df_waste.index else int(df_waste.index.min())
-    cities = cities_available  # asegurar solo ciudades con datos
-
+    cities = cities_available
     df_now = pd.DataFrame({
         "City": cities,
         "lat": [city_coords[c][0] for c in cities],
         "lon": [city_coords[c][1] for c in cities],
         "Landfill": [landfills.get(c, "N/A") for c in cities],
-        "Population": [float(df_pop.loc[current_year, c]) if current_year in df_pop.index else np.nan for c in cities],
-        "Waste_tons_year": [float(df_waste.loc[current_year, c]) if current_year in df_waste.index else np.nan for c in cities],
+        "Population": [float(df_pop.loc[view_year, c]) if view_year in df_pop.index else np.nan for c in cities],
+        "Waste_tons_year": [float(df_waste.loc[view_year, c]) if view_year in df_waste.index else np.nan for c in cities],
     })
     df_now["Daily_waste_tpd"] = df_now["Waste_tons_year"] / 365.0
+    df_now["Value"] = df_now["Daily_waste_tpd"] if unit == "tons/day" else df_now["Waste_tons_year"]
+    cbar_title = "t/day" if unit == "tons/day" else "t/year"
 
-    # Tamaños robustos
-    mx = float(df_now["Daily_waste_tpd"].fillna(0).max())
-    mx = 1.0 if mx == 0 else mx
-    sizes = 6 + 44 * (df_now["Daily_waste_tpd"].fillna(0) / mx).clip(0, 1)
+    # Tamaños robustos (evita división por 0)
+    m = float(df_now["Value"].fillna(0).max()); m = 1.0 if m == 0 else m
+    sizes = 6 + 44 * (df_now["Value"].fillna(0) / m).clip(0, 1)
 
     fig_current = px.scatter_mapbox(
         df_now, lat="lat", lon="lon",
-        size=None,  # lo controlamos abajo
-        color="Daily_waste_tpd",
+        size=None,  # control manual
+        color="Value",
         hover_name="City",
-        hover_data={"Landfill": True, "Population": ":,.0f", "Daily_waste_tpd": ":.1f"},
-        color_continuous_scale="Viridis",
-        zoom=5, mapbox_style="carto-positron",
-        title=f"Current Daily Waste (t/day) • {current_year}"
+        hover_data={"Landfill": True, "Population": ":,.0f", "Value": ":,.1f"},
+        color_continuous_scale="Turbo",  # más vibrante
+        zoom=5, mapbox_style="open-street-map",
+        title=f"Geographic Distribution • {view_year}"
     )
-    fig_current.update_traces(marker=dict(size=sizes))
+    fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
     fig_current.update_layout(margin=dict(l=0, r=0, t=50, b=0),
-                              coloraxis_colorbar=dict(title="t/day"))
+                              coloraxis_colorbar=dict(title=cbar_title, thickness=12, len=0.75, y=0.55))
     st.plotly_chart(fig_current, use_container_width=True)
 
 # ==============================
-# TAB 4 — Animated Map + National Chart
+# TAB 4 — Animated Map + Animated Line (mismo Play)
 # ==============================
 with tab4:
-    from plotly.subplots import make_subplots
-    import plotly.graph_objects as go
-
     st.markdown("### Animated Simulation (2025–2050) + **Waste Generation of Ten Cities**")
 
-    # ---- Datos base (ciudades con coordenadas) ----
-    cities_ok = [c for c in city_coords.keys() if c in df_waste.columns]
+    cities_ok = cities_available
     years = [y for y in range(2025, 2051) if y in df_waste.index]
 
     base = pd.DataFrame({
@@ -224,11 +216,9 @@ with tab4:
             "Waste_tons": [float(df_waste.loc[y, c]) for c in cities_ok],
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
-
-    # Tendencia nacional (suma de las 10 ciudades)
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
-    # ---- Figura combinada: mapa + línea ----
+    # Subplots: mapa + línea (comparten frames)
     fig = make_subplots(
         rows=1, cols=2,
         specs=[[{"type": "mapbox"}, {"type": "xy"}]],
@@ -237,13 +227,10 @@ with tab4:
         subplot_titles=("Geographic Projection", "Waste Generation of Ten Cities")
     )
 
-    # Tamaños robustos para las burbujas
     def bubble_sizes(sub):
-        m = float(sub["Waste_tons"].fillna(0).max())
-        m = 1.0 if m == 0 else m
+        m = float(sub["Waste_tons"].fillna(0).max()); m = 1.0 if m == 0 else m
         return 6 + 44 * (sub["Waste_tons"].fillna(0) / m).clip(0, 1)
 
-    # --- Estado inicial (primer año) ---
     y0 = years[0]
     d0 = df_anim[df_anim["Year"] == y0]
     nat0 = national[national["Year"] <= y0]
@@ -251,24 +238,18 @@ with tab4:
     # Trace 0: mapa
     fig.add_trace(
         go.Scattermapbox(
-            lat=d0["lat"], lon=d0["lon"],
-            mode="markers",
-            marker=dict(
-                size=bubble_sizes(d0),
-                color=d0["Waste_tons"],
-                colorscale="Turbo",  # más vibrante
-                showscale=True,
-                colorbar=dict(title="t/year", thickness=12, len=0.75, y=0.55),
-                line=dict(width=1, color="white"),
-                opacity=0.9
-            ),
+            lat=d0["lat"], lon=d0["lon"], mode="markers",
+            marker=dict(size=bubble_sizes(d0), color=d0["Waste_tons"],
+                        colorscale="Turbo", showscale=True,
+                        colorbar=dict(title="t/year", thickness=12, len=0.75, y=0.55),
+                        line=dict(width=1, color="white"), opacity=0.9),
             text=d0["City"],
             hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
         ),
         row=1, col=1
     )
 
-    # Trace 1: línea nacional (hasta y0)
+    # Trace 1: línea (hasta y0)
     fig.add_trace(
         go.Scatter(
             x=nat0["Year"], y=nat0["Waste_tons"],
@@ -281,7 +262,7 @@ with tab4:
         row=1, col=2
     )
 
-    # --- Frames compartidos (mapa y línea avanzan juntos) ---
+    # Frames sincronizados
     frames = []
     for y in years:
         dy = df_anim[df_anim["Year"] == y]
@@ -289,22 +270,14 @@ with tab4:
         frames.append(go.Frame(
             name=str(y),
             data=[
-                # mapa
                 go.Scattermapbox(
-                    lat=dy["lat"], lon=dy["lon"],
-                    mode="markers",
-                    marker=dict(
-                        size=bubble_sizes(dy),
-                        color=dy["Waste_tons"],
-                        colorscale="Turbo",
-                        showscale=True,
-                        line=dict(width=1, color="white"),
-                        opacity=0.9
-                    ),
+                    lat=dy["lat"], lon=dy["lon"], mode="markers",
+                    marker=dict(size=bubble_sizes(dy), color=dy["Waste_tons"],
+                                colorscale="Turbo", showscale=True,
+                                line=dict(width=1, color="white"), opacity=0.9),
                     text=dy["City"],
                     hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
                 ),
-                # línea acumulada hasta el año y
                 go.Scatter(
                     x=ny["Year"], y=ny["Waste_tons"],
                     mode="lines+markers",
@@ -317,44 +290,32 @@ with tab4:
         ))
     fig.frames = frames
 
-    # ---- Layout general + controles de animación ----
     fig.update_layout(
         mapbox_style="open-street-map",
-        mapbox_zoom=5,
-        mapbox_center={"lat": 4.6, "lon": -74.1},
+        mapbox_zoom=5, mapbox_center={"lat": 4.6, "lon": -74.1},
         margin=dict(l=10, r=10, t=60, b=10),
         font=dict(size=13, color="#1d3557"),
+        plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
         updatemenus=[{
-            "type": "buttons",
-            "direction": "left",
-            "x": 0.12, "y": -0.08,
-            "showactive": True,
+            "type": "buttons", "direction": "left", "x": 0.12, "y": -0.08, "showactive": True,
             "buttons": [
                 {"label": "▶ Play", "method": "animate",
                  "args": [None, {"frame": {"duration": 800, "redraw": True},
-                                 "fromcurrent": True,
-                                 "transition": {"duration": 300}}]},
+                                 "fromcurrent": True, "transition": {"duration": 300}}]},
                 {"label": "⏸ Pause", "method": "animate",
                  "args": [[None], {"frame": {"duration": 0, "redraw": False},
-                                   "mode": "immediate",
-                                   "transition": {"duration": 0}}]}
+                                   "mode": "immediate", "transition": {"duration": 0}}]}
             ]
         }],
         sliders=[{
-            "active": 0,
-            "y": -0.05,
-            "x": 0.12,
-            "len": 0.7,
+            "active": 0, "y": -0.05, "x": 0.12, "len": 0.7,
             "pad": {"b": 10, "t": 10},
             "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
             "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True},
                                           "mode": "immediate"}],
                        "label": str(y), "method": "animate"} for y in years]
         }],
-        xaxis_title="Year",
-        yaxis_title="tons/year",
-        plot_bgcolor="rgba(0,0,0,0)",
-        paper_bgcolor="rgba(0,0,0,0)"
+        xaxis_title="Year", yaxis_title="tons/year"
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -365,7 +326,7 @@ with tab4:
 with tab5:
     st.markdown("""
 ### About
-**Developer:** Dr. Danny Ibarra Vega — Universidad de Antioquia (2025)  
+**Developer:** Dr. Danny Ibarra Vega — Universidad de Antioquia (2025)**  
 **Method:** System Dynamics (logistic population growth, bounded PPC), 2025–2050 simulations.  
 **Data:** DANE projections (2018–2042), SSPD (2023), city-specific compositions.  
 **AI Layer:** Generative AI for parameter exploration, scenario generation, and narrative visualization.
