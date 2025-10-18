@@ -213,12 +213,9 @@ with tab3:
     )
 
     # ✅ Aplicar tamaños y (si procede) borde blanco SOLO cuando la traza lo soporta
-    for tr in fig_current.data:
-        if getattr(tr, "type", "") == "scattermapbox":
-            tr.marker.update(size=sizes, opacity=0.9, line=dict(width=1, color="white"))
-        else:
-            # 'scattermap' (MapLibre) no soporta marker.line
-            tr.marker.update(size=sizes, opacity=0.9)
+   # Aplica tamaños y opacidad sin usar marker.line (100% compatible)
+for tr in fig_current.data:
+    tr.marker.update(size=sizes, opacity=0.9)
 
     # ✅ Layout (deja la colorbar bonita)
     fig_current.update_layout(
@@ -232,17 +229,23 @@ with tab3:
 # TAB 4 — Animated Map + Animated Line (mismo Play)
 # ==============================
 with tab4:
+    from plotly.subplots import make_subplots
+    import plotly.graph_objects as go
+
     st.markdown("### Animated Simulation (2025–2050) + **Waste Generation of Ten Cities**")
 
+    # Ciudades con datos y rango de años disponible
     cities_ok = cities_available
     years = [y for y in range(2025, 2051) if y in df_waste.index]
 
+    # Tabla base (coords)
     base = pd.DataFrame({
         "City": cities_ok,
         "lat": [city_coords[c][0] for c in cities_ok],
         "lon": [city_coords[c][1] for c in cities_ok],
     })
 
+    # Tabla larga para animación
     frames_list = []
     for y in years:
         frames_list.append(pd.DataFrame({
@@ -253,9 +256,11 @@ with tab4:
             "Waste_tons": [float(df_waste.loc[y, c]) for c in cities_ok],
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
+
+    # Tendencia total (suma 10 ciudades) por año
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
-    # Subplots: mapa + línea (comparten frames)
+    # --- Subplots: mapa + línea (comparten frames) ---
     fig = make_subplots(
         rows=1, cols=2,
         specs=[[{"type": "mapbox"}, {"type": "xy"}]],
@@ -267,22 +272,27 @@ with tab4:
     # Estado inicial
     y0 = years[0]
     d0 = df_anim[df_anim["Year"] == y0]
-    sizes0 = bubble_sizes(d0["Waste_tons"])
+    sizes0 = bubble_sizes(d0["Waste_tons"])  # usa helper ya definido
+    nat0 = national[national["Year"] <= y0]
 
+    # Trace 0 (MAPA) - estado inicial
     fig.add_trace(
         go.Scattermapbox(
             lat=d0["lat"], lon=d0["lon"], mode="markers",
-            marker=dict(size=sizes0, color=to_num(d0["Waste_tons"]),
-                        colorscale="Turbo", showscale=True,
-                        colorbar=dict(title="t/year", thickness=12, len=0.75, y=0.55),
-                        line=dict(width=1, color="white"), opacity=0.9),
+            marker=dict(
+                size=sizes0,
+                color=to_num(d0["Waste_tons"]),
+                colorscale="Turbo",
+                showscale=True,
+                opacity=0.9
+            ),
             text=d0["City"],
             hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
         ),
         row=1, col=1
     )
 
-    nat0 = national[national["Year"] <= y0]
+    # Trace 1 (LÍNEA) - estado inicial
     fig.add_trace(
         go.Scatter(
             x=nat0["Year"], y=nat0["Waste_tons"],
@@ -295,7 +305,7 @@ with tab4:
         row=1, col=2
     )
 
-    # Frames sincronizados
+    # Frames sincronizados (mapa y línea avanzan juntos)
     frames = []
     for y in years:
         dy = df_anim[df_anim["Year"] == y]
@@ -303,15 +313,20 @@ with tab4:
         frames.append(go.Frame(
             name=str(y),
             data=[
+                # Mapa para el año y
                 go.Scattermapbox(
                     lat=dy["lat"], lon=dy["lon"], mode="markers",
-                    marker=dict(size=bubble_sizes(dy["Waste_tons"]),
-                                color=to_num(dy["Waste_tons"]),
-                                colorscale="Turbo", showscale=True,
-                                line=dict(width=1, color="white"), opacity=0.9),
+                    marker=dict(
+                        size=bubble_sizes(dy["Waste_tons"]),
+                        color=to_num(dy["Waste_tons"]),
+                        colorscale="Turbo",
+                        showscale=True,
+                        opacity=0.9
+                    ),
                     text=dy["City"],
                     hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
                 ),
+                # Línea acumulada hasta y
                 go.Scatter(
                     x=ny["Year"], y=ny["Waste_tons"],
                     mode="lines+markers",
@@ -324,21 +339,28 @@ with tab4:
         ))
     fig.frames = frames
 
+    # Layout + controles (Play/Pause + slider)
     fig.update_layout(
         mapbox_style="open-street-map",
-        mapbox_zoom=5, mapbox_center={"lat": 4.6, "lon": -74.1},
+        mapbox_zoom=5,
+        mapbox_center={"lat": 4.6, "lon": -74.1},
         margin=dict(l=10, r=10, t=60, b=10),
         font=dict(size=13, color="#1d3557"),
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
         updatemenus=[{
-            "type": "buttons", "direction": "left", "x": 0.12, "y": -0.08, "showactive": True,
+            "type": "buttons",
+            "direction": "left",
+            "x": 0.12, "y": -0.08,
+            "showactive": True,
             "buttons": [
                 {"label": "▶ Play", "method": "animate",
                  "args": [None, {"frame": {"duration": 800, "redraw": True},
-                                 "fromcurrent": True, "transition": {"duration": 300}}]},
+                                 "fromcurrent": True,
+                                 "transition": {"duration": 300}}]},
                 {"label": "⏸ Pause", "method": "animate",
                  "args": [[None], {"frame": {"duration": 0, "redraw": False},
-                                   "mode": "immediate", "transition": {"duration": 0}}]}
+                                   "mode": "immediate",
+                                   "transition": {"duration": 0}}]}
             ]
         }],
         sliders=[{
