@@ -25,7 +25,9 @@ st.markdown("""
 # HEADER / BANNER
 # ==============================
 st.markdown("""
-# 🌎 Urban Waste Simulation and Circularity Dashboard  
+# 🌎 Urban Waste Simulation and Circularity Dashboard
+Elaborated by Danny Ibarra Vega Ph.D 
+danny.ibarra@udea.edu.co
 This interactive dashboard shows the simulation of **population growth** and **waste generation**  
 in 10 Colombian cities from **2025 to 2050**, integrating **System Dynamics modeling** with  
 **Generative AI** to explore **urban circularity scenarios**.
