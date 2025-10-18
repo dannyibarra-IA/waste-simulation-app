@@ -1,13 +1,17 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
 import numpy as np
 
+# -------------------------------------------------
+# PAGE CONFIGURATION
+# -------------------------------------------------
 st.set_page_config(page_title='Urban Waste Simulation and Circularity', layout='wide')
 
-# Banner (emoji + headline)
+# -------------------------------------------------
+# HEADER / BANNER
+# -------------------------------------------------
 st.markdown(
     """
     # 🌎 Urban Waste Simulation and Circularity Dashboard  
@@ -17,6 +21,9 @@ st.markdown(
     """
 )
 
+# -------------------------------------------------
+# LOAD DATA
+# -------------------------------------------------
 DATA_FILE = 'simulacion_residuos_2025_2050.xlsx'
 
 @st.cache_data
@@ -28,7 +35,7 @@ def load_data(path: str):
         types = pd.read_excel(path, sheet_name='Residuos_5Tipos_largo')
         return pop, waste, types, True
     else:
-        # DEMO fallback (small synthetic dataset)
+        # DEMO fallback
         cities_demo = ['Medellín','Santiago de Cali','Barranquilla','Cartagena de Indias',
                        'Soacha','San José de Cúcuta','Soledad','Bucaramanga','Bello','Valledupar']
         years = list(range(2025, 2051))
@@ -60,12 +67,27 @@ city_coords = {
     'Valledupar': (10.4631, -73.2532)
 }
 
+# -------------------------------------------------
+# SIDEBAR CONTROLS
+# -------------------------------------------------
 st.sidebar.title('Simulation Control')
 city = st.sidebar.selectbox('Select City', cities, index=0)
 year_range = st.sidebar.slider('Select Year Range', 2025, 2050, (2025, 2050))
 
-tab1, tab2, tab3, tab4 = st.tabs(['📈 Population & Waste', '♻️ Composition by Type', '🗺️ Geographic View', 'ℹ️ About'])
+# -------------------------------------------------
+# MAIN TABS
+# -------------------------------------------------
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    '📈 Population & Waste',
+    '♻️ Composition by Type',
+    '🗺️ Geographic View',
+    '🎞️ Animated Simulation + Chart',
+    'ℹ️ About'
+])
 
+# -------------------------------------------------
+# TAB 1: Population & Waste
+# -------------------------------------------------
 with tab1:
     st.subheader(f'Population Projection: {city}')
     df_pop_plot = df_pop[(df_pop.index >= year_range[0]) & (df_pop.index <= year_range[1])]
@@ -80,13 +102,16 @@ with tab1:
     st.plotly_chart(fig2, use_container_width=True)
 
     if not loaded_from_file:
-        st.warning("Demo data is being used because 'simulacion_residuos_2025_2050.xlsx' was not found. Upload the file to the repo for real results.")
+        st.warning("⚠️ Demo data is being used because 'simulacion_residuos_2025_2050.xlsx' was not found. Upload the real file to the repo for real results.")
 
+# -------------------------------------------------
+# TAB 2: Composition by Type
+# -------------------------------------------------
 with tab2:
     st.subheader(f'Waste Composition by Type: {city}')
     df_city = df_types[df_types['Ciudad'] == city]
     if df_city.empty and city in df_waste.columns:
-        st.info('Composition long table not found for this city; showing only total series.')
+        st.info('Composition data not found; showing total waste instead.')
         st.line_chart(df_waste[city])
     else:
         df_city = df_city[(df_city['Año'] >= year_range[0]) & (df_city['Año'] <= year_range[1])]
@@ -96,50 +121,99 @@ with tab2:
                        labels={'value': 'Tons/year', 'Año': 'Year'})
         st.plotly_chart(fig3, use_container_width=True)
 
+# -------------------------------------------------
+# TAB 3: Geographic Distribution (2050)
+# -------------------------------------------------
 with tab3:
     st.subheader("Geographic Distribution of Waste Generation (2050)")
-
-    # --- Manejar año faltante ---
     if 2050 in df_waste.index:
         df_2050 = df_waste.loc[2050].reset_index().rename(columns={"index": "City", 2050: "Waste_tons"})
     else:
         last_year = int(df_waste.index.max())
         df_2050 = df_waste.loc[last_year].reset_index().rename(columns={"index": "City", last_year: "Waste_tons"})
 
-    # --- Crear DataFrame base con coordenadas ---
     df_map = pd.DataFrame({
         "City": list(city_coords.keys()),
         "lat": [v[0] for v in city_coords.values()],
         "lon": [v[1] for v in city_coords.values()],
     })
-
-    # --- Asignar valores de residuos por ciudad ---
     df_map["Waste_tons"] = df_map["City"].apply(
         lambda c: float(df_2050.loc[df_2050["City"] == c, "Waste_tons"].values[0])
         if c in df_2050["City"].values and not df_2050.loc[df_2050["City"] == c, "Waste_tons"].isna().all()
         else 0.0
     )
-
-    # --- Asegurar tipo numérico ---
-    df_map["Waste_tons"] = pd.to_numeric(df_map["Waste_tons"], errors="coerce").fillna(0.0)
-
-    # --- Generar mapa ---
     fig_map = px.scatter_mapbox(
-        df_map,
-        lat="lat",
-        lon="lon",
-        size="Waste_tons",
-        color="Waste_tons",
-        hover_name="City",
-        color_continuous_scale="Viridis",
-        zoom=5,
+        df_map, lat="lat", lon="lon", size="Waste_tons", color="Waste_tons",
+        hover_name="City", color_continuous_scale="Viridis", zoom=5,
         mapbox_style="carto-positron",
-        title=f"Simulated Waste Generation in {2050 if 2050 in df_waste.index else int(df_waste.index.max())}"
+        title=f"Simulated Waste Generation in {2050 if 2050 in df_waste.index else last_year}"
     )
-
     st.plotly_chart(fig_map, use_container_width=True)
 
+# -------------------------------------------------
+# TAB 4: Animated Map + National Chart
+# -------------------------------------------------
 with tab4:
+    st.markdown("### Animated Simulation of Urban Waste Generation (2025–2050) with National Trend")
+
+    rellenos = {
+        "Medellín": "La Pradera", "Santiago de Cali": "Navarro",
+        "Barranquilla": "Los Pocitos", "Cartagena de Indias": "Henequén",
+        "Soacha": "Doña Juana (Bogotá)", "San José de Cúcuta": "Guayabal",
+        "Soledad": "Los Pocitos (Metropolitano)", "Bucaramanga": "El Carrasco",
+        "Bello": "La Pradera", "Valledupar": "Los Corazones"
+    }
+
+    df_base = pd.DataFrame({
+        "City": list(city_coords.keys()),
+        "lat": [v[0] for v in city_coords.values()],
+        "lon": [v[1] for v in city_coords.values()],
+        "Landfill": [rellenos[c] for c in city_coords.keys()]
+    })
+
+    frames = []
+    for year in range(2025, 2051):
+        if year in df_waste.index:
+            df_temp = pd.DataFrame({
+                "City": df_base["City"], "lat": df_base["lat"], "lon": df_base["lon"],
+                "Year": year,
+                "Population": [df_pop.loc[year, c] for c in df_base["City"]],
+                "Waste_tons": [df_waste.loc[year, c] for c in df_base["City"]],
+                "Landfill": df_base["Landfill"]
+            })
+            df_temp["Daily_waste_tpd"] = df_temp["Waste_tons"] / 365
+            frames.append(df_temp)
+    df_anim = pd.concat(frames, ignore_index=True)
+    national_trend = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
+
+    col1, col2 = st.columns([3, 1.5])
+    with col1:
+        fig_anim = px.scatter_mapbox(
+            df_anim, lat="lat", lon="lon", size="Waste_tons", color="Waste_tons",
+            hover_name="City", hover_data={
+                "Year": True, "Population": ":.0f",
+                "Daily_waste_tpd": ":.1f", "Landfill": True
+            },
+            animation_frame="Year", color_continuous_scale="Viridis",
+            mapbox_style="carto-positron", zoom=5,
+            title="Animated Projection of Waste Generation in Colombian Cities (2025–2050)"
+        )
+        fig_anim.update_layout(margin=dict(l=0, r=0, t=50, b=0))
+        st.plotly_chart(fig_anim, use_container_width=True)
+
+    with col2:
+        fig_trend = px.line(
+            national_trend, x="Year", y="Waste_tons", markers=True,
+            title="National Waste Generation Trend",
+            labels={"Waste_tons": "tons/year", "Year": "Year"}
+        )
+        fig_trend.update_traces(line_color="#2A9D8F", marker_color="#264653")
+        st.plotly_chart(fig_trend, use_container_width=True)
+
+# -------------------------------------------------
+# TAB 5: About
+# -------------------------------------------------
+with tab5:
     st.markdown(
         '''
         ### About  
