@@ -125,37 +125,75 @@ with tab2:
 # TAB 3: Geographic Distribution (2050)
 # -------------------------------------------------
 with tab3:
-    st.subheader("Geographic Distribution of Waste Generation (2050)")
-    if 2050 in df_waste.index:
-        df_2050 = df_waste.loc[2050].reset_index().rename(columns={"index": "City", 2050: "Waste_tons"})
-    else:
-        last_year = int(df_waste.index.max())
-        df_2050 = df_waste.loc[last_year].reset_index().rename(columns={"index": "City", last_year: "Waste_tons"})
+    st.subheader("Geographic View — Current Daily Waste, Population & Landfill (2025)")
 
-    df_map = pd.DataFrame({
+    # Año "actual" (ajústalo a 2024 si lo manejas en tu Excel)
+    current_year = 2025 if 2025 in df_waste.index else int(df_waste.index.min())
+
+    # Diccionario de rellenos (ajústalo si tienes nombres oficiales distintos)
+    rellenos = {
+        "Medellín": "La Pradera",
+        "Santiago de Cali": "Navarro",
+        "Barranquilla": "Los Pocitos",
+        "Cartagena de Indias": "Henequén",
+        "Soacha": "Doña Juana (Bogotá)",
+        "San José de Cúcuta": "Guayabal",
+        "Soledad": "Los Pocitos (Metropolitano)",
+        "Bucaramanga": "El Carrasco",
+        "Bello": "La Pradera",
+        "Valledupar": "Los Corazones"
+    }
+
+    # Base con coordenadas + rellenos
+    df_base = pd.DataFrame({
         "City": list(city_coords.keys()),
         "lat": [v[0] for v in city_coords.values()],
         "lon": [v[1] for v in city_coords.values()],
+        "Landfill": [rellenos.get(c, "N/A") for c in city_coords.keys()]
     })
-    df_map["Waste_tons"] = df_map["City"].apply(
-        lambda c: float(df_2050.loc[df_2050["City"] == c, "Waste_tons"].values[0])
-        if c in df_2050["City"].values and not df_2050.loc[df_2050["City"] == c, "Waste_tons"].isna().all()
-        else 0.0
-    )
-    fig_map = px.scatter_mapbox(
-        df_map, lat="lat", lon="lon", size="Waste_tons", color="Waste_tons",
-        hover_name="City", color_continuous_scale="Viridis", zoom=5,
+
+    # Construir datos 2025
+    df_now = pd.DataFrame({
+        "City": df_base["City"],
+        "lat": df_base["lat"],
+        "lon": df_base["lon"],
+        "Population": [float(df_pop.loc[current_year, c]) if current_year in df_pop.index and c in df_pop.columns else float("nan")
+                       for c in df_base["City"]],
+        "Waste_tons_year": [float(df_waste.loc[current_year, c]) if current_year in df_waste.index and c in df_waste.columns else float("nan")
+                            for c in df_base["City"]],
+        "Landfill": df_base["Landfill"]
+    })
+    df_now["Daily_waste_tpd"] = df_now["Waste_tons_year"] / 365.0
+
+    # Mapa (tamaño/color por t/día)
+    fig_current = px.scatter_mapbox(
+        df_now,
+        lat="lat", lon="lon",
+        size="Daily_waste_tpd",
+        color="Daily_waste_tpd",
+        hover_name="City",
+        hover_data={
+            "Landfill": True,
+            "Population": ":.0f",
+            "Daily_waste_tpd": ":.1f"
+        },
+        color_continuous_scale="Viridis",
+        zoom=5,
         mapbox_style="carto-positron",
-        title=f"Simulated Waste Generation in {2050 if 2050 in df_waste.index else last_year}"
+        title=f"Current Daily Waste (tons/day) • {current_year}"
     )
-    st.plotly_chart(fig_map, use_container_width=True)
+    st.plotly_chart(fig_current, use_container_width=True)
 
 # -------------------------------------------------
 # TAB 4: Animated Map + National Chart
 # -------------------------------------------------
 with tab4:
-    st.markdown("### Animated Simulation of Urban Waste Generation (2025–2050) with National Trend")
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
 
+    st.markdown("### Animated Simulation (2025–2050) + National Trend (synchronized)")
+
+    # Rellenos
     rellenos = {
         "Medellín": "La Pradera", "Santiago de Cali": "Navarro",
         "Barranquilla": "Los Pocitos", "Cartagena de Indias": "Henequén",
@@ -164,51 +202,162 @@ with tab4:
         "Bello": "La Pradera", "Valledupar": "Los Corazones"
     }
 
+    # Base
     df_base = pd.DataFrame({
         "City": list(city_coords.keys()),
         "lat": [v[0] for v in city_coords.values()],
         "lon": [v[1] for v in city_coords.values()],
-        "Landfill": [rellenos[c] for c in city_coords.keys()]
+        "Landfill": [rellenos.get(c, "N/A") for c in city_coords.keys()]
     })
 
+    # Construir tabla larga 2025–2050
+    frames_list = []
+    years = [y for y in range(2025, 2051) if y in df_waste.index]
+    for y in years:
+        df_temp = pd.DataFrame({
+            "City": df_base["City"],
+            "lat": df_base["lat"],
+            "lon": df_base["lon"],
+            "Year": y,
+            "Population": [float(df_pop.loc[y, c]) if y in df_pop.index and c in df_pop.columns else float("nan")
+                           for c in df_base["City"]],
+            "Waste_tons": [float(df_waste.loc[y, c]) if y in df_waste.index and c in df_waste.columns else float("nan")
+                           for c in df_base["City"]],
+            "Landfill": df_base["Landfill"]
+        })
+        df_temp["Daily_waste_tpd"] = df_temp["Waste_tons"] / 365.0
+        frames_list.append(df_temp)
+    df_anim = pd.concat(frames_list, ignore_index=True)
+
+    # Tendencia nacional (acumulada hasta cada año para animar la línea)
+    national = (df_anim.groupby("Year")["Waste_tons"].sum().reset_index())
+    national.rename(columns={"Waste_tons": "Total_tons"}, inplace=True)
+
+    # --- Figura con 2 subplots: mapbox + xy ---
+    fig = make_subplots(
+        rows=1, cols=2,
+        specs=[[{"type": "mapbox"}, {"type": "xy"}]],
+        column_widths=[0.62, 0.38],
+        horizontal_spacing=0.06,
+        subplot_titles=("Geographic Projection", "National Waste Generation")
+    )
+
+    # Datos iniciales (primer año)
+    y0 = years[0]
+    df0 = df_anim[df_anim["Year"] == y0]
+    nat0 = national[national["Year"] <= y0]
+
+    # Trace 0: Mapa (scattermapbox)
+    fig.add_trace(
+        go.Scattermapbox(
+            lat=df0["lat"], lon=df0["lon"],
+            mode="markers",
+            marker=dict(size=np.clip(df0["Waste_tons"].fillna(0)/df0["Waste_tons"].max()*50, 6, 50),
+                        color=df0["Waste_tons"], colorscale="Viridis", showscale=True,
+                        colorbar=dict(title="tons/year")),
+            text=df0["City"],
+            hovertemplate=(
+                "<b>%{text}</b><br>" +
+                "Landfill: %{customdata[0]}<br>" +
+                "Population: %{customdata[1]:,.0f}<br>" +
+                "Daily waste: %{customdata[2]:.1f} t/day<br>" +
+                "Annual waste: %{marker.color:,.0f} t/year"
+            ),
+            customdata=np.stack([df0["Landfill"], df0["Population"], df0["Daily_waste_tpd"]], axis=-1)
+        ),
+        row=1, col=1
+    )
+
+    # Trace 1: Línea nacional (hasta y0)
+    fig.add_trace(
+        go.Scatter(
+            x=nat0["Year"], y=nat0["Total_tons"],
+            mode="lines+markers",
+            line=dict(color="#2A9D8F", width=3),
+            marker=dict(color="#264653", size=7),
+            name="National total"
+        ),
+        row=1, col=2
+    )
+
+    # Frames (actualizan ambos traces)
     frames = []
-    for year in range(2025, 2051):
-        if year in df_waste.index:
-            df_temp = pd.DataFrame({
-                "City": df_base["City"], "lat": df_base["lat"], "lon": df_base["lon"],
-                "Year": year,
-                "Population": [df_pop.loc[year, c] for c in df_base["City"]],
-                "Waste_tons": [df_waste.loc[year, c] for c in df_base["City"]],
-                "Landfill": df_base["Landfill"]
-            })
-            df_temp["Daily_waste_tpd"] = df_temp["Waste_tons"] / 365
-            frames.append(df_temp)
-    df_anim = pd.concat(frames, ignore_index=True)
-    national_trend = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
+    for y in years:
+        dfy = df_anim[df_anim["Year"] == y]
+        naty = national[national["Year"] <= y]
+        frames.append(go.Frame(
+            name=str(y),
+            data=[
+                # Trace 0 (mapa)
+                go.Scattermapbox(
+                    lat=dfy["lat"], lon=dfy["lon"],
+                    mode="markers",
+                    marker=dict(size=np.clip(dfy["Waste_tons"].fillna(0)/dfy["Waste_tons"].max()*50, 6, 50),
+                                color=dfy["Waste_tons"], colorscale="Viridis", showscale=True),
+                    text=dfy["City"],
+                    customdata=np.stack([dfy["Landfill"], dfy["Population"], dfy["Daily_waste_tpd"]], axis=-1),
+                    hovertemplate=(
+                        "<b>%{text}</b><br>" +
+                        "Landfill: %{customdata[0]}<br>" +
+                        "Population: %{customdata[1]:,.0f}<br>" +
+                        "Daily waste: %{customdata[2]:.1f} t/day<br>" +
+                        "Annual waste: %{marker.color:,.0f} t/year"
+                    )
+                ),
+                # Trace 1 (línea nacional)
+                go.Scatter(
+                    x=naty["Year"], y=naty["Total_tons"],
+                    mode="lines+markers",
+                    line=dict(color="#2A9D8F", width=3),
+                    marker=dict(color="#264653", size=7),
+                    name="National total"
+                )
+            ]
+        ))
 
-    col1, col2 = st.columns([3, 1.5])
-    with col1:
-        fig_anim = px.scatter_mapbox(
-            df_anim, lat="lat", lon="lon", size="Waste_tons", color="Waste_tons",
-            hover_name="City", hover_data={
-                "Year": True, "Population": ":.0f",
-                "Daily_waste_tpd": ":.1f", "Landfill": True
-            },
-            animation_frame="Year", color_continuous_scale="Viridis",
-            mapbox_style="carto-positron", zoom=5,
-            title="Animated Projection of Waste Generation in Colombian Cities (2025–2050)"
-        )
-        fig_anim.update_layout(margin=dict(l=0, r=0, t=50, b=0))
-        st.plotly_chart(fig_anim, use_container_width=True)
+    fig.frames = frames
 
-    with col2:
-        fig_trend = px.line(
-            national_trend, x="Year", y="Waste_tons", markers=True,
-            title="National Waste Generation Trend",
-            labels={"Waste_tons": "tons/year", "Year": "Year"}
-        )
-        fig_trend.update_traces(line_color="#2A9D8F", marker_color="#264653")
-        st.plotly_chart(fig_trend, use_container_width=True)
+    # Layout + controles Play/Pause
+    fig.update_layout(
+        mapbox_style="carto-positron",
+        mapbox_zoom=5,
+        mapbox_center={"lat": 4.6, "lon": -74.1},
+        margin=dict(l=10, r=10, t=60, b=10),
+        updatemenus=[{
+            "type": "buttons",
+            "direction": "left",
+            "x": 0.15, "y": -0.08,
+            "showactive": True,
+            "buttons": [
+                {"label": "▶ Play",
+                 "method": "animate",
+                 "args": [None, {"frame": {"duration": 800, "redraw": True},
+                                 "fromcurrent": True,
+                                 "transition": {"duration": 300}}]},
+                {"label": "⏸ Pause",
+                 "method": "animate",
+                 "args": [[None], {"frame": {"duration": 0, "redraw": False},
+                                   "mode": "immediate",
+                                   "transition": {"duration": 0}}]}
+            ]
+        }],
+        sliders=[{
+            "active": 0,
+            "y": -0.05,
+            "x": 0.15,
+            "len": 0.7,
+            "pad": {"b": 10, "t": 10},
+            "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
+            "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True},
+                                          "mode": "immediate"}],
+                       "label": str(y),
+                       "method": "animate"} for y in years]
+        }],
+        xaxis_title="Year",
+        yaxis_title="Total waste (tons/year)"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 # -------------------------------------------------
 # TAB 5: About
