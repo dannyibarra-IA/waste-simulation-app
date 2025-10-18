@@ -6,28 +6,6 @@ from plotly.subplots import make_subplots
 from pathlib import Path
 import numpy as np
 
-def to_num(x):
-    """Devuelve float con NaN->0, y listas/Series -> numpy array de floats."""
-    import numpy as np, pandas as pd
-    if isinstance(x, (pd.Series, pd.Index)):
-        x = pd.to_numeric(x, errors="coerce").fillna(0.0).to_numpy()
-    elif isinstance(x, pd.DataFrame):
-        x = pd.to_numeric(x.squeeze(), errors="coerce").fillna(0.0).to_numpy()
-    else:
-        try:
-            x = np.asarray(x, dtype=float)
-        except Exception:
-            x = np.array([0.0], dtype=float)
-    x = np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
-    return x
-
-def bubble_sizes(values, min_size=6, max_size=50):
-    import numpy as np
-    v = to_num(values)
-    vmax = float(v.max()) if v.size else 0.0
-    vmax = 1.0 if vmax <= 0 else vmax
-    s = min_size + (max_size - min_size) * (v / vmax)
-    return s.tolist()
 # ==============================
 # PAGE CONFIG & GLOBAL STYLE
 # ==============================
@@ -52,6 +30,28 @@ This interactive dashboard shows the simulation of **population growth** and **w
 in 10 Colombian cities from **2025 to 2050**, integrating **System Dynamics modeling** with  
 **Generative AI** to explore **urban circularity scenarios**.
 """)
+
+# ==============================
+# HELPERS (para tamaños y numéricos seguros)
+# ==============================
+def to_num(x):
+    """Convierte a array float y reemplaza NaN/inf por 0 (evita fallos en Plotly)."""
+    if isinstance(x, (pd.Series, pd.Index)):
+        v = pd.to_numeric(x, errors="coerce").fillna(0.0).to_numpy(dtype=float)
+    elif isinstance(x, pd.DataFrame):
+        v = pd.to_numeric(x.squeeze(), errors="coerce").fillna(0.0).to_numpy(dtype=float)
+    else:
+        v = np.asarray(x, dtype=float)
+    v = np.nan_to_num(v, nan=0.0, posinf=0.0, neginf=0.0)
+    return v
+
+def bubble_sizes(values, min_size=6, max_size=50):
+    """Escala robusta de tamaños (sin divisiones por cero)."""
+    v = to_num(values)
+    vmax = float(v.max()) if v.size else 0.0
+    vmax = 1.0 if vmax <= 0 else vmax
+    s = min_size + (max_size - min_size) * (v / vmax).clip(0, 1)
+    return s.tolist()
 
 # ==============================
 # LOAD DATA (REAL EXCEL)
@@ -178,7 +178,8 @@ with tab2:
 with tab3:
     st.subheader("Geographic View — Daily/Annual Waste, Population & Landfill")
 
-    view_year = st.slider("Select year to visualize:", min_year, max_year, min_year)
+    # Selector de año y unidades
+    view_year = st.slider("Select year to visualize:", min_value=min_year, max_value=max_year, value=min_year)
     unit = st.radio("Units:", ["tons/day", "tons/year"], horizontal=True)
 
     cities = cities_available
@@ -191,26 +192,22 @@ with tab3:
         "Waste_tons_year": [float(df_waste.loc[view_year, c]) if view_year in df_waste.index else np.nan for c in cities],
     })
     df_now["Daily_waste_tpd"] = df_now["Waste_tons_year"] / 365.0
-
-    value_col = "Daily_waste_tpd" if unit == "tons/day" else "Waste_tons_year"
-    df_now["Value"] = pd.to_numeric(df_now[value_col], errors="coerce").fillna(0.0)
-
-    sizes = bubble_sizes(df_now["Value"])
+    df_now["Value"] = df_now["Daily_waste_tpd"] if unit == "tons/day" else df_now["Waste_tons_year"]
     cbar_title = "t/day" if unit == "tons/day" else "t/year"
 
-    # Nuevo API: scatter_map (MapLibre). Si tu Plotly <5.24, deja scatter_mapbox.
-    fig_current = px.scatter_map(
-        df_now,
-        lat="lat", lon="lon",
+    # Tamaños robustos
+    sizes = bubble_sizes(df_now["Value"])
+
+    # Usamos scatter_mapbox (compatible y estable). NO pasamos size= (evita errores).
+    fig_current = px.scatter_mapbox(
+        df_now, lat="lat", lon="lon",
         color="Value",
         hover_name="City",
         hover_data={"Landfill": True, "Population": ":,.0f", "Value": ":,.1f"},
         color_continuous_scale="Turbo",
-        zoom=5,
-        map_style="carto-positron",
+        zoom=5, mapbox_style="open-street-map",
         title=f"Geographic Distribution • {view_year}"
     )
-
     fig_current.update_traces(marker=dict(size=sizes, line=dict(width=1, color="white"), opacity=0.9))
     fig_current.update_layout(margin=dict(l=0, r=0, t=50, b=0),
                               coloraxis_colorbar=dict(title=cbar_title, thickness=12, len=0.75, y=0.55))
@@ -241,12 +238,9 @@ with tab4:
             "Waste_tons": [float(df_waste.loc[y, c]) for c in cities_ok],
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
-
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
-    from plotly.subplots import make_subplots
-    import plotly.graph_objects as go
-
+    # Subplots: mapa + línea (comparten frames)
     fig = make_subplots(
         rows=1, cols=2,
         specs=[[{"type": "mapbox"}, {"type": "xy"}]],
@@ -316,7 +310,7 @@ with tab4:
     fig.frames = frames
 
     fig.update_layout(
-        mapbox_style="open-street-map",  # si usas mapbox, cambia a mapbox_style y token si aplica
+        mapbox_style="open-street-map",
         mapbox_zoom=5, mapbox_center={"lat": 4.6, "lon": -74.1},
         margin=dict(l=10, r=10, t=60, b=10),
         font=dict(size=13, color="#1d3557"),
@@ -336,7 +330,8 @@ with tab4:
             "active": 0, "y": -0.05, "x": 0.12, "len": 0.7,
             "pad": {"b": 10, "t": 10},
             "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
-            "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True}, "mode": "immediate"}],
+            "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True},
+                                          "mode": "immediate"}],
                        "label": str(y), "method": "animate"} for y in years]
         }],
         xaxis_title="Year", yaxis_title="tons/year"
@@ -355,4 +350,5 @@ with tab5:
 **Data:** DANE projections (2018–2042), SSPD (2023), city-specific compositions.  
 **AI Layer:** Generative AI for parameter exploration, scenario generation, and narrative visualization.
 """)
+
 
