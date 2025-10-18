@@ -257,7 +257,7 @@ with tab4:
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
 
-    # Tendencia total (suma 10 ciudades) por año
+    # Tendencia total (suma de las 10 ciudades) por año
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
     # --- Subplots: mapa + línea (comparten frames) ---
@@ -272,7 +272,7 @@ with tab4:
     # Estado inicial
     y0 = years[0]
     d0 = df_anim[df_anim["Year"] == y0]
-    sizes0 = bubble_sizes(d0["Waste_tons"])  # usa helper ya definido
+    sizes0 = bubble_sizes(d0["Waste_tons"])  # helper definido arriba
     nat0 = national[national["Year"] <= y0]
 
     # Trace 0 (MAPA) - estado inicial
@@ -287,6 +287,7 @@ with tab4:
                 opacity=0.9
             ),
             text=d0["City"],
+            showlegend=False,  # evita "trace 0" en leyenda
             hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
         ),
         row=1, col=1
@@ -324,11 +325,13 @@ with tab4:
                         opacity=0.9
                     ),
                     text=dy["City"],
+                    showlegend=False,
                     hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
                 ),
-                # Línea acumulada hasta y
+                # Línea acumulada hasta y — forzamos subplot derecho
                 go.Scatter(
-                    x=ny["Year"], y=ny["Waste_tons"],
+                    x=ny["Year"].astype(int), y=ny["Waste_tons"],
+                    xaxis="x2", yaxis="y2",   # clave para que actualice el subplot 2
                     mode="lines+markers",
                     line=dict(color="#3A86FF", width=3),
                     marker=dict(color="#8338EC", size=7),
@@ -373,6 +376,10 @@ with tab4:
         }],
         xaxis_title="Year", yaxis_title="tons/year"
     )
+
+    # Ejes limpios para la línea (subplot derecho)
+    fig.update_xaxes(row=1, col=2, tickmode="linear", dtick=1, range=[years[0], years[-1]], tickformat="d")
+    fig.update_yaxes(row=1, col=2, tickformat=",.0f", rangemode="tozero")
 
     st.plotly_chart(fig, use_container_width=True)
 
