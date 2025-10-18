@@ -199,16 +199,19 @@ with tab3:
 # TAB 4 — Animated Map + National Chart
 # ==============================
 with tab4:
-    st.markdown("### Animated Simulation (2025–2050) + National Trend")
+    from plotly.subplots import make_subplots
+    import plotly.graph_objects as go
 
-    cities = cities_available
+    st.markdown("### Animated Simulation (2025–2050) + **Waste Generation of Ten Cities**")
+
+    # ---- Datos base (ciudades con coordenadas) ----
+    cities_ok = [c for c in city_coords.keys() if c in df_waste.columns]
     years = [y for y in range(2025, 2051) if y in df_waste.index]
 
     base = pd.DataFrame({
-        "City": cities,
-        "lat": [city_coords[c][0] for c in cities],
-        "lon": [city_coords[c][1] for c in cities],
-        "Landfill": [landfills.get(c, "N/A") for c in cities],
+        "City": cities_ok,
+        "lat": [city_coords[c][0] for c in cities_ok],
+        "lon": [city_coords[c][1] for c in cities_ok],
     })
 
     frames_list = []
@@ -218,88 +221,143 @@ with tab4:
             "lat": base["lat"],
             "lon": base["lon"],
             "Year": y,
-            "Population": [float(df_pop.loc[y, c]) if y in df_pop.index else np.nan for c in cities],
-            "Waste_tons": [float(df_waste.loc[y, c]) if y in df_waste.index else np.nan for c in cities],
-            "Landfill": base["Landfill"],
+            "Waste_tons": [float(df_waste.loc[y, c]) for c in cities_ok],
         }))
     df_anim = pd.concat(frames_list, ignore_index=True)
-    df_anim["Daily_waste_tpd"] = df_anim["Waste_tons"] / 365.0
 
+    # Tendencia nacional (suma de las 10 ciudades)
     national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
 
-    col1, col2 = st.columns([3, 1.4])
+    # ---- Figura combinada: mapa + línea ----
+    fig = make_subplots(
+        rows=1, cols=2,
+        specs=[[{"type": "mapbox"}, {"type": "xy"}]],
+        column_widths=[0.62, 0.38],
+        horizontal_spacing=0.06,
+        subplot_titles=("Geographic Projection", "Waste Generation of Ten Cities")
+    )
 
-    # ===== MAPA ANIMADO =====
-    with col1:
-        fig_anim = px.scatter_mapbox(
-            df_anim,
-            lat="lat", lon="lon",
-            size=None,  # tamaño manual por frame
-            color="Waste_tons",
-            hover_name="City",
-            hover_data={"Year": True, "Population": ":,.0f", "Daily_waste_tpd": ":.1f", "Landfill": True},
-            animation_frame="Year",
-            color_continuous_scale="Viridis",
-            mapbox_style="carto-positron",
-            zoom=5,
-            title="Animated Projection of Waste Generation in Colombian Cities (2025–2050)"
-        )
+    # Tamaños robustos para las burbujas
+    def bubble_sizes(sub):
+        m = float(sub["Waste_tons"].fillna(0).max())
+        m = 1.0 if m == 0 else m
+        return 6 + 44 * (sub["Waste_tons"].fillna(0) / m).clip(0, 1)
 
-        # Tamaños por frame (robustos)
-        def safe_sizes(sub):
-            m = float(sub["Waste_tons"].fillna(0).max())
-            m = 1.0 if m == 0 else m
-            return 6 + 44 * (sub["Waste_tons"].fillna(0) / m).clip(0, 1)
+    # --- Estado inicial (primer año) ---
+    y0 = years[0]
+    d0 = df_anim[df_anim["Year"] == y0]
+    nat0 = national[national["Year"] <= y0]
 
-        # inicial
-        y0 = years[0]
-        fig_anim.update_traces(selector=dict(frame=None),
-                               marker=dict(size=safe_sizes(df_anim[df_anim["Year"] == y0])))
+    # Trace 0: mapa
+    fig.add_trace(
+        go.Scattermapbox(
+            lat=d0["lat"], lon=d0["lon"],
+            mode="markers",
+            marker=dict(
+                size=bubble_sizes(d0),
+                color=d0["Waste_tons"],
+                colorscale="Turbo",  # más vibrante
+                showscale=True,
+                colorbar=dict(title="t/year", thickness=12, len=0.75, y=0.55),
+                line=dict(width=1, color="white"),
+                opacity=0.9
+            ),
+            text=d0["City"],
+            hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
+        ),
+        row=1, col=1
+    )
 
-        # por cada frame
-        for fr in fig_anim.frames:
-            yr = int(fr.name)
-            sizesf = safe_sizes(df_anim[df_anim["Year"] == yr])
-            fr.data[0].marker.size = sizesf
+    # Trace 1: línea nacional (hasta y0)
+    fig.add_trace(
+        go.Scatter(
+            x=nat0["Year"], y=nat0["Waste_tons"],
+            mode="lines+markers",
+            line=dict(color="#3A86FF", width=3),
+            marker=dict(color="#8338EC", size=7),
+            name="Total",
+            hovertemplate="Year: %{x}<br>t/year: %{y:,.0f}<extra></extra>"
+        ),
+        row=1, col=2
+    )
 
-        fig_anim.update_layout(
-            margin=dict(l=0, r=0, t=50, b=0),
-            coloraxis_colorbar=dict(title="t/year", thickness=12, len=0.75, y=0.55),
-            updatemenus=[{
-                "type": "buttons", "direction": "left", "x": 0.05, "y": -0.08, "showactive": True,
-                "buttons": [
-                    {"label": "▶ Play", "method": "animate",
-                     "args": [None, {"frame": {"duration": 900, "redraw": True},
-                                     "fromcurrent": True, "transition": {"duration": 300}}]},
-                    {"label": "⏸ Pause", "method": "animate",
-                     "args": [[None], {"frame": {"duration": 0, "redraw": False},
-                                       "mode": "immediate", "transition": {"duration": 0}}]}
-                ]
-            }],
-            sliders=[{
-                "active": 0, "y": -0.05, "x": 0.05, "len": 0.8,
-                "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
-                "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True},
-                                              "mode": "immediate"}],
-                           "label": str(y), "method": "animate"} for y in years]
-            }]
-        )
-        st.plotly_chart(fig_anim, use_container_width=True)
+    # --- Frames compartidos (mapa y línea avanzan juntos) ---
+    frames = []
+    for y in years:
+        dy = df_anim[df_anim["Year"] == y]
+        ny = national[national["Year"] <= y]
+        frames.append(go.Frame(
+            name=str(y),
+            data=[
+                # mapa
+                go.Scattermapbox(
+                    lat=dy["lat"], lon=dy["lon"],
+                    mode="markers",
+                    marker=dict(
+                        size=bubble_sizes(dy),
+                        color=dy["Waste_tons"],
+                        colorscale="Turbo",
+                        showscale=True,
+                        line=dict(width=1, color="white"),
+                        opacity=0.9
+                    ),
+                    text=dy["City"],
+                    hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>"
+                ),
+                # línea acumulada hasta el año y
+                go.Scatter(
+                    x=ny["Year"], y=ny["Waste_tons"],
+                    mode="lines+markers",
+                    line=dict(color="#3A86FF", width=3),
+                    marker=dict(color="#8338EC", size=7),
+                    name="Total",
+                    hovertemplate="Year: %{x}<br>t/year: %{y:,.0f}<extra></extra>"
+                )
+            ]
+        ))
+    fig.frames = frames
 
-    # ===== LÍNEA NACIONAL =====
-    with col2:
-        fig_trend = px.line(
-            national, x="Year", y="Waste_tons", markers=True,
-            title="National Waste Generation",
-            labels={"Waste_tons": "tons/year", "Year": "Year"}
-        )
-        fig_trend.update_traces(line_color="#2A9D8F", marker_color="#264653", marker_size=7)
-        fig_trend.update_layout(
-            margin=dict(l=10, r=10, t=32, b=10),
-            xaxis=dict(tickmode="linear", dtick=5, tickformat="d"),
-            yaxis=dict(tickformat=",.0f", rangemode="tozero"),
-        )
-        st.plotly_chart(fig_trend, use_container_width=True)
+    # ---- Layout general + controles de animación ----
+    fig.update_layout(
+        mapbox_style="open-street-map",
+        mapbox_zoom=5,
+        mapbox_center={"lat": 4.6, "lon": -74.1},
+        margin=dict(l=10, r=10, t=60, b=10),
+        font=dict(size=13, color="#1d3557"),
+        updatemenus=[{
+            "type": "buttons",
+            "direction": "left",
+            "x": 0.12, "y": -0.08,
+            "showactive": True,
+            "buttons": [
+                {"label": "▶ Play", "method": "animate",
+                 "args": [None, {"frame": {"duration": 800, "redraw": True},
+                                 "fromcurrent": True,
+                                 "transition": {"duration": 300}}]},
+                {"label": "⏸ Pause", "method": "animate",
+                 "args": [[None], {"frame": {"duration": 0, "redraw": False},
+                                   "mode": "immediate",
+                                   "transition": {"duration": 0}}]}
+            ]
+        }],
+        sliders=[{
+            "active": 0,
+            "y": -0.05,
+            "x": 0.12,
+            "len": 0.7,
+            "pad": {"b": 10, "t": 10},
+            "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
+            "steps": [{"args": [[str(y)], {"frame": {"duration": 0, "redraw": True},
+                                          "mode": "immediate"}],
+                       "label": str(y), "method": "animate"} for y in years]
+        }],
+        xaxis_title="Year",
+        yaxis_title="tons/year",
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 # ==============================
 # TAB 5 — About
