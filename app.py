@@ -98,6 +98,11 @@ st.markdown(
 DATA_FILE = "simulacion_residuos_2025_2050.xlsx"
 EXPECTED_LONG_COLS = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
 PLOT_TEMPLATE = "plotly_white"
+SCENARIO_OPTIONS = {
+    "BAU": {"waste_multiplier": 1.00, "diversion_multiplier": 1.00, "label": "Business as usual"},
+    "Moderate Circularity": {"waste_multiplier": 0.92, "diversion_multiplier": 1.18, "label": "Moderate intervention"},
+    "Accelerated Circularity": {"waste_multiplier": 0.82, "diversion_multiplier": 1.35, "label": "High circularity push"},
+}
 
 city_coords = {
     "Medellín": (6.2442, -75.5812),
@@ -219,6 +224,55 @@ def export_dataframe(df, name):
     return df.to_csv(index=True).encode("utf-8"), f"{name}.csv"
 
 
+def apply_scenario_to_waste(df_waste, scenario_name, base_year=None):
+    scenario = SCENARIO_OPTIONS[scenario_name]
+    adjusted = df_waste.copy()
+    if base_year is None:
+        base_year = int(adjusted.index.min())
+
+    for year in adjusted.index:
+        years_from_base = max(0, int(year - base_year))
+        progressive_factor = 1 - ((1 - scenario["waste_multiplier"]) * (years_from_base / max(1, int(adjusted.index.max() - base_year))))
+        adjusted.loc[year] = adjusted.loc[year] * progressive_factor
+    return adjusted
+
+
+def build_insights(city, year, pop_value, waste_value, per_capita_value, df_waste_selected, df_types_selected):
+    insights = []
+    try:
+        first_year = int(df_waste_selected.index.min())
+        last_year = int(df_waste_selected.index.max())
+        growth = compute_growth_pct(df_waste_selected[city])
+        insights.append(f"Waste generation in **{city}** changes by **{human_format(growth, 1)}%** between **{first_year}** and **{last_year}**.")
+    except Exception:
+        pass
+
+    insights.append(f"For **{year}**, the estimated generation is **{human_format(waste_value, 0)} t/year**, equivalent to **{human_format(per_capita_value, 2)} kg/person/day**.")
+
+    if not df_types_selected.empty:
+        latest_mix = df_types_selected[df_types_selected["Año"] == year].copy()
+        if not latest_mix.empty:
+            top_row = latest_mix.sort_values("Toneladas_anio", ascending=False).iloc[0]
+            share = 100 * top_row["Toneladas_anio"] / latest_mix["Toneladas_anio"].sum()
+            insights.append(
+                f"The dominant fraction is **{top_row['Tipo']}**, representing approximately **{human_format(share, 1)}%** of the waste mix in **{year}**."
+            )
+
+    return insights[:3]
+
+
+def add_section_intro(title, text):
+    st.markdown(f"<div class='small-note'><b>{title}</b> — {text}</div>", unsafe_allow_html=True)
+
+
+def scenario_summary_text(scenario_name):
+    scenario = SCENARIO_OPTIONS[scenario_name]
+    return (
+        f"Scenario: **{scenario['label']}**. Relative long-run waste pressure factor: "
+        f"**{human_format(scenario['waste_multiplier'] * 100, 0)}%** of BAU."
+    )
+
+
 # =========================================================
 # DATA LOADING
 # =========================================================
@@ -327,6 +381,7 @@ min_year, max_year = get_year_bounds(df_pop, df_waste)
 default_city = "Medellín" if "Medellín" in cities_available else cities_available[0]
 
 selected_city = st.sidebar.selectbox("Select city", cities_available, index=cities_available.index(default_city))
+selected_scenario = st.sidebar.selectbox("Scenario", list(SCENARIO_OPTIONS.keys()), index=0)
 year_range = st.sidebar.slider("Select year range", min_year, max_year, (min_year, max_year))
 comparison_cities = st.sidebar.multiselect(
     "Compare cities",
@@ -335,6 +390,7 @@ comparison_cities = st.sidebar.multiselect(
     help="Choose one or more cities for comparison charts.",
 )
 show_raw_data = st.sidebar.toggle("Show raw filtered data", value=False)
+show_method_note = st.sidebar.toggle("Show methodology note", value=False)
 
 st.sidebar.markdown("---")
 st.sidebar.caption(data_source_label)
@@ -342,8 +398,9 @@ st.sidebar.caption(data_source_label)
 # =========================================================
 # TOP KPIs
 # =========================================================
+df_waste_scenario = apply_scenario_to_waste(df_waste, selected_scenario, base_year=min_year)
 pop_city = filter_year_range(df_pop, year_range, [selected_city])[selected_city]
-waste_city = filter_year_range(df_waste, year_range, [selected_city])[selected_city]
+waste_city = filter_year_range(df_waste_scenario, year_range, [selected_city])[selected_city]
 
 pop_growth = compute_growth_pct(pop_city)
 waste_growth = compute_growth_pct(waste_city)
@@ -351,6 +408,32 @@ latest_year = year_range[1]
 latest_pop = float(pop_city.loc[latest_year]) if latest_year in pop_city.index else float(pop_city.iloc[-1])
 latest_waste = float(waste_city.loc[latest_year]) if latest_year in waste_city.index else float(waste_city.iloc[-1])
 per_capita_kg_day = (latest_waste * 1000 / latest_pop / 365) if latest_pop > 0 else 0
+
+hero_left, hero_right = st.columns([1.35, 1])
+with hero_left:
+    st.markdown(
+        f"""
+        <div class='metric-card'>
+            <div class='metric-label'>Dashboard focus</div>
+            <div class='metric-value' style='font-size:1.2rem;'>Urban waste dynamics in {selected_city}</div>
+            <div class='small-note'>Explore trajectories, composition, territorial concentration and scenario-sensitive outcomes from {year_range[0]} to {year_range[1]}.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+with hero_right:
+    st.markdown(
+        f"""
+        <div class='metric-card'>
+            <div class='metric-label'>Active scenario</div>
+            <div class='metric-value' style='font-size:1.2rem;'>{selected_scenario}</div>
+            <div class='small-note'>{SCENARIO_OPTIONS[selected_scenario]['label']}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 k1, k2, k3, k4 = st.columns(4)
 with k1:
@@ -361,6 +444,33 @@ with k3:
     build_kpi_card(f"Waste ({latest_year})", f"{human_format(latest_waste, 0)} t/year")
 with k4:
     build_kpi_card("Per capita waste", f"{human_format(per_capita_kg_day, 2)} kg/person/day")
+
+st.caption(scenario_summary_text(selected_scenario))
+
+if show_method_note:
+    st.info(
+        "Scenario mode applies a progressive modifier to waste generation over time to emulate different circularity intensities. "
+        "Population remains unchanged, while waste trajectories are adjusted for exploration and communication purposes."
+    )
+
+insight_types = df_types[(df_types["Ciudad"] == selected_city) & (df_types["Año"].between(year_range[0], year_range[1]))].copy()
+insights = build_insights(selected_city, latest_year, latest_pop, latest_waste, per_capita_kg_day, waste_city.to_frame(), insight_types)
+
+ibox_left, ibox_right = st.columns([1.15, 1])
+with ibox_left:
+    st.markdown("#### Executive insights")
+    for item in insights:
+        st.markdown(f"- {item}")
+with ibox_right:
+    st.markdown("#### Quick reading")
+    st.markdown(
+        f"""
+        - **Main question:** How does waste evolve under the selected scenario?
+        - **Current focus city:** **{selected_city}**
+        - **Selected window:** **{year_range[0]}–{year_range[1]}**
+        - **Recommended use:** compare composition, geography and relative performance across cities.
+        """
+    )
 
 st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
@@ -383,6 +493,7 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
 # =========================================================
 with tab1:
     st.subheader(f"Population and Waste Trends — {selected_city}")
+    add_section_intro("What this tab answers", "How population, total waste and per-capita pressure evolve over time.")
 
     c1, c2 = st.columns(2)
     with c1:
@@ -419,6 +530,7 @@ with tab1:
 # =========================================================
 with tab2:
     st.subheader(f"Waste Composition by Type — {selected_city}")
+    add_section_intro("What this tab answers", "Which fractions dominate the waste mix and how their shares change across time.")
     df_city = df_types[
         (df_types["Ciudad"] == selected_city)
         & (df_types["Año"].between(year_range[0], year_range[1]))
@@ -498,6 +610,7 @@ with tab2:
 # =========================================================
 with tab3:
     st.subheader("Geographic Distribution of Waste and Population")
+    add_section_intro("What this tab answers", "Where waste generation is concentrated and how territorial pressure differs among cities.")
 
     col_a, col_b = st.columns([1, 1])
     with col_a:
@@ -512,7 +625,7 @@ with tab3:
             "lon": [city_coords[c][1] for c in cities_available],
             "Landfill": [landfills.get(c, "N/A") for c in cities_available],
             "Population": [float(df_pop.loc[view_year, c]) if view_year in df_pop.index else np.nan for c in cities_available],
-            "Waste_tons_year": [float(df_waste.loc[view_year, c]) if view_year in df_waste.index else np.nan for c in cities_available],
+            "Waste_tons_year": [float(df_waste_scenario.loc[view_year, c]) if view_year in df_waste_scenario.index else np.nan for c in cities_available],
         }
     )
     geo_df["Waste_tons_day"] = geo_df["Waste_tons_year"] / 365
@@ -565,8 +678,9 @@ with tab3:
 # =========================================================
 with tab4:
     st.subheader("Animated Waste Simulation (Cities + Aggregate Trend)")
+    add_section_intro("What this tab answers", "How the spatial footprint and aggregate waste trajectory evolve together year by year.")
 
-    years = [y for y in range(min_year, max_year + 1) if y in df_waste.index]
+    years = [y for y in range(min_year, max_year + 1) if y in df_waste_scenario.index]
     anim_base = pd.DataFrame(
         {
             "City": cities_available,
@@ -584,7 +698,7 @@ with tab4:
                     "lat": anim_base["lat"],
                     "lon": anim_base["lon"],
                     "Year": year,
-                    "Waste_tons": [float(df_waste.loc[year, c]) for c in cities_available],
+                    "Waste_tons": [float(df_waste_scenario.loc[year, c]) for c in cities_available],
                 }
             )
         )
@@ -744,8 +858,9 @@ with tab4:
 # =========================================================
 with tab5:
     st.subheader("Multi-city comparison")
+    add_section_intro("What this tab answers", "Which cities generate more waste in absolute and per-capita terms under the selected scenario.")
     selected_compare = comparison_cities if comparison_cities else [selected_city]
-    compare_df = filter_year_range(df_waste, year_range, selected_compare)
+    compare_df = filter_year_range(df_waste_scenario, year_range, selected_compare)
 
     fig_compare = px.line(
         compare_df,
@@ -762,7 +877,7 @@ with tab5:
     latest_compare = pd.DataFrame(
         {
             "City": selected_compare,
-            "Waste_tons_year": [float(df_waste.loc[latest_year, c]) for c in selected_compare],
+            "Waste_tons_year": [float(df_waste_scenario.loc[latest_year, c]) for c in selected_compare],
             "Population": [float(df_pop.loc[latest_year, c]) for c in selected_compare],
         }
     )
@@ -801,6 +916,7 @@ with tab5:
 # =========================================================
 with tab6:
     st.subheader("About the Platform")
+    add_section_intro("What this tab answers", "What the dashboard does, what data it expects and how to export results.")
     st.markdown(
         """
         **Purpose.** This platform supports the exploration of urban waste dynamics and circularity potential
@@ -819,6 +935,8 @@ with tab6:
         - Better error handling and data validation
         - Per capita indicator
         - Multi-city comparison
+        - Executive insights block
+        - Scenario selector for communication-ready exploration
         - More consistent chart layout
         - Optional data inspection and export
         """
@@ -844,4 +962,3 @@ with tab6:
         st.dataframe(filtered_waste.style.format("{:,.0f}"), use_container_width=True)
 
 st.caption("Designed to be more robust, readable, and decision-friendly. A dashboard should explain itself before the user has to fight it.")
-
