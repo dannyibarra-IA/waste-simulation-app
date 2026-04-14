@@ -6,169 +6,99 @@ from plotly.subplots import make_subplots
 from pathlib import Path
 import numpy as np
 
-# ==============================
-# PAGE CONFIG & GLOBAL STYLE
-# ==============================
-st.set_page_config(page_title="Urban Waste Simulation and Circularity", layout="wide")
-
-# Modern UI Styling
-st.markdown("""
-    <style>
-        [data-testid="stAppViewContainer"] { background-color: #f8f9fb; }
-        [data-testid="stSidebar"] { background-color: #eef2f6; }
-        h1, h2, h3, h4 { color: #1d3557; }
-        .stTabs [data-baseweb="tab"] { font-size:16px; font-weight:600; }
-    </style>
-""", unsafe_allow_html=True)
-
-# ==============================
-# HEADER / BANNER
-# ==============================
-st.markdown("""
-# 🌎 Urban Waste Simulation and Circularity Dashboard  
-Elaborated by **Danny Ibarra Vega Ph.D**  
-📧 danny.ibarra@udea.edu.co  
-
-This interactive dashboard shows the simulation of **population growth** and **waste generation**  
-in 10 Colombian cities from **2025 to 2050**, integrating **System Dynamics modeling** with  
-**Generative AI** to explore **urban circularity scenarios**.
-""")
-
-# ==============================
-# HELPERS (numéricos y utilitarios)
-# ==============================
-def to_num(x):
-    """Convierte a array float y reemplaza NaN/inf por 0 (evita fallos en Plotly)."""
-    if isinstance(x, (pd.Series, pd.Index)):
-        v = pd.to_numeric(x, errors="coerce").fillna(0.0).to_numpy(dtype=float)
-    elif isinstance(x, pd.DataFrame):
-        v = pd.to_numeric(x.squeeze(), errors="coerce").fillna(0.0).to_numpy(dtype=float)
-    else:
-        v = np.asarray(x, dtype=float)
-    v = np.nan_to_num(v, nan=0.0, posinf=0.0, neginf=0.0)
-    return v
-
-
-def bubble_sizes(values, min_size=6, max_size=50):
-    """Escala robusta de tamaños (sin divisiones por cero)."""
-    v = to_num(values)
-    vmax = float(v.max()) if v.size else 0.0
-    vmax = 1.0 if vmax <= 0 else vmax
-    s = min_size + (max_size - min_size) * (v / vmax).clip(0, 1)
-    return s.tolist()
-
-
-def filter_by_year(df, year_range, city):
-    """Filtra un DataFrame por rango de años e incluye solo la columna de una ciudad."""
-    return df.loc[(df.index >= year_range[0]) & (df.index <= year_range[1]), [city]]
-
-
-def get_year_bounds(df_pop, df_waste, min_default=2025, max_default=2050):
-    """Obtiene los años mínimo y máximo razonables dados los DataFrames."""
-    min_year = int(min(df_pop.index.min(), df_waste.index.min()))
-    max_year = int(max(df_pop.index.max(), df_waste.index.max()))
-    min_year = max(min_default, min_year)
-    max_year = min(max_default, max_year)
-    return min_year, max_year
-
-
-# ==============================
-# LOAD DATA (REAL EXCEL)
-# ==============================
-DATA_FILE = "simulacion_residuos_2025_2050.xlsx"
-
-
-@st.cache_data
-def load_data(source):
-    """
-    Carga datos desde un path (str/Path) o un archivo subido (UploadedFile).
-    Valida estructura y lanza errores con mensajes claros si algo falta.
-    """
-    # Determinar origen: path local o archivo subido
-    if isinstance(source, (str, Path)):
-        path = Path(source)
-        if not path.exists():
-            raise FileNotFoundError(
-                f"El archivo por defecto '{path.name}' no se encontró en el directorio de la app."
-            )
-        excel_source = path
-    else:
-        # UploadedFile de Streamlit
-        excel_source = source
-
-    try:
-        # Leer hojas
-        pop = pd.read_excel(excel_source, sheet_name="Poblacion_2050", index_col=0)
-        waste = pd.read_excel(excel_source, sheet_name="ResiduosTotales_t_anio", index_col=0)
-        types = pd.read_excel(excel_source, sheet_name="Residuos_5Tipos_largo")
-    except ValueError as e:
-        # Error típico: nombres de hojas incorrectos
-        raise ValueError(
-            "Error al leer las hojas del archivo Excel. "
-            "Asegúrate de que existan las hojas: 'Poblacion_2050', "
-            "'ResiduosTotales_t_anio' y 'Residuos_5Tipos_largo'. "
-            f"Detalle técnico: {e}"
-        )
-
-    # Limpieza numérica básica
-    pop = pop.apply(pd.to_numeric, errors="coerce")
-    waste = waste.apply(pd.to_numeric, errors="coerce")
-
-    # Índices como años enteros
-    pop.index = pop.index.astype(float).round().astype(int)
-    waste.index = waste.index.astype(float).round().astype(int)
-
-    # Limpiar nombres de columnas
-    pop.columns = pop.columns.astype(str).str.strip()
-    waste.columns = waste.columns.astype(str).str.strip()
-
-    # Limpiar columnas de la tabla larga
-    for col in ("Ciudad", "Tipo"):
-        if col in types.columns:
-            types[col] = types[col].astype(str).str.strip()
-
-    # Validar columnas de la tabla larga
-    expected_cols = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
-    if not expected_cols.issubset(set(types.columns)):
-        missing = expected_cols - set(types.columns)
-        raise ValueError(
-            "La hoja 'Residuos_5Tipos_largo' no tiene las columnas esperadas. "
-            f"Faltan: {', '.join(missing)}. "
-            "Se requieren exactamente: Ciudad, Año, Tipo, Toneladas_anio."
-        )
-
-    return pop, waste, types
-
-
-# ==============================
-# SIDEBAR: CARGA DE ARCHIVO
-# ==============================
-st.sidebar.title("Simulation Control")
-
-st.sidebar.markdown("#### Data Source")
-uploaded_file = st.sidebar.file_uploader(
-    "Upload simulation Excel (.xlsx)", type=["xlsx"], help="If empty, the app will use the default file."
+# =========================================================
+# PAGE CONFIGURATION
+# =========================================================
+st.set_page_config(
+    page_title="Urban Waste Simulation and Circularity",
+    page_icon="🌍",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-# Cargar datos con manejo de errores explícitos
-try:
-    if uploaded_file is not None:
-        df_pop, df_waste, df_types = load_data(uploaded_file)
-    else:
-        df_pop, df_waste, df_types = load_data(DATA_FILE)
-except FileNotFoundError as e:
-    st.error(f"❌ {e}")
-    st.stop()
-except ValueError as e:
-    st.error(f"⚠️ Problema en la estructura del archivo: {e}")
-    st.stop()
-except Exception as e:
-    st.error(f"⚠️ Se produjo un error inesperado al leer el archivo: {e}")
-    st.stop()
+# =========================================================
+# CUSTOM STYLES
+# =========================================================
+st.markdown(
+    """
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --soft: #e9eef5;
+            --text: #17324d;
+            --muted: #5f6b7a;
+            --accent: #1f77b4;
+            --accent-2: #2ca58d;
+            --shadow: 0 4px 18px rgba(23, 50, 77, 0.08);
+            --radius: 16px;
+        }
 
-# ==============================
-# CONFIG (coords & landfills)
-# ==============================
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(180deg, #f7f9fc 0%, #eef4f9 100%);
+        }
+
+        [data-testid="stSidebar"] {
+            background: #eef3f8;
+            border-right: 1px solid rgba(23, 50, 77, 0.08);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(31,119,180,0.10), rgba(44,165,141,0.12));
+            border: 1px solid rgba(23, 50, 77, 0.08);
+            border-radius: 22px;
+            padding: 1.4rem 1.5rem 1.1rem 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .metric-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 0.9rem 1rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(23, 50, 77, 0.05);
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .metric-value {
+            color: var(--text);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stTabs [data-baseweb="tab"] {
+            font-size: 15px;
+            font-weight: 600;
+            padding-top: 0.65rem;
+            padding-bottom: 0.65rem;
+        }
+
+        .small-note {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# =========================================================
+# CONSTANTS
+# =========================================================
+DATA_FILE = "simulacion_residuos_2025_2050.xlsx"
+EXPECTED_LONG_COLS = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
+PLOT_TEMPLATE = "plotly_white"
+
 city_coords = {
     "Medellín": (6.2442, -75.5812),
     "Santiago de Cali": (3.4516, -76.5320),
@@ -195,314 +125,574 @@ landfills = {
     "Valledupar": "Los Corazones",
 }
 
-# Asegurar que existan datos para estas ciudades
-cities_available = sorted(list(set(df_pop.columns) & set(df_waste.columns) & set(city_coords.keys())))
-if not cities_available:
-    st.error("❌ Ninguna ciudad del Excel coincide con las coordenadas configuradas. Revisa nombres/acentos.")
-    st.stop()
-
-# ==============================
-# SIDEBAR CONTROLS (city & years)
-# ==============================
-city = st.sidebar.selectbox("Select City", cities_available, index=0)
-
-min_year, max_year = get_year_bounds(df_pop, df_waste)
-year_range = st.sidebar.slider("Select Year Range", min_year, max_year, (min_year, max_year))
-
-# ==============================
-# TABS
-# ==============================
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📈 Population & Waste",
-    "♻️ Composition by Type",
-    "🗺️ Geographic View",
-    "🎞️ Animated Simulation + Chart",
-    "ℹ️ About",
-])
-
-# ==============================
-# TAB 1 — Population & Waste
-# ==============================
-with tab1:
-    st.subheader(f"Population Projection: {city}")
-    df_pop_plot = filter_by_year(df_pop, year_range, city)
-    fig1 = px.line(
-        df_pop_plot,
-        x=df_pop_plot.index,
-        y=city,
-        markers=True,
-        labels={"x": "Year", "y": "Population"},
-        title="Population 2025–2050",
-    )
-    st.plotly_chart(fig1, use_container_width=True)
-
-    st.subheader(f"Total Waste Generation (tons/year): {city}")
-    df_waste_plot = filter_by_year(df_waste, year_range, city)
-    fig2 = px.line(
-        df_waste_plot,
-        x=df_waste_plot.index,
-        y=city,
-        markers=True,
-        labels={"x": "Year", "y": "Tons/year"},
-        title="Waste Generation 2025–2050",
-    )
-    st.plotly_chart(fig2, use_container_width=True)
-
-# ==============================
-# TAB 2 — Composition by Type
-# ==============================
-with tab2:
-    st.subheader(f"Waste Composition by Type: {city}")
-
-    expected_cols = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
-    if expected_cols.issubset(set(df_types.columns)):
-        df_city = df_types[
-            (df_types["Ciudad"] == city)
-            & (df_types["Año"].between(year_range[0], year_range[1]))
-        ]
-
-        if df_city.empty:
-            st.info("No hay tabla de composición larga para esta ciudad en el rango seleccionado.")
-        else:
-            # Selector de modo de visualización
-            view_mode = st.radio(
-                "Visualization mode:",
-                ("Time series (stacked area)", "Single year (bar chart)"),
-                horizontal=False,
-            )
-
-            if view_mode == "Time series (stacked area)":
-                pivot = df_city.pivot(index="Año", columns="Tipo", values="Toneladas_anio").sort_index()
-                fig3 = px.area(
-                    pivot,
-                    x=pivot.index,
-                    y=pivot.columns,
-                    title="Composition of Waste by Type (Time Series)",
-                    labels={"value": "Tons/year", "Año": "Year"},
-                )
-                st.plotly_chart(fig3, use_container_width=True)
-            else:
-                # Un solo año con gráfico de barras
-                years_city = sorted(df_city["Año"].unique())
-                year_single = st.slider(
-                    "Select year to visualize composition:",
-                    min_value=int(years_city[0]),
-                    max_value=int(years_city[-1]),
-                    value=int(years_city[0]),
-                )
-                df_single = df_city[df_city["Año"] == year_single]
-                fig_bar = px.bar(
-                    df_single,
-                    x="Tipo",
-                    y="Toneladas_anio",
-                    title=f"Composition of Waste by Type — {year_single}",
-                    labels={"Toneladas_anio": "Tons/year", "Tipo": "Type"},
-                )
-                st.plotly_chart(fig_bar, use_container_width=True)
+# =========================================================
+# HELPERS
+# =========================================================
+def to_num(values):
+    """Convert input to numeric numpy array, replacing NaN/inf with zero."""
+    if isinstance(values, (pd.Series, pd.Index)):
+        arr = pd.to_numeric(values, errors="coerce").fillna(0.0).to_numpy(dtype=float)
+    elif isinstance(values, pd.DataFrame):
+        arr = pd.to_numeric(values.squeeze(), errors="coerce").fillna(0.0).to_numpy(dtype=float)
     else:
-        st.info(
-            "Hoja 'Residuos_5Tipos_largo' no tiene columnas esperadas "
-            "(Ciudad, Año, Tipo, Toneladas_anio)."
+        arr = np.asarray(values, dtype=float)
+    return np.nan_to_num(arr, nan=0.0, posinf=0.0, neginf=0.0)
+
+
+def safe_bubble_sizes(values, min_size=10, max_size=42):
+    """Scale bubble sizes robustly avoiding zero-division."""
+    arr = to_num(values)
+    if arr.size == 0:
+        return []
+    vmax = max(float(arr.max()), 1.0)
+    scaled = min_size + (max_size - min_size) * np.clip(arr / vmax, 0, 1)
+    return scaled.tolist()
+
+
+def human_format(value, decimals=0):
+    try:
+        return f"{value:,.{decimals}f}"
+    except Exception:
+        return str(value)
+
+
+def filter_year_range(df, year_range, cols=None):
+    data = df.loc[(df.index >= year_range[0]) & (df.index <= year_range[1])]
+    if cols is not None:
+        data = data[cols]
+    return data
+
+
+def get_year_bounds(df_pop, df_waste):
+    min_year = int(min(df_pop.index.min(), df_waste.index.min()))
+    max_year = int(max(df_pop.index.max(), df_waste.index.max()))
+    return min_year, max_year
+
+
+def compute_growth_pct(series):
+    arr = to_num(series)
+    if arr.size < 2 or arr[0] == 0:
+        return 0.0
+    return ((arr[-1] - arr[0]) / arr[0]) * 100
+
+
+def validate_columns(df, required, table_name):
+    missing = set(required) - set(df.columns)
+    if missing:
+        raise ValueError(
+            f"La tabla '{table_name}' no contiene las columnas requeridas: {', '.join(sorted(missing))}."
         )
 
-# ==============================
-# TAB 3 — Geographic View
-# ==============================
-with tab3:
-    st.subheader("Geographic View — Daily/Annual Waste, Population & Landfill")
 
-    # Selector de año y unidades
-    view_year = st.slider(
-        "Select year to visualize:",
-        min_value=min_year,
-        max_value=max_year,
-        value=min_year,
+def build_kpi_card(label, value):
+    st.markdown(
+        f"""
+        <div class='metric-card'>
+            <div class='metric-label'>{label}</div>
+            <div class='metric-value'>{value}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
-    unit = st.radio("Units:", ["tons/day", "tons/year"], horizontal=True)
 
-    cities = cities_available
-    df_now = pd.DataFrame({
-        "City": cities,
-        "lat": [city_coords[c][0] for c in cities],
-        "lon": [city_coords[c][1] for c in cities],
-        "Landfill": [landfills.get(c, "N/A") for c in cities],
-        "Population": [
-            float(df_pop.loc[view_year, c]) if view_year in df_pop.index else np.nan
-            for c in cities
-        ],
-        "Waste_tons_year": [
-            float(df_waste.loc[view_year, c]) if view_year in df_waste.index else np.nan
-            for c in cities
-        ],
-    })
-    df_now["Daily_waste_tpd"] = df_now["Waste_tons_year"] / 365.0
-    df_now["Value"] = df_now["Daily_waste_tpd"] if unit == "tons/day" else df_now["Waste_tons_year"]
-    cbar_title = "t/day" if unit == "tons/day" else "t/year"
 
-    sizes = bubble_sizes(df_now["Value"])
+def line_chart(df, y_col, title, y_label, color="#1f77b4"):
+    fig = px.line(
+        df,
+        x=df.index,
+        y=y_col,
+        markers=True,
+        template=PLOT_TEMPLATE,
+        title=title,
+        labels={"x": "Year", y_col: y_label},
+    )
+    fig.update_traces(line=dict(width=3, color=color), marker=dict(size=7))
+    fig.update_layout(
+        hovermode="x unified",
+        margin=dict(l=10, r=10, t=50, b=10),
+        xaxis=dict(dtick=1),
+    )
+    return fig
 
-    fig_current = px.scatter_mapbox(
-        df_now,
+
+def export_dataframe(df, name):
+    return df.to_csv(index=True).encode("utf-8"), f"{name}.csv"
+
+
+# =========================================================
+# DATA LOADING
+# =========================================================
+@st.cache_data(show_spinner=False)
+def load_data(source):
+    if isinstance(source, (str, Path)):
+        source = Path(source)
+        if not source.exists():
+            raise FileNotFoundError(
+                f"No se encontró el archivo por defecto '{source.name}' en el directorio de la app."
+            )
+        excel_source = source
+    else:
+        excel_source = source
+
+    try:
+        pop = pd.read_excel(excel_source, sheet_name="Poblacion_2050", index_col=0)
+        waste = pd.read_excel(excel_source, sheet_name="ResiduosTotales_t_anio", index_col=0)
+        types = pd.read_excel(excel_source, sheet_name="Residuos_5Tipos_largo")
+    except ValueError as exc:
+        raise ValueError(
+            "No fue posible leer las hojas esperadas. Verifica que existan: "
+            "'Poblacion_2050', 'ResiduosTotales_t_anio' y 'Residuos_5Tipos_largo'. "
+            f"Detalle: {exc}"
+        ) from exc
+
+    pop = pop.apply(pd.to_numeric, errors="coerce")
+    waste = waste.apply(pd.to_numeric, errors="coerce")
+    pop.index = pd.to_numeric(pop.index, errors="coerce").round().astype("Int64")
+    waste.index = pd.to_numeric(waste.index, errors="coerce").round().astype("Int64")
+
+    pop = pop[~pop.index.isna()].copy()
+    waste = waste[~waste.index.isna()].copy()
+    pop.index = pop.index.astype(int)
+    waste.index = waste.index.astype(int)
+
+    pop.columns = pop.columns.astype(str).str.strip()
+    waste.columns = waste.columns.astype(str).str.strip()
+
+    validate_columns(types, EXPECTED_LONG_COLS, "Residuos_5Tipos_largo")
+    types["Ciudad"] = types["Ciudad"].astype(str).str.strip()
+    types["Tipo"] = types["Tipo"].astype(str).str.strip()
+    types["Año"] = pd.to_numeric(types["Año"], errors="coerce").astype("Int64")
+    types["Toneladas_anio"] = pd.to_numeric(types["Toneladas_anio"], errors="coerce")
+    types = types.dropna(subset=["Año", "Toneladas_anio"]).copy()
+    types["Año"] = types["Año"].astype(int)
+
+    if pop.empty or waste.empty:
+        raise ValueError("Las tablas principales quedaron vacías después de la limpieza de datos.")
+
+    return pop.sort_index(), waste.sort_index(), types
+
+
+# =========================================================
+# HEADER
+# =========================================================
+st.markdown(
+    """
+    <div class="hero">
+        <h1 style="margin-bottom:0.2rem;">🌎 Urban Waste Simulation and Circularity Dashboard</h1>
+        <p style="margin:0.15rem 0;"><b>Elaborated by Danny Ibarra Vega, Ph.D.</b></p>
+        <p style="margin:0.15rem 0; color:#415466;">
+            Interactive platform for exploring population growth, waste generation, composition patterns,
+            territorial distribution and dynamic trends for Colombian cities under a system dynamics perspective.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# =========================================================
+# SIDEBAR
+# =========================================================
+st.sidebar.title("Simulation Control")
+st.sidebar.markdown("Adjust the data source and visualization parameters.")
+
+uploaded_file = st.sidebar.file_uploader(
+    "Upload simulation Excel (.xlsx)",
+    type=["xlsx"],
+    help="If no file is uploaded, the dashboard will use the default dataset.",
+)
+
+try:
+    if uploaded_file is not None:
+        df_pop, df_waste, df_types = load_data(uploaded_file)
+        data_source_label = f"Custom file: {uploaded_file.name}"
+    else:
+        df_pop, df_waste, df_types = load_data(DATA_FILE)
+        data_source_label = f"Default file: {DATA_FILE}"
+except FileNotFoundError as exc:
+    st.error(f"❌ {exc}")
+    st.stop()
+except ValueError as exc:
+    st.error(f"⚠️ Error de estructura o calidad de datos: {exc}")
+    st.stop()
+except Exception as exc:
+    st.error(f"⚠️ Ocurrió un error inesperado al cargar los datos: {exc}")
+    st.stop()
+
+cities_available = sorted(set(df_pop.columns) & set(df_waste.columns) & set(city_coords.keys()))
+if not cities_available:
+    st.error("❌ No hay coincidencia entre las ciudades del archivo y las ciudades configuradas.")
+    st.stop()
+
+min_year, max_year = get_year_bounds(df_pop, df_waste)
+default_city = "Medellín" if "Medellín" in cities_available else cities_available[0]
+
+selected_city = st.sidebar.selectbox("Select city", cities_available, index=cities_available.index(default_city))
+year_range = st.sidebar.slider("Select year range", min_year, max_year, (min_year, max_year))
+comparison_cities = st.sidebar.multiselect(
+    "Compare cities",
+    options=cities_available,
+    default=[selected_city],
+    help="Choose one or more cities for comparison charts.",
+)
+show_raw_data = st.sidebar.toggle("Show raw filtered data", value=False)
+
+st.sidebar.markdown("---")
+st.sidebar.caption(data_source_label)
+
+# =========================================================
+# TOP KPIs
+# =========================================================
+pop_city = filter_year_range(df_pop, year_range, [selected_city])[selected_city]
+waste_city = filter_year_range(df_waste, year_range, [selected_city])[selected_city]
+
+pop_growth = compute_growth_pct(pop_city)
+waste_growth = compute_growth_pct(waste_city)
+latest_year = year_range[1]
+latest_pop = float(pop_city.loc[latest_year]) if latest_year in pop_city.index else float(pop_city.iloc[-1])
+latest_waste = float(waste_city.loc[latest_year]) if latest_year in waste_city.index else float(waste_city.iloc[-1])
+per_capita_kg_day = (latest_waste * 1000 / latest_pop / 365) if latest_pop > 0 else 0
+
+k1, k2, k3, k4 = st.columns(4)
+with k1:
+    build_kpi_card("Selected city", selected_city)
+with k2:
+    build_kpi_card(f"Population ({latest_year})", human_format(latest_pop, 0))
+with k3:
+    build_kpi_card(f"Waste ({latest_year})", f"{human_format(latest_waste, 0)} t/year")
+with k4:
+    build_kpi_card("Per capita waste", f"{human_format(per_capita_kg_day, 2)} kg/person/day")
+
+st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+
+# =========================================================
+# TABS
+# =========================================================
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    [
+        "📈 Population & Waste",
+        "♻️ Composition",
+        "🗺️ Geographic View",
+        "🎞️ Dynamic Simulation",
+        "📊 City Comparison",
+        "ℹ️ About & Data",
+    ]
+)
+
+# =========================================================
+# TAB 1 - POPULATION & WASTE
+# =========================================================
+with tab1:
+    st.subheader(f"Population and Waste Trends — {selected_city}")
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.caption(f"Population growth across selected period: {human_format(pop_growth, 1)}%")
+        fig_pop = line_chart(pop_city.to_frame(), selected_city, "Population Projection", "Population", color="#1f77b4")
+        st.plotly_chart(fig_pop, use_container_width=True)
+
+    with c2:
+        st.caption(f"Waste growth across selected period: {human_format(waste_growth, 1)}%")
+        fig_waste = line_chart(waste_city.to_frame(), selected_city, "Total Waste Generation", "Tons/year", color="#2ca58d")
+        st.plotly_chart(fig_waste, use_container_width=True)
+
+    derived = pd.DataFrame(index=pop_city.index)
+    derived["Population"] = pop_city
+    derived["Waste_tons_year"] = waste_city
+    derived["Waste_kg_person_day"] = (derived["Waste_tons_year"] * 1000 / derived["Population"] / 365).replace([np.inf, -np.inf], np.nan)
+
+    st.markdown("#### Derived indicator")
+    fig_pc = px.line(
+        derived,
+        x=derived.index,
+        y="Waste_kg_person_day",
+        markers=True,
+        template=PLOT_TEMPLATE,
+        title="Per Capita Waste Generation",
+        labels={"x": "Year", "Waste_kg_person_day": "kg/person/day"},
+    )
+    fig_pc.update_traces(line=dict(width=3, color="#ff7f0e"), marker=dict(size=7))
+    fig_pc.update_layout(hovermode="x unified", margin=dict(l=10, r=10, t=50, b=10))
+    st.plotly_chart(fig_pc, use_container_width=True)
+
+# =========================================================
+# TAB 2 - COMPOSITION
+# =========================================================
+with tab2:
+    st.subheader(f"Waste Composition by Type — {selected_city}")
+    df_city = df_types[
+        (df_types["Ciudad"] == selected_city)
+        & (df_types["Año"].between(year_range[0], year_range[1]))
+    ].copy()
+
+    if df_city.empty:
+        st.info("No composition data is available for the selected city and year range.")
+    else:
+        left, right = st.columns([1, 1])
+        with left:
+            view_mode = st.radio(
+                "Visualization mode",
+                ["Time series", "Single year", "Share by type"],
+                horizontal=True,
+            )
+        with right:
+            sort_mode = st.selectbox("Sort types", ["Alphabetical", "By value (desc)"])
+
+        pivot = df_city.pivot_table(
+            index="Año", columns="Tipo", values="Toneladas_anio", aggfunc="sum"
+        ).sort_index()
+
+        if view_mode == "Time series":
+            fig_area = px.area(
+                pivot,
+                x=pivot.index,
+                y=pivot.columns,
+                template=PLOT_TEMPLATE,
+                title="Composition of Waste by Type Over Time",
+                labels={"value": "Tons/year", "Año": "Year", "variable": "Type"},
+            )
+            fig_area.update_layout(hovermode="x unified", margin=dict(l=10, r=10, t=50, b=10))
+            st.plotly_chart(fig_area, use_container_width=True)
+
+        elif view_mode == "Single year":
+            years_city = sorted(df_city["Año"].unique())
+            year_single = st.select_slider("Select year", options=years_city, value=years_city[0])
+            df_single = df_city[df_city["Año"] == year_single].copy()
+            if sort_mode == "By value (desc)":
+                df_single = df_single.sort_values("Toneladas_anio", ascending=False)
+            else:
+                df_single = df_single.sort_values("Tipo")
+
+            fig_bar = px.bar(
+                df_single,
+                x="Tipo",
+                y="Toneladas_anio",
+                text_auto=".2s",
+                template=PLOT_TEMPLATE,
+                title=f"Composition by Type — {year_single}",
+                labels={"Toneladas_anio": "Tons/year", "Tipo": "Type"},
+            )
+            fig_bar.update_layout(margin=dict(l=10, r=10, t=50, b=10))
+            st.plotly_chart(fig_bar, use_container_width=True)
+
+        else:
+            year_share = st.select_slider("Select year for share", options=sorted(df_city["Año"].unique()))
+            df_share = df_city[df_city["Año"] == year_share].copy()
+            if sort_mode == "By value (desc)":
+                df_share = df_share.sort_values("Toneladas_anio", ascending=False)
+            else:
+                df_share = df_share.sort_values("Tipo")
+
+            fig_pie = px.pie(
+                df_share,
+                names="Tipo",
+                values="Toneladas_anio",
+                hole=0.45,
+                template=PLOT_TEMPLATE,
+                title=f"Waste Share by Type — {year_share}",
+            )
+            fig_pie.update_traces(textposition="inside", textinfo="percent+label")
+            st.plotly_chart(fig_pie, use_container_width=True)
+
+# =========================================================
+# TAB 3 - GEOGRAPHIC VIEW
+# =========================================================
+with tab3:
+    st.subheader("Geographic Distribution of Waste and Population")
+
+    col_a, col_b = st.columns([1, 1])
+    with col_a:
+        view_year = st.slider("Select year", min_value=min_year, max_value=max_year, value=min_year, key="geo_year")
+    with col_b:
+        unit = st.radio("Units", ["tons/day", "tons/year"], horizontal=True)
+
+    geo_df = pd.DataFrame(
+        {
+            "City": cities_available,
+            "lat": [city_coords[c][0] for c in cities_available],
+            "lon": [city_coords[c][1] for c in cities_available],
+            "Landfill": [landfills.get(c, "N/A") for c in cities_available],
+            "Population": [float(df_pop.loc[view_year, c]) if view_year in df_pop.index else np.nan for c in cities_available],
+            "Waste_tons_year": [float(df_waste.loc[view_year, c]) if view_year in df_waste.index else np.nan for c in cities_available],
+        }
+    )
+    geo_df["Waste_tons_day"] = geo_df["Waste_tons_year"] / 365
+    geo_df["Value"] = geo_df["Waste_tons_day"] if unit == "tons/day" else geo_df["Waste_tons_year"]
+    geo_df["Per_capita_kg_day"] = (geo_df["Waste_tons_year"] * 1000 / geo_df["Population"] / 365).replace([np.inf, -np.inf], np.nan)
+
+    fig_map = px.scatter_mapbox(
+        geo_df,
         lat="lat",
         lon="lon",
         color="Value",
+        size="Value",
+        size_max=35,
         hover_name="City",
-        hover_data={"Landfill": True, "Population": ":,.0f", "Value": ":,.1f"},
-        color_continuous_scale="Turbo",
-        zoom=5,
+        hover_data={
+            "Landfill": True,
+            "Population": ":,.0f",
+            "Waste_tons_year": ":,.0f",
+            "Waste_tons_day": ":,.1f",
+            "Per_capita_kg_day": ":.2f",
+            "lat": False,
+            "lon": False,
+            "Value": False,
+        },
+        color_continuous_scale="Viridis",
         mapbox_style="open-street-map",
-        title=f"Geographic Distribution • {view_year}",
+        zoom=4.8,
+        center={"lat": 6.5, "lon": -74.5},
+        title=f"Geographic Distribution — {view_year}",
+    )
+    fig_map.update_layout(margin=dict(l=0, r=0, t=50, b=0))
+    st.plotly_chart(fig_map, use_container_width=True)
+
+    st.dataframe(
+        geo_df[["City", "Population", "Waste_tons_year", "Waste_tons_day", "Per_capita_kg_day", "Landfill"]]
+        .sort_values("Waste_tons_year", ascending=False)
+        .style.format(
+            {
+                "Population": "{:,.0f}",
+                "Waste_tons_year": "{:,.0f}",
+                "Waste_tons_day": "{:,.1f}",
+                "Per_capita_kg_day": "{:,.2f}",
+            }
+        ),
+        use_container_width=True,
     )
 
-    # Aplicar tamaños y opacidad a todas las trazas
-    for tr in fig_current.data:
-        tr.marker.update(size=sizes, opacity=0.9)
-
-    fig_current.update_layout(
-        margin=dict(l=0, r=0, t=50, b=0),
-        coloraxis_colorbar=dict(title=cbar_title, thickness=12, len=0.75, y=0.55),
-    )
-
-    st.plotly_chart(fig_current, use_container_width=True)
-
-# ==============================
-# TAB 4 — Animated Map + Animated Line
-# ==============================
+# =========================================================
+# TAB 4 - DYNAMIC SIMULATION
+# =========================================================
 with tab4:
-    st.markdown("### Animated Simulation (2025–2050) + **Waste Generation of Ten Cities**")
+    st.subheader("Animated Waste Simulation (Cities + Aggregate Trend)")
 
-    # Ciudades con datos y rango de años disponible
-    cities_ok = cities_available
-    years = [y for y in range(2025, 2051) if y in df_waste.index]
+    years = [y for y in range(min_year, max_year + 1) if y in df_waste.index]
+    anim_base = pd.DataFrame(
+        {
+            "City": cities_available,
+            "lat": [city_coords[c][0] for c in cities_available],
+            "lon": [city_coords[c][1] for c in cities_available],
+        }
+    )
 
-    # Tabla base (coords)
-    base = pd.DataFrame({
-        "City": cities_ok,
-        "lat": [city_coords[c][0] for c in cities_ok],
-        "lon": [city_coords[c][1] for c in cities_ok],
-    })
+    anim_frames = []
+    for year in years:
+        anim_frames.append(
+            pd.DataFrame(
+                {
+                    "City": anim_base["City"],
+                    "lat": anim_base["lat"],
+                    "lon": anim_base["lon"],
+                    "Year": year,
+                    "Waste_tons": [float(df_waste.loc[year, c]) for c in cities_available],
+                }
+            )
+        )
 
-    # Tabla larga para animación (ciudad-año)
-    frames_list = []
-    for y in years:
-        frames_list.append(pd.DataFrame({
-            "City": base["City"],
-            "lat": base["lat"],
-            "lon": base["lon"],
-            "Year": y,
-            "Waste_tons": [float(df_waste.loc[y, c]) for c in cities_ok],
-        }))
-    df_anim = pd.concat(frames_list, ignore_index=True)
+    df_anim = pd.concat(anim_frames, ignore_index=True)
+    national = df_anim.groupby("Year", as_index=False)["Waste_tons"].sum()
 
-    # Tendencia total (suma de las 10 ciudades) por año
-    national = df_anim.groupby("Year")["Waste_tons"].sum().reset_index()
+    initial_year = years[0]
+    d0 = df_anim[df_anim["Year"] == initial_year]
+    n0 = national[national["Year"] <= initial_year]
 
-    # --- Subplots: mapa + línea (comparten frames) ---
-    fig = make_subplots(
+    fig_anim = make_subplots(
         rows=1,
         cols=2,
         specs=[[{"type": "mapbox"}, {"type": "xy"}]],
-        column_widths=[0.62, 0.38],
-        horizontal_spacing=0.06,
-        subplot_titles=("Geographic Projection", "Waste Generation of Ten Cities"),
+        column_widths=[0.58, 0.42],
+        horizontal_spacing=0.05,
+        subplot_titles=("Geographic projection", "Total waste trend"),
     )
 
-    # Estado inicial
-    y0 = years[0]
-    d0 = df_anim[df_anim["Year"] == y0]
-    sizes0 = bubble_sizes(d0["Waste_tons"])
-    nat0 = national[national["Year"] <= y0]
-
-    # Trace 0 (MAPA) - estado inicial
-    fig.add_trace(
+    fig_anim.add_trace(
         go.Scattermapbox(
             lat=d0["lat"],
             lon=d0["lon"],
             mode="markers",
             marker=dict(
-                size=sizes0,
+                size=safe_bubble_sizes(d0["Waste_tons"]),
                 color=to_num(d0["Waste_tons"]),
                 colorscale="Turbo",
                 showscale=True,
-                opacity=0.9,
+                opacity=0.88,
+                colorbar=dict(title="t/year"),
             ),
             text=d0["City"],
+            hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>",
             showlegend=False,
-            hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>",
         ),
         row=1,
         col=1,
     )
 
-    # Trace 1 (LÍNEA) - estado inicial
-    fig.add_trace(
+    fig_anim.add_trace(
         go.Scatter(
-            x=nat0["Year"].astype(int),
-            y=nat0["Waste_tons"],
+            x=n0["Year"],
+            y=n0["Waste_tons"],
             mode="lines+markers",
-            line=dict(color="#3A86FF", width=3),
-            marker=dict(color="#8338EC", size=7),
-            name="Total",
-            hovertemplate="Year: %{x}<br>t/year: %{y:,.0f}<extra></extra>",
+            line=dict(width=3, color="#1f77b4"),
+            marker=dict(size=7, color="#2ca58d"),
+            hovertemplate="Year %{x}<br>Total: %{y:,.0f} t/year<extra></extra>",
+            showlegend=False,
         ),
         row=1,
         col=2,
     )
 
-    # Frames sincronizados (mapa y línea avanzan juntos)
     frames = []
-    for y in years:
-        dy = df_anim[df_anim["Year"] == y]
-        ny = national[national["Year"] <= y]
+    for year in years:
+        dy = df_anim[df_anim["Year"] == year]
+        ny = national[national["Year"] <= year]
         frames.append(
             go.Frame(
-                name=str(y),
+                name=str(year),
                 data=[
-                    # Mapa para el año y
                     go.Scattermapbox(
                         lat=dy["lat"],
                         lon=dy["lon"],
                         mode="markers",
                         marker=dict(
-                            size=bubble_sizes(dy["Waste_tons"]),
+                            size=safe_bubble_sizes(dy["Waste_tons"]),
                             color=to_num(dy["Waste_tons"]),
                             colorscale="Turbo",
                             showscale=True,
-                            opacity=0.9,
+                            opacity=0.88,
                         ),
                         text=dy["City"],
+                        hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>",
                         showlegend=False,
-                        hovertemplate="<b>%{text}</b><br>Annual waste: %{marker.color:,.0f} t/year<extra></extra>",
                     ),
-                    # Línea acumulada hasta y
                     go.Scatter(
-                        x=ny["Year"].astype(int),
+                        x=ny["Year"],
                         y=ny["Waste_tons"],
                         mode="lines+markers",
-                        line=dict(color="#3A86FF", width=3),
-                        marker=dict(color="#8338EC", size=7),
-                        name="Total",
-                        hovertemplate="Year: %{x}<br>t/year: %{y:,.0f}<extra></extra>",
+                        line=dict(width=3, color="#1f77b4"),
+                        marker=dict(size=7, color="#2ca58d"),
+                        hovertemplate="Year %{x}<br>Total: %{y:,.0f} t/year<extra></extra>",
+                        showlegend=False,
                     ),
                 ],
             )
         )
-    fig.frames = frames
+    fig_anim.frames = frames
 
-    # Layout + controles (Play/Pause + slider)
-    fig.update_layout(
+    y_min = float(national["Waste_tons"].min())
+    y_max = float(national["Waste_tons"].max())
+
+    fig_anim.update_layout(
         mapbox_style="open-street-map",
-        mapbox_zoom=5,
-        mapbox_center={"lat": 4.6, "lon": -74.1},
+        mapbox_zoom=4.8,
+        mapbox_center={"lat": 6.5, "lon": -74.5},
+        template=PLOT_TEMPLATE,
         margin=dict(l=10, r=10, t=60, b=10),
-        font=dict(size=13, color="#1d3557"),
-        plot_bgcolor="rgba(0,0,0,0)",
-        paper_bgcolor="rgba(0,0,0,0)",
+        xaxis_title="Year",
+        yaxis_title="tons/year",
         updatemenus=[
             {
                 "type": "buttons",
                 "direction": "left",
-                "x": 0.12,
+                "x": 0.1,
                 "y": -0.08,
                 "showactive": True,
                 "buttons": [
@@ -521,14 +711,7 @@ with tab4:
                     {
                         "label": "⏸ Pause",
                         "method": "animate",
-                        "args": [
-                            [None],
-                            {
-                                "frame": {"duration": 0, "redraw": False},
-                                "mode": "immediate",
-                                "transition": {"duration": 0},
-                            },
-                        ],
+                        "args": [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}],
                     },
                 ],
             }
@@ -536,59 +719,129 @@ with tab4:
         sliders=[
             {
                 "active": 0,
-                "y": -0.05,
-                "x": 0.12,
-                "len": 0.7,
-                "pad": {"b": 10, "t": 10},
+                "x": 0.1,
+                "y": -0.04,
+                "len": 0.75,
                 "currentvalue": {"prefix": "Year: ", "font": {"size": 16}},
                 "steps": [
                     {
-                        "args": [[str(y)], {"frame": {"duration": 0, "redraw": True}, "mode": "immediate"}],
-                        "label": str(y),
+                        "label": str(year),
                         "method": "animate",
+                        "args": [[str(year)], {"mode": "immediate", "frame": {"duration": 0, "redraw": True}}],
                     }
-                    for y in years
+                    for year in years
                 ],
             }
         ],
-        xaxis_title="Year",
-        yaxis_title="tons/year",
     )
 
-    # Ejes limpios para la LÍNEA (subplot derecho) + rango dinámico
-    fig.update_xaxes(
-        row=1,
-        col=2,
-        tickmode="linear",
-        dtick=1,
-        range=[years[0], years[-1]],
-        tickformat="d",
-    )
+    fig_anim.update_xaxes(row=1, col=2, tickmode="linear", dtick=1, range=[years[0], years[-1]], tickformat="d")
+    fig_anim.update_yaxes(row=1, col=2, range=[max(0, y_min * 0.95), y_max * 1.05], tickformat=",.0f")
+    st.plotly_chart(fig_anim, use_container_width=True)
 
-    y_min = float(national["Waste_tons"].min())
-    y_max = float(national["Waste_tons"].max())
-    y_lower = max(0.0, y_min * 0.9)
-    y_upper = y_max * 1.05
-
-    fig.update_yaxes(
-        row=1,
-        col=2,
-        tickformat=",.0f",
-        range=[y_lower, y_upper],
-        rangemode="nonnegative",
-        title_text="tons/year",
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-# ==============================
-# TAB 5 — About
-# ==============================
+# =========================================================
+# TAB 5 - CITY COMPARISON
+# =========================================================
 with tab5:
-    st.markdown("""
-### About
-**Developer:** Dr. Danny Ibarra Vega — Universidad de Antioquia (2025)**  
-**Method:** System Dynamics (logistic population growth, bounded PPC), 2025–2050 simulations.  
-**Data:** DANE projections (2018–2042), SSPD (2023), city-specific compositions.  
-**AI Layer:** Generative AI for parameter exploration, scenario generation, and narrative visualization.
-""")
+    st.subheader("Multi-city comparison")
+    selected_compare = comparison_cities if comparison_cities else [selected_city]
+    compare_df = filter_year_range(df_waste, year_range, selected_compare)
+
+    fig_compare = px.line(
+        compare_df,
+        x=compare_df.index,
+        y=compare_df.columns,
+        markers=True,
+        template=PLOT_TEMPLATE,
+        title="Waste Generation by City",
+        labels={"x": "Year", "value": "Tons/year", "variable": "City"},
+    )
+    fig_compare.update_layout(hovermode="x unified", margin=dict(l=10, r=10, t=50, b=10))
+    st.plotly_chart(fig_compare, use_container_width=True)
+
+    latest_compare = pd.DataFrame(
+        {
+            "City": selected_compare,
+            "Waste_tons_year": [float(df_waste.loc[latest_year, c]) for c in selected_compare],
+            "Population": [float(df_pop.loc[latest_year, c]) for c in selected_compare],
+        }
+    )
+    latest_compare["kg_person_day"] = latest_compare["Waste_tons_year"] * 1000 / latest_compare["Population"] / 365
+    latest_compare = latest_compare.sort_values("Waste_tons_year", ascending=False)
+
+    c1, c2 = st.columns(2)
+    with c1:
+        fig_rank = px.bar(
+            latest_compare,
+            x="City",
+            y="Waste_tons_year",
+            text_auto=".2s",
+            template=PLOT_TEMPLATE,
+            title=f"Ranking by Waste Generation ({latest_year})",
+            labels={"Waste_tons_year": "Tons/year"},
+        )
+        fig_rank.update_layout(xaxis_tickangle=-20, margin=dict(l=10, r=10, t=50, b=10))
+        st.plotly_chart(fig_rank, use_container_width=True)
+
+    with c2:
+        fig_pc_comp = px.bar(
+            latest_compare,
+            x="City",
+            y="kg_person_day",
+            text_auto=".2f",
+            template=PLOT_TEMPLATE,
+            title=f"Per Capita Waste ({latest_year})",
+            labels={"kg_person_day": "kg/person/day"},
+        )
+        fig_pc_comp.update_layout(xaxis_tickangle=-20, margin=dict(l=10, r=10, t=50, b=10))
+        st.plotly_chart(fig_pc_comp, use_container_width=True)
+
+# =========================================================
+# TAB 6 - ABOUT & DATA
+# =========================================================
+with tab6:
+    st.subheader("About the Platform")
+    st.markdown(
+        """
+        **Purpose.** This platform supports the exploration of urban waste dynamics and circularity potential
+        for Colombian cities using structured simulation outputs.
+
+        **Methodological core.** The interface is designed to visualize simulation trajectories, compare cities,
+        inspect waste composition, and communicate results in a more decision-oriented way.
+
+        **Expected data sheets.**
+        - `Poblacion_2050`
+        - `ResiduosTotales_t_anio`
+        - `Residuos_5Tipos_largo`
+
+        **Good UX changes introduced in this version.**
+        - Cleaner visual hierarchy and dashboard cards
+        - Better error handling and data validation
+        - Per capita indicator
+        - Multi-city comparison
+        - More consistent chart layout
+        - Optional data inspection and export
+        """
+    )
+
+    st.markdown("#### Filtered data export")
+    filtered_pop = filter_year_range(df_pop, year_range, [selected_city])
+    filtered_waste = filter_year_range(df_waste, year_range, [selected_city])
+    csv_pop, pop_name = export_dataframe(filtered_pop, f"population_{selected_city}_{year_range[0]}_{year_range[1]}")
+    csv_waste, waste_name = export_dataframe(filtered_waste, f"waste_{selected_city}_{year_range[0]}_{year_range[1]}")
+
+    d1, d2 = st.columns(2)
+    with d1:
+        st.download_button("Download population CSV", data=csv_pop, file_name=pop_name, mime="text/csv")
+    with d2:
+        st.download_button("Download waste CSV", data=csv_waste, file_name=waste_name, mime="text/csv")
+
+    if show_raw_data:
+        st.markdown("#### Raw filtered tables")
+        st.write("Population")
+        st.dataframe(filtered_pop.style.format("{:,.0f}"), use_container_width=True)
+        st.write("Waste")
+        st.dataframe(filtered_waste.style.format("{:,.0f}"), use_container_width=True)
+
+st.caption("Designed to be more robust, readable, and decision-friendly. A dashboard should explain itself before the user has to fight it.")
+
