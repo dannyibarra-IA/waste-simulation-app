@@ -845,7 +845,9 @@ with tab3:
     geo_df["Value"] = geo_df["Waste_tons_day"] if unit == "tons/day" else geo_df["Waste_tons_year"]
     geo_df["Per_capita_kg_day"] = (geo_df["Waste_tons_year"] * 1000 / geo_df["Population"] / 365).replace([np.inf, -np.inf], np.nan)
 
-    fig_map = px.scatter_mapbox(
+    # Plotly 6.5+ removed the deprecated Mapbox Express helper.  The
+    # MapLibre-based API provides the same map without requiring a token.
+    fig_map = px.scatter_map(
         geo_df,
         lat="lat",
         lon="lon",
@@ -855,7 +857,7 @@ with tab3:
         hover_name="City",
         hover_data={"Landfill": True, "Population": ":,.0f", "Waste_tons_year": ":,.0f", "Waste_tons_day": ":,.1f", "Per_capita_kg_day": ":.2f", "lat": False, "lon": False, "Value": False},
         color_continuous_scale="Viridis",
-        mapbox_style="open-street-map",
+        map_style="open-street-map",
         zoom=4.8,
         center={"lat": 6.5, "lon": -74.5},
         title=f"Geographic Distribution — {view_year}",
@@ -878,17 +880,17 @@ with tab4:
     d0 = df_anim[df_anim["Year"] == initial_year]
     n0 = national[national["Year"] <= initial_year]
 
-    fig_anim = make_subplots(rows=1, cols=2, specs=[[{"type": "mapbox"}, {"type": "xy"}]], column_widths=[0.58, 0.42], horizontal_spacing=0.05, subplot_titles=("Geographic projection", "Total waste trend"))
-    fig_anim.add_trace(go.Scattermapbox(lat=d0["lat"], lon=d0["lon"], mode="markers", marker=dict(size=safe_bubble_sizes(d0["Waste_tons"]), color=to_num(d0["Waste_tons"]), colorscale="Turbo", showscale=True, opacity=0.88, colorbar=dict(title="t/year")), text=d0["City"], hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>", showlegend=False), row=1, col=1)
+    fig_anim = make_subplots(rows=1, cols=2, specs=[[{"type": "map"}, {"type": "xy"}]], column_widths=[0.58, 0.42], horizontal_spacing=0.05, subplot_titles=("Geographic projection", "Total waste trend"))
+    fig_anim.add_trace(go.Scattermap(lat=d0["lat"], lon=d0["lon"], mode="markers", marker=dict(size=safe_bubble_sizes(d0["Waste_tons"]), color=to_num(d0["Waste_tons"]), colorscale="Turbo", showscale=True, opacity=0.88, colorbar=dict(title="t/year")), text=d0["City"], hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>", showlegend=False), row=1, col=1)
     fig_anim.add_trace(go.Scatter(x=n0["Year"], y=n0["Waste_tons"], mode="lines+markers", line=dict(width=3, color="#0d5c91"), marker=dict(size=7, color="#2f7d6b"), hovertemplate="Year %{x}<br>Total: %{y:,.0f} t/year<extra></extra>", showlegend=False), row=1, col=2)
 
     frames = []
     for year in years:
         dy = df_anim[df_anim["Year"] == year]
         ny = national[national["Year"] <= year]
-        frames.append(go.Frame(name=str(year), data=[go.Scattermapbox(lat=dy["lat"], lon=dy["lon"], mode="markers", marker=dict(size=safe_bubble_sizes(dy["Waste_tons"]), color=to_num(dy["Waste_tons"]), colorscale="Turbo", showscale=True, opacity=0.88), text=dy["City"], hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>", showlegend=False), go.Scatter(x=ny["Year"], y=ny["Waste_tons"], mode="lines+markers", line=dict(width=3, color="#0d5c91"), marker=dict(size=7, color="#2f7d6b"), hovertemplate="Year %{x}<br>Total: %{y:,.0f} t/year<extra></extra>", showlegend=False)]))
+        frames.append(go.Frame(name=str(year), data=[go.Scattermap(lat=dy["lat"], lon=dy["lon"], mode="markers", marker=dict(size=safe_bubble_sizes(dy["Waste_tons"]), color=to_num(dy["Waste_tons"]), colorscale="Turbo", showscale=True, opacity=0.88), text=dy["City"], hovertemplate="<b>%{text}</b><br>Waste: %{marker.color:,.0f} t/year<extra></extra>", showlegend=False), go.Scatter(x=ny["Year"], y=ny["Waste_tons"], mode="lines+markers", line=dict(width=3, color="#0d5c91"), marker=dict(size=7, color="#2f7d6b"), hovertemplate="Year %{x}<br>Total: %{y:,.0f} t/year<extra></extra>", showlegend=False)]))
     fig_anim.frames = frames
-    fig_anim.update_layout(mapbox_style="open-street-map", mapbox_zoom=4.8, mapbox_center={"lat": 6.5, "lon": -74.5}, template=PLOT_TEMPLATE, margin=dict(l=10, r=10, t=60, b=10), xaxis_title="Year", yaxis_title="tons/year", updatemenus=[{"type": "buttons", "direction": "left", "x": 0.1, "y": -0.08, "showactive": True, "buttons": [{"label": "▶ Play", "method": "animate", "args": [None, {"frame": {"duration": 700, "redraw": True}, "fromcurrent": True, "transition": {"duration": 250}}]}, {"label": "⏸ Pause", "method": "animate", "args": [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}]}]}], sliders=[{"active": 0, "x": 0.1, "y": -0.04, "len": 0.75, "currentvalue": {"prefix": "Year: ", "font": {"size": 16}}, "steps": [{"label": str(year), "method": "animate", "args": [[str(year)], {"mode": "immediate", "frame": {"duration": 0, "redraw": True}}]} for year in years]}])
+    fig_anim.update_layout(map_style="open-street-map", map_zoom=4.8, map_center={"lat": 6.5, "lon": -74.5}, template=PLOT_TEMPLATE, margin=dict(l=10, r=10, t=60, b=10), xaxis_title="Year", yaxis_title="tons/year", updatemenus=[{"type": "buttons", "direction": "left", "x": 0.1, "y": -0.08, "showactive": True, "buttons": [{"label": "▶ Play", "method": "animate", "args": [None, {"frame": {"duration": 700, "redraw": True}, "fromcurrent": True, "transition": {"duration": 250}}]}, {"label": "⏸ Pause", "method": "animate", "args": [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}]}]}], sliders=[{"active": 0, "x": 0.1, "y": -0.04, "len": 0.75, "currentvalue": {"prefix": "Year: ", "font": {"size": 16}}, "steps": [{"label": str(year), "method": "animate", "args": [[str(year)], {"mode": "immediate", "frame": {"duration": 0, "redraw": True}}]} for year in years]}])
     fig_anim.update_xaxes(row=1, col=2, tickmode="linear", dtick=1, range=[years[0], years[-1]], tickformat="d")
     fig_anim.update_yaxes(row=1, col=2, range=[max(0, float(national["Waste_tons"].min()) * 0.95), float(national["Waste_tons"].max()) * 1.05], tickformat=",.0f")
     st.plotly_chart(fig_anim, use_container_width=True)
@@ -1088,3 +1090,4 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
