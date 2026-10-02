@@ -799,17 +799,61 @@ with tab1:
     st.subheader(f"Population and Waste Trends — {selected_city}")
     add_section_intro("What this tab answers", "How population, total waste and per-capita pressure evolve, and how much waste the scenario avoids against the baseline.")
     x = res_w.index
+
+    # Tab-specific axis styling: generous margins + readable ticks in two-column layouts.
+    x_num = np.asarray(x, dtype=float)
+    x_span = max(float(x_num[-1] - x_num[0]), 1.0)
+    x_dtick = max(1, int(round(x_span / 5)))
+
+    def style_t1_axes(fig, y_values, y_title, y_tickformat=None, zero_floor=False):
+        vals = np.asarray(y_values, dtype=float)
+        vals = vals[np.isfinite(vals)]
+        if vals.size:
+            ymin, ymax = float(vals.min()), float(vals.max())
+            span = ymax - ymin
+            pad = max(span * 0.10, abs(ymax) * 0.02, 1e-9)
+            lower = 0.0 if zero_floor else max(0.0, ymin - pad)
+            upper = ymax + pad
+            fig.update_yaxes(range=[lower, upper])
+
+        fig.update_xaxes(
+            range=[float(x_num.min()) - 0.55, float(x_num.max()) + 0.55],
+            tickmode="linear", tick0=int(x_num.min()), dtick=x_dtick,
+            tickformat="d", automargin=True, title_standoff=10,
+            showline=True, mirror=False,
+        )
+        fig.update_yaxes(
+            title_text=y_title, tickformat=y_tickformat, automargin=True,
+            title_standoff=14, ticklabelposition="outside",
+            showline=True, mirror=False, nticks=6,
+        )
+        fig.update_layout(
+            height=390, hovermode="x unified",
+            margin=dict(l=82, r=24, t=78, b=58),
+            title=dict(font=dict(size=15), y=0.96),
+            legend=dict(y=1.01, x=0, orientation="h"),
+        )
+        return fig
+
     c1, c2 = st.columns(2)
     with c1:
         f = go.Figure()
         f.add_trace(go.Scatter(x=x, y=res_w["Baseline_t"], name="Baseline (no policy)", line=dict(color=C["grey"], dash="dash", width=2)))
         f.add_trace(go.Scatter(x=x, y=res_w["Generated_t"], name=f"Scenario: {selected_scenario}", line=dict(color=C["green"], width=3),
                                fill="tonexty", fillcolor="rgba(47,125,107,0.16)"))
-        f.update_layout(title="Waste generation — baseline vs scenario (shaded = avoided)", yaxis_title="t/year", yaxis_tickformat=",.2s", hovermode="x unified", height=370)
+        f.update_layout(title="Waste generation — baseline vs scenario")
+        style_t1_axes(
+            f,
+            np.r_[res_w["Baseline_t"].to_numpy(), res_w["Generated_t"].to_numpy()],
+            "Waste (t/year)", y_tickformat="~s", zero_floor=True,
+        )
         show(f, "t1_waste")
+
     with c2:
-        f = go.Figure(go.Scatter(x=x, y=res_w["Population"], name="Population", line=dict(color=C["blue"], width=3), fill="tozeroy", fillcolor="rgba(13,92,145,0.10)"))
-        f.update_layout(title="Population projection", yaxis_title="inhabitants", yaxis_tickformat=",.2s", hovermode="x unified", height=370, showlegend=False)
+        f = go.Figure(go.Scatter(x=x, y=res_w["Population"], name="Population", line=dict(color=C["blue"], width=3),
+                                 fill="tozeroy", fillcolor="rgba(13,92,145,0.10)"))
+        f.update_layout(title="Population projection", showlegend=False)
+        style_t1_axes(f, res_w["Population"].to_numpy(), "Population (inhabitants)", y_tickformat="~s", zero_floor=False)
         show(f, "t1_pop")
 
     c3, c4 = st.columns(2)
@@ -817,15 +861,22 @@ with tab1:
         f = go.Figure()
         f.add_trace(go.Scatter(x=x, y=res_w["kg_person_day_baseline"], name="Baseline", line=dict(color=C["grey"], dash="dash", width=2)))
         f.add_trace(go.Scatter(x=x, y=res_w["kg_person_day"], name="Scenario", line=dict(color=C["gold"], width=3)))
-        f.add_hline(y=1.1, line=dict(color=C["red"], dash="dot"), annotation_text="High per-capita threshold (1.1)", annotation_position="top left")
-        f.update_layout(title="Per-capita waste generation", yaxis_title="kg/person/day", hovermode="x unified", height=370)
+        f.add_hline(y=1.1, line=dict(color=C["red"], dash="dot"), annotation_text="High threshold (1.1)", annotation_position="top left")
+        f.update_layout(title="Per-capita waste generation")
+        pc_vals = np.r_[res_w["kg_person_day_baseline"].to_numpy(), res_w["kg_person_day"].to_numpy(), [1.1]]
+        style_t1_axes(f, pc_vals, "kg/person/day", y_tickformat=".2f", zero_floor=False)
         show(f, "t1_pc")
+
     with c4:
+        pop_idx = 100 * res_w["Population"] / res_w["Population"].iloc[0]
+        gen_idx = 100 * res_w["Generated_t"] / res_w["Generated_t"].iloc[0]
+        base_idx = 100 * res_w["Baseline_t"] / res_w["Baseline_t"].iloc[0]
         f = go.Figure()
-        f.add_trace(go.Scatter(x=x, y=100 * res_w["Population"] / res_w["Population"].iloc[0], name="Population", line=dict(color=C["blue"], width=3)))
-        f.add_trace(go.Scatter(x=x, y=100 * res_w["Generated_t"] / res_w["Generated_t"].iloc[0], name="Waste (scenario)", line=dict(color=C["green"], width=3)))
-        f.add_trace(go.Scatter(x=x, y=100 * res_w["Baseline_t"] / res_w["Baseline_t"].iloc[0], name="Waste (baseline)", line=dict(color=C["grey"], dash="dash", width=2)))
-        f.update_layout(title=f"Decoupling check — index ({x[0]} = 100)", yaxis_title="index", hovermode="x unified", height=370)
+        f.add_trace(go.Scatter(x=x, y=pop_idx, name="Population", line=dict(color=C["blue"], width=3)))
+        f.add_trace(go.Scatter(x=x, y=gen_idx, name="Waste (scenario)", line=dict(color=C["green"], width=3)))
+        f.add_trace(go.Scatter(x=x, y=base_idx, name="Waste (baseline)", line=dict(color=C["grey"], dash="dash", width=2)))
+        f.update_layout(title=f"Decoupling check — index ({x[0]} = 100)")
+        style_t1_axes(f, np.r_[pop_idx.to_numpy(), gen_idx.to_numpy(), base_idx.to_numpy()], "Index", y_tickformat=".0f", zero_floor=False)
         show(f, "t1_idx")
 
 # ---------------------------------------------------------
