@@ -67,4 +67,10 @@ streamlit run app.py
 
 Para actualizar los datos de la SSPD, copie las bases nuevas como `data/raw/sspd/sspd_DF_<año>.xlsx` (disposición final) o `data/raw/sspd/sspd_AA_<año>.xlsx` (aprovechamiento) y ejecute `python data/build_data.py`. El script importa los datos, aplica los controles de calidad, recalibra las 32 capitales y guarda la versión de los datos.
 
+Versión HTML autónoma (sin servidor ni internet), con los 12 escenarios precalculados para las 32 capitales:
+
+```bash
+python reports/build_static_html.py        # genera dist/observatorio_residuos_v3.html
+```
+
 Despliegue en Streamlit Community Cloud: ver [`docs/deployment.md`](docs/deployment.md).

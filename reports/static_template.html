@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colombia Circular Waste Observatory · v3 (HTML local)</title>
+<script>/*__PLOTLY__*/</script>
+<style>
+.viz-root{color-scheme:light;
+  --surface-0:#f6f6f4;--surface-1:#fcfcfb;--border:#e4e3df;--grid:#ecebe7;
+  --text-primary:#0b0b0b;--text-secondary:#52514e;--text-muted:#7a7974;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--bau:#8b8a85;
+  --seq-1:#cde2fb;--seq-2:#9ec5f4;--seq-3:#6da7ec;--seq-4:#3987e5;--seq-5:#256abf;--seq-6:#184f95;--seq-7:#0d366b;
+  --good:#0b8a3c;--warn:#b26b00;--serious:#c2410c;--crit:#c0262d;--land:#ecebe6;--landline:#c9c7c0;--accent:#2a78d6;--obs:#0b0b0b;--fit:#6250d6}
+:root[data-theme="dark"] .viz-root{color-scheme:dark;
+  --surface-0:#121211;--surface-1:#1a1a19;--border:#2e2e2c;--grid:#262624;
+  --text-primary:#f0efec;--text-secondary:#c3c2b7;--text-muted:#8f8e86;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--bau:#8f8e86;
+  --seq-1:#104281;--seq-2:#1c5cab;--seq-3:#2a78d6;--seq-4:#3987e5;--seq-5:#6da7ec;--seq-6:#9ec5f4;--seq-7:#cde2fb;
+  --good:#3fbf6f;--warn:#e3a33b;--serious:#ef7d4b;--crit:#ef6b6b;--land:#242423;--landline:#3a3a37;--accent:#3987e5;--obs:#f0efec;--fit:#9085e9}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:14px}
+.viz-root{background:var(--surface-0);color:var(--text-primary);min-height:100vh}
+header{padding:18px 28px 10px;border-bottom:1px solid var(--border);background:var(--surface-1)}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:24px;margin:4px 0 2px;letter-spacing:-.01em}
+.sub{color:var(--text-secondary);max-width:1100px;line-height:1.45}
+.meta{color:var(--text-muted);font-size:12px;margin-top:6px}
+.controls{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-end;padding:10px 28px;background:var(--surface-1);border-bottom:1px solid var(--border)}
+.ctl label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-secondary);margin-bottom:4px}
+select,input[type=range]{font:inherit;color:var(--text-primary);background:var(--surface-0);border:1px solid var(--border);border-radius:6px;padding:5px 8px}
+input[type=range]{padding:0;width:200px;accent-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-width:760px}
+.chip{border:1px solid var(--border);background:var(--surface-0);color:var(--text-secondary);border-radius:999px;padding:3px 10px;cursor:pointer;font-size:12.5px;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed=true]{color:var(--text-primary);border-color:var(--text-secondary);font-weight:600}
+.chip .sw{width:14px;height:3px;border-radius:2px;display:inline-block}
+.chip[disabled]{opacity:.45;cursor:not-allowed}
+.tabs{display:flex;gap:2px;padding:0 28px;background:var(--surface-1);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab{border:0;background:none;color:var(--text-secondary);padding:11px 14px;font:inherit;font-weight:600;cursor:pointer;border-bottom:2px solid transparent}
+.tab[aria-selected=true]{color:var(--text-primary);border-bottom-color:var(--accent)}
+main{padding:18px 28px 40px;max-width:1500px}
+section[hidden]{display:none}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(520px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.kpi .l{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-secondary)}
+.kpi .v{font-size:22px;font-weight:800;margin-top:2px}
+.kpi .n{font-size:12px;color:var(--text-muted);margin-top:1px}
+.tag{font-size:10.5px;font-weight:700;border-radius:999px;padding:1px 6px;margin-left:6px;border:1px solid var(--border);color:var(--text-secondary);text-transform:none;letter-spacing:0}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.card h3{font-size:14px;margin:2px 0 6px}
+.note{color:var(--text-secondary);font-size:12.5px;line-height:1.45}
+.plot{width:100%;height:380px}
+.plot.tall{height:620px}
+.alert{border-left:4px solid var(--warn);background:var(--surface-1);border-radius:6px;padding:8px 10px;margin:6px 0;font-size:13px}
+.alert.alta{border-left-color:var(--crit)}
+.alert b{color:var(--text-primary)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:5px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{color:var(--text-secondary);font-weight:700;position:sticky;top:0;background:var(--surface-1)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{max-height:420px;overflow:auto;border:1px solid var(--border);border-radius:8px}
+.lvl{display:inline-block;min-width:22px;text-align:center;font-weight:800;border-radius:4px;padding:0 5px;border:1px solid var(--border)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+button.small{font:inherit;font-size:12px;border:1px solid var(--border);background:var(--surface-0);color:var(--text-primary);border-radius:6px;padding:4px 10px;cursor:pointer}
+h2{font-size:17px;margin:18px 0 8px}
+footer{color:var(--text-muted);font-size:12px;padding:16px 28px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="viz-root" id="root">
+<header>
+  <div class="kicker">Colombia Circular Waste Observatory · Waste Simulation App 3.0 · versión HTML local</div>
+  <h1>Residuos sólidos en las 32 capitales de Colombia, 2018–2050</h1>
+  <div class="sub">Disposición final y aprovechamiento observados (SSPD 2018–2024), población oficial del DANE y proyecciones del motor de Dinámica de Sistemas
+  calibrado por ciudad. Los resultados están precalculados: para cambiar parámetros o palancas use la aplicación Streamlit.</div>
+  <div class="meta" id="meta"></div>
+</header>
+<div class="controls">
+  <div class="ctl"><label for="city">Ciudad</label><select id="city"></select></div>
+  <div class="ctl"><label for="year">Año de referencia: <span id="yearv"></span></label><input type="range" id="year"></div>
+  <div class="ctl"><label for="main">Escenario principal</label><select id="main"></select></div>
+  <div class="ctl"><label>Escenarios a comparar (máx. 4 además del BAU)</label><div class="chips" id="chips"></div></div>
+  <div class="ctl"><label>Tema</label><button class="small" id="theme">Oscuro</button></div>
+</div>
+<nav class="tabs" role="tablist" id="tabs"></nav>
+<main>
+<section id="t-nac">
+  <div class="kpis" id="nac-kpis"></div>
+  <div class="row"><label class="note" for="ind">Indicador del mapa y del ranking</label><select id="ind"></select></div>
+  <div class="grid g2">
+    <div class="card"><div id="map" class="plot tall"></div></div>
+    <div class="card"><div id="rank" class="plot tall"></div></div>
+  </div>
+  <p class="note">Tamaño del círculo: generación; color: indicador elegido. Haga clic en una ciudad del mapa o del ranking para abrir su perfil.</p>
+</section>
+<section id="t-ciu" hidden>
+  <div class="kpis" id="ciu-kpis"></div>
+  <div class="grid g2">
+    <div class="card"><div id="c-disp" class="plot"></div><div class="note" id="c-disp-n"></div></div>
+    <div class="card"><div id="c-apr" class="plot"></div><div class="note" id="c-apr-n"></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>Calidad de datos y limitaciones</h3><div id="c-flags"></div></div>
+    <div class="card"><h3>Disposición final y condición inicial del modelo</h3><div id="c-site" class="note"></div><div id="c-life" class="plot" style="height:240px"></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><div id="c-fam" class="plot"></div></div>
+    <div class="card"><div id="c-pop" class="plot"></div></div>
+  </div>
+</section>
+<section id="t-esc" hidden>
+  <div class="note" id="esc-desc" style="margin-bottom:10px"></div>
+  <div class="grid g3" id="esc-grid"></div>
+  <h2>Resumen 2050</h2>
+  <div class="tablewrap" id="esc-tab"></div>
+</section>
+<section id="t-flu" hidden>
+  <div class="card"><div id="sankey" class="plot" style="height:480px"></div><div class="note" id="sankey-n"></div></div>
+  <div class="card" style="margin-top:14px"><div id="cap" class="plot"></div></div>
+</section>
+<section id="t-com" hidden>
+  <div class="row"><label class="note" for="hind">Indicador</label><select id="hind"></select></div>
+  <div class="card"><div id="heat" class="plot" style="height:860px"></div></div>
+</section>
+<section id="t-met" hidden>
+  <div class="grid g2">
+    <div class="card note" id="met-text"></div>
+    <div class="card"><h3>Calibración y validación por ciudad</h3><div class="tablewrap" id="met-cal"></div></div>
+  </div>
+  <h2>Alertas de calidad de las series SSPD</h2>
+  <div class="tablewrap" id="met-q"></div>
+</section>
+</main>
+<footer>Danny Ibarra Vega, Ph.D. · Universidad de Antioquia · Colombia Circular Waste Observatory. Límites departamentales: Natural Earth (dominio público), simplificados. Coordenadas de las capitales aproximadas.</footer>
+</div>
+<script>
+const D = /*__DATA__*/null;
+const GEO = /*__GEO__*/null;
+const Y = D.years, CODES = D.orden, CITY = D.cities, SC = D.escenarios;
+const GEOXY = (() => { const x=[], y=[]; const ring = r => { r.forEach(([a,b])=>{x.push(a); y.push(b);}); x.push(null); y.push(null); };
+  GEO.features.forEach(f => { const g=f.geometry; if (!g) return; (g.type==='Polygon'? [g.coordinates] : g.coordinates).forEach(poly => ring(poly[0])); }); return {x, y}; })();
+const css = n => getComputedStyle(document.getElementById('root')).getPropertyValue(n).trim();
+const fmt = (x, d=0) => (x==null||isNaN(x)) ? '—' : Number(x).toLocaleString('es-CO',{maximumFractionDigits:d, minimumFractionDigits:d});
+const fmtT = x => { if (x==null||isNaN(x)) return '—'; const a=Math.abs(x);
+  return a>=1e6? fmt(x/1e6,2)+' Mt' : a>=1e3? fmt(x/1e3,1)+' kt' : fmt(x,0)+' t'; };
+const pct = (x,d=1) => (x==null||isNaN(x))?'—':fmt(100*x,d)+' %';
+const lifeTxt = v => (v==null||v>100)? '> 100 años' : fmt(v,1)+' años';
+const esc = s => String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const S = {city: CODES.includes('05001')?'05001':CODES[0], year: 2035, main:'S7', sel:['MOD','ACC','S7'], slot:{MOD:1,ACC:2,S7:3}, tab:'nac', ind:'G', hind:'tasa_aprovechamiento'};
+const TABS = [['nac','Observatorio nacional'],['ciu','Perfil de ciudad'],['esc','Escenarios'],['flu','Flujos de materiales'],['com','Comparación de ciudades'],['met','Método y calidad de datos']];
+const INDS = {G:['Generación (t/año)','int'], gpc_kg_dia:['Generación per cápita (kg/hab/día)','dec'], tasa_aprovechamiento:['Tasa de aprovechamiento','pct'],
+  disp_pc_kg_dia:['Disposición per cápita (kg/hab/día)','dec'], Overflow:['Disposición sin capacidad licenciada (t/año)','int'], life:['Vida útil de disposición (años)','life']};
+const scenColor = k => k==='BAU' ? css('--bau') : css('--s'+(S.slot[k]||1));
+const yi = y => Y.indexOf(y);
+
+function baseLayout(extra={}) {
+  return Object.assign({paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)', font:{family:'Source Sans 3, Segoe UI, sans-serif', size:12.5, color:css('--text-primary')},
+    margin:{l:62,r:18,t:46,b:46}, hoverlabel:{bgcolor:css('--surface-1'), bordercolor:css('--border'), font:{color:css('--text-primary')}},
+    xaxis:{gridcolor:css('--grid'), linecolor:css('--border'), zeroline:false, tickformat:'d', automargin:true},
+    yaxis:{gridcolor:css('--grid'), linecolor:css('--border'), zeroline:false, automargin:true, rangemode:'tozero'},
+    legend:{orientation:'h', y:-0.18, x:0, font:{size:11.5, color:css('--text-secondary')}},
+    title:{font:{size:14}, x:0.01, xanchor:'left'}}, extra, extra.title ? {title:Object.assign({font:{size:14}, x:0.01, xanchor:'left'}, extra.title)} : {});
+}
+const CFG = {displaylogo:false, responsive:true, toImageButtonOptions:{format:'png', scale:3}};
+function plot(id, data, layout) { Plotly.react(id, data, layout, CFG); }
+
+/* ------------------------------------------------------------- controles */
+function initControls() {
+  document.getElementById('meta').textContent = `Generado ${D.generado} · código ${D.version_codigo} · datos ${D.version_datos} · horizonte ${Y[0]}–${Y[Y.length-1]}`;
+  const city = document.getElementById('city');
+  CODES.forEach(c => city.add(new Option(`${CITY[c].ciudad} (${CITY[c].departamento.split(' (')[0]})`, c)));
+  city.value = S.city; city.onchange = () => { S.city = city.value; render(); };
+  const yr = document.getElementById('year'); yr.min=Y[0]; yr.max=Y[Y.length-1]; yr.value=S.year;
+  document.getElementById('yearv').textContent = S.year;
+  yr.oninput = () => { S.year=+yr.value; document.getElementById('yearv').textContent=S.year; render(); };
+  const mn = document.getElementById('main');
+  Object.keys(SC).forEach(k => mn.add(new Option(SC[k].label, k))); mn.value=S.main; mn.onchange=()=>{S.main=mn.value; render();};
+  const ind = document.getElementById('ind'); Object.entries(INDS).forEach(([k,v])=>ind.add(new Option(v[0],k))); ind.value=S.ind; ind.onchange=()=>{S.ind=ind.value; render();};
+  const hind = document.getElementById('hind'); Object.entries(INDS).filter(([k])=>k!=='life').forEach(([k,v])=>hind.add(new Option(v[0],k))); hind.value=S.hind; hind.onchange=()=>{S.hind=hind.value; render();};
+  const tabs = document.getElementById('tabs');
+  TABS.forEach(([k,l]) => { const b=document.createElement('button'); b.className='tab'; b.role='tab'; b.textContent=l; b.dataset.k=k; b.onclick=()=>{S.tab=k; render();}; tabs.appendChild(b); });
+  document.getElementById('theme').onclick = () => { const r=document.documentElement; const dark = r.dataset.theme!=='dark';
+    r.dataset.theme = dark?'dark':'light'; document.getElementById('theme').textContent = dark?'Claro':'Oscuro'; render(); };
+  if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.dataset.theme='dark'; document.getElementById('theme').textContent='Claro'; }
+}
+function renderChips() {
+  const box = document.getElementById('chips'); box.innerHTML='';
+  Object.keys(SC).forEach(k => {
+    const b=document.createElement('button'); b.className='chip'; const on = k==='BAU' || S.sel.includes(k);
+    b.setAttribute('aria-pressed', on); if (k==='BAU') b.disabled=true;
+    if (k!=='BAU' && !on && S.sel.length>=4) b.disabled=true;
+    b.innerHTML = `<span class="sw" style="background:${on?scenColor(k):'transparent'};${k==='BAU'?'border-top:2px dashed '+scenColor(k)+';height:0':''}"></span>${esc(SC[k].label)}`;
+    b.title = SC[k].desc;
+    b.onclick = () => { if (k==='BAU') return;
+      if (S.sel.includes(k)) { S.sel = S.sel.filter(x=>x!==k); delete S.slot[k]; }
+      else if (S.sel.length<4) { const used = Object.values(S.slot); S.slot[k] = [1,2,3,4].find(s=>!used.includes(s)); S.sel.push(k); }
+      render(); };
+    box.appendChild(b);
+  });
+}
+const shown = () => ['BAU', ...S.sel];
+
+/* ------------------------------------------------------------- utilidades de datos */
+function val(c, s, v, y) { const r = CITY[c].res[s]; if (v==='life') return r.life; return r[v][yi(y)]; }
+function fmtInd(v, x) { const t = INDS[v][1]; return t==='int'?fmtT(x): t==='pct'?pct(x): t==='life'? lifeTxt(x) : fmt(x,2); }
+function kpi(l, v, n='', tag='') { return `<div class="kpi"><div class="l">${l}${tag?`<span class="tag">${tag}</span>`:''}</div><div class="v">${v}</div><div class="n">${n}</div></div>`; }
+
+/* ------------------------------------------------------------- 1. nacional */
+function renderNational() {
+  const y=S.year, s=S.main;
+  let pop=0,G=0,apr=0,disp=0,over=0,crit=0;
+  CODES.forEach(c=>{ pop+=val(c,s,'pop',y); G+=val(c,s,'G',y); apr+=val(c,s,'aprovechado_t',y); disp+=val(c,s,'dispuesto_total_t',y); over+=val(c,s,'Overflow',y); if (val(c,s,'life')<y-Y[0]+1) crit++; });
+  document.getElementById('nac-kpis').innerHTML =
+    kpi(`Población ${y}`, fmt(pop/1e6,2)+' M', y<=2042?'proyección oficial DANE':'extensión estimada', y<=2042?'oficial':'estimado') +
+    kpi(`Generación ${y}`, fmtT(G), SC[s].label, 'simulado') +
+    kpi('Tasa de aprovechamiento', pct(apr/G), 'reciclables + orgánicos tratados', 'simulado') +
+    kpi('Dispuesto (incl. sin capacidad)', fmtT(disp), `${fmtT(over)} sin capacidad licenciada`, 'simulado') +
+    kpi(`Capitales con capacidad agotada a ${y}`, `${crit} / 32`, 'vida útil licenciada SSPD', 'simulado');
+  const v=S.ind, vals = CODES.map(c=>{ const x=val(c,s,v,y); return v==='life'? Math.min(x,40): x; });
+  const sizes = CODES.map(c=> 8 + 34*Math.sqrt(val(c,s,'G',y)/Math.max(...CODES.map(k=>val(k,s,'G',y)))));
+  const seq = [[0,css('--seq-1')],[0.17,css('--seq-2')],[0.33,css('--seq-3')],[0.5,css('--seq-4')],[0.67,css('--seq-5')],[0.83,css('--seq-6')],[1,css('--seq-7')]];
+  const scale = v==='life'? seq.map(([p,c],i)=>[p,seq[seq.length-1-i][1]]) : seq;
+  plot('map', [
+    {type:'scatter', x:GEOXY.x, y:GEOXY.y, mode:'lines', fill:'toself', fillcolor:css('--land'), line:{color:css('--landline'), width:0.7}, hoverinfo:'skip', showlegend:false},
+    {type:'scatter', mode:'markers', x:CODES.map(c=>CITY[c].lon), y:CODES.map(c=>CITY[c].lat), customdata:CODES, showlegend:false,
+     marker:{size:sizes, color:vals, colorscale:scale, cmin:Math.min(...vals), cmax:Math.max(...vals), line:{color:css('--surface-1'), width:1.5},
+       colorbar:{title:{text:INDS[v][0].replace(/ \(.*\)/,''), side:'right'}, thickness:10, len:0.7, tickfont:{color:css('--text-secondary')}}},
+     hovertemplate: CODES.map(c=>`<b>${CITY[c].ciudad}</b><br>${INDS[v][0]}: ${fmtInd(v,val(c,s,v,y))}<br>Generación: ${fmtT(val(c,s,'G',y))}<br>Confiabilidad: nivel ${CITY[c].nivel}<extra></extra>`)}
+  ], baseLayout({title:{text:`${INDS[v][0]} · ${y} · ${SC[s].label}`}, margin:{l:0,r:0,t:40,b:0}, hovermode:'closest',
+     xaxis:{visible:false, range:[-82.2,-66.6]}, yaxis:{visible:false, range:[-4.4,13.6], scaleanchor:'x', scaleratio:1}}));
+  const ord = [...CODES].sort((a,b)=>val(a,s,v,y)-val(b,s,v,y));
+  plot('rank', [{type:'bar', orientation:'h', y:ord.map(c=>CITY[c].ciudad), x:ord.map(c=>v==='life'?Math.min(val(c,s,v,y),100):val(c,s,v,y)), customdata:ord,
+     marker:{color:ord.map(c=>c===S.city?css('--s2'):css('--s1')), cornerradius:3},
+     hovertemplate: ord.map(c=>`<b>${CITY[c].ciudad}</b><br>${fmtInd(v,val(c,s,v,y))}<br>Nivel de confiabilidad ${CITY[c].nivel}<extra></extra>`)}],
+     baseLayout({title:{text:`Ranking · ${INDS[v][0]}`}, margin:{l:150,r:18,t:46,b:40}, showlegend:false, bargap:0.25,
+       xaxis:{gridcolor:css('--grid'), tickformat: INDS[v][1]==='pct'?'.0%':',.3~s', zeroline:false}, yaxis:{automargin:true, tickfont:{size:11}}}));
+  ['map','rank'].forEach(id=>{ const el=document.getElementById(id); el.removeAllListeners && el.removeAllListeners('plotly_click');
+    el.on('plotly_click', ev=>{ const c=ev.points[0].customdata; if (c){ S.city=c; document.getElementById('city').value=c; S.tab='ciu'; render(); } }); });
+}
+
+/* ------------------------------------------------------------- 2. ciudad */
+function obsTrace(obj, name) { const ys=Object.keys(obj).map(Number); return {x:ys, y:ys.map(k=>obj[k]), name, mode:'lines+markers', line:{color:css('--obs'), width:2}, marker:{size:8, color:css('--obs')}}; }
+function scenTraces(c, v, from=Y[0]) {
+  return shown().map(s=>({x:Y, y:CITY[c].res[s][v], name:SC[s].label, mode:'lines', line:{color:scenColor(s), width: s==='BAU'?2:2.5, dash: s==='BAU'?'dash':'solid'},
+    hovertemplate:`${SC[s].label}: %{y:,.0f}<extra></extra>`}));
+}
+function endLabels(c, v, mul=1) { return shown().map(s=>({x:Y[Y.length-1], y:CITY[c].res[s][v][Y.length-1]*mul, text:' '+s, showarrow:false, xanchor:'left', font:{size:11, color:css('--text-secondary')}})); }
+function renderCity() {
+  const c=S.city, P=CITY[c], y=S.year;
+  const lastDisp = Object.keys(P.obs_disp).map(Number).pop(), lastApr = Object.keys(P.obs_apr).map(Number).pop();
+  const lifeObs = Object.keys(P.obs_life).map(Number).pop();
+  document.getElementById('ciu-kpis').innerHTML =
+    kpi(`Población 2024`, fmt(P.pop_hist[2024]/1e6,3)+' M', `${P.departamento.split(' (')[0]} · región ${P.region}`, 'oficial') +
+    kpi(`Dispuesto ${lastDisp}`, fmtT(P.obs_disp[lastDisp]), 'SSPD, disposición final', 'observado') +
+    kpi(lastApr?`Aprovechado ${lastApr}`:'Aprovechado', lastApr?fmtT(P.obs_apr[lastApr]):'sin reporte', 'SSPD, materiales inorgánicos', 'observado') +
+    kpi('Vida útil licenciada', lifeObs!=null? fmt(P.obs_life[lifeObs],1)+' años':'sin dato', lifeObs!=null? `al 31-dic-${lifeObs} · sitio principal`:'capacidad supuesta', lifeObs!=null?'observado':'supuesto') +
+    kpi('Confiabilidad del modelo', 'Nivel '+P.nivel, `sMAPE ajuste ${fmt(P.smape_fit,1)} % · validación ${P.smape_val==null?'—':fmt(P.smape_val,1)+' %'}`);
+  const cal = P.calib, shapes=[];
+  if (cal.years_val && cal.years_val.length) shapes.push({type:'rect', xref:'x', yref:'paper', x0:cal.years_val[0]-0.5, x1:cal.years_val[cal.years_val.length-1]+0.5, y0:0, y1:1, fillcolor:css('--grid'), line:{width:0}, layer:'below'});
+  const fit = cal.years.length? [{x:cal.years, y:cal.sim_disp, name:'Ajuste del modelo (calibración)', mode:'lines', line:{color:css('--fit'), width:2, dash:'dot'}}] : [];
+  plot('c-disp', [...scenTraces(c,'dispuesto_total_t'), ...fit, obsTrace(P.obs_disp,'Observado SSPD')],
+    baseLayout({title:{text:`Disposición final (t/año) · ${P.ciudad}`}, shapes, hovermode:'x unified', annotations:endLabels(c,'dispuesto_total_t'), margin:{l:62,r:46,t:46,b:46}}));
+  document.getElementById('c-disp-n').textContent = cal.status==='calibrado' ?
+    `Ajuste ${cal.years_fit[0]}–${cal.years_fit[cal.years_fit.length-1]}; banda gris: validación fuera de muestra ${cal.years_val.join('–')}. Las proyecciones parten de 2024 e incluyen la disposición sin capacidad licenciada.` : '';
+  const fitA = (cal.years.length && cal.uso_apr)? [{x:cal.years, y:cal.sim_apr, name:'Ajuste del modelo (calibración)', mode:'lines', line:{color:css('--fit'), width:2, dash:'dot'}}] : [];
+  plot('c-apr', [...scenTraces(c,'Rrec'), ...fitA, obsTrace(P.obs_apr,'Observado SSPD')],
+    baseLayout({title:{text:'Aprovechamiento de materiales inorgánicos (t/año)'}, hovermode:'x unified', annotations:endLabels(c,'Rrec'), margin:{l:62,r:46,t:46,b:46}}));
+  document.getElementById('c-apr-n').textContent = !cal.uso_apr ? 'El aprovechamiento reportado supera el potencial reciclable plausible: se excluyó de la calibración y se acotó en la condición inicial.' :
+    (P.a0_topado ? 'El aprovechamiento reportado supera lo que el modelo recupera con 20 % de reciclables (composición por defecto): ingrese la caracterización de la ciudad en la app Streamlit.' : 'La SSPD reporta solo materiales inorgánicos; los orgánicos tratados no se comparan.');
+  const fl = document.getElementById('c-flags');
+  fl.innerHTML = (P.flags.length? P.flags.map(f=>`<div class="alert ${f.severidad}"><b>${esc(f.alerta)}.</b> ${esc(f.detalle)}</div>`).join('') : '<div class="note">Sin alertas de calidad en las series SSPD.</div>') +
+     (P.limitaciones.length? '<div class="note" style="margin-top:8px"><b>Limitaciones:</b><ul style="margin:4px 0 0 18px;padding:0">'+P.limitaciones.map(l=>`<li>${esc(l)}</li>`).join('')+'</ul></div>':'');
+  const st=P.sitio, pr=P.procedencia;
+  document.getElementById('c-site').innerHTML = `<b>Sitio principal:</b> ${esc(st.relleno_nombre||'—')} · ${esc((st.tipo_sitio||'').toLowerCase())}${st.sitio_ubicacion?' · en '+esc(st.sitio_ubicacion):''}${st.sitio_regional==='SI'?' · <b>regional</b>':''}<br>
+     <b>Fecha final de vida útil:</b> ${esc(st.fecha_fin_vida_util||'—')}<br><b>Capacidad en el modelo:</b> ${esc(pr.capacidad||'supuesta (sin vida útil reportada)')}<br>
+     <b>Condición inicial:</b> ${esc(pr.generacion||'')}; ${esc(pr.aprovechado||'')}${pr.aprovechado_ajuste?'; '+esc(pr.aprovechado_ajuste):''}.<br>
+     <b>Generación per cápita inicial:</b> ${fmt(P.init.g_pc0,3)} kg/hab/día · <b>adopción inicial de separación:</b> ${pct(P.init.A0)} · <b>tasa per cápita de corto plazo:</b> ${pct(P.calib.g_fin,2)} por año (converge a 0,5 %).`;
+  const ly = Object.keys(P.obs_life).map(Number);
+  plot('c-life', [{x:ly, y:ly.map(k=>P.obs_life[k]), mode:'lines+markers', line:{color:css('--obs'), width:2}, marker:{size:8}, name:'Vida útil reportada', hovertemplate:'%{x}: %{y:.1f} años<extra></extra>'}],
+    baseLayout({title:{text:'Vida útil licenciada reportada en cada informe (años)'}, showlegend:false, margin:{l:50,r:18,t:40,b:30}, yaxis:{gridcolor:css('--grid'), zeroline:true, zerolinecolor:css('--border')}}));
+  const fams = Object.keys(P.familias), fy = [...new Set(fams.flatMap(f=>Object.keys(P.familias[f]).map(Number)))].sort();
+  const famCol = {papel_carton:css('--s1'), plasticos:css('--s2'), vidrio:css('--s3'), metales:css('--s4'), madera:css('--bau'), textil:css('--fit'), otros:css('--text-muted')};
+  plot('c-fam', fams.map(f=>({type:'bar', x:fy, y:fy.map(k=>P.familias[f][k]||0), name:f.replace('_',' y ').replace('papel y carton','papel y cartón').replace('plasticos','plásticos'),
+     marker:{color:famCol[f]||css('--bau')}, hovertemplate:'%{x}: %{y:,.0f} t<extra>%{fullData.name}</extra>'})),
+    baseLayout({title:{text:'Aprovechamiento reportado por familia de material (t/año, SSPD)'}, barmode:'stack', bargap:0.35}));
+  const py = Object.keys(P.pop_hist).map(Number);
+  const segs = [['base_censal_conciliada','Base censal 2018','solid'],['proyeccion_oficial','Proyección oficial DANE','solid'],['estimado','Extensión estimada 2043–2050','dot']];
+  plot('c-pop', segs.map(([k,l,d])=>{ let xs = py.filter(t=>P.pop_tipo[t]===k); if (k==='estimado' && xs.length) xs=[xs[0]-1,...xs];
+     return {x:xs, y:xs.map(t=>P.pop_hist[t]), name:l, mode:k==='base_censal_conciliada'?'markers':'lines', line:{color:k==='estimado'?css('--s4'):css('--s1'), width:2.5, dash:d}, marker:{size:9, color:css('--obs')}}; }),
+    baseLayout({title:{text:'Población total (hab)'}, yaxis:{gridcolor:css('--grid'), rangemode:'normal', tickformat:',.3~s'}, hovermode:'x unified'}));
+}
+
+/* ------------------------------------------------------------- 3. escenarios */
+function renderScenarios() {
+  const c=S.city, P=CITY[c];
+  document.getElementById('esc-desc').innerHTML = `<b>${esc(P.ciudad)}.</b> ` + shown().map(s=>`<span style="color:${scenColor(s)}">■</span> <b>${s}</b> ${esc(SC[s].label)}: ${esc(SC[s].desc)}`).join('<br>');
+  const charts = [['dispuesto_total_t','Disposición total (t/año)',1,',.3~s'],['tasa_aprovechamiento','Tasa de aprovechamiento (%)',100,'.0f'],['Q','Capacidad remanente de disposición (t)',1,',.3~s'],
+    ['desviacion_acum_vs_bau_t','Disposición evitada acumulada frente al BAU (t)',1,',.3~s'],['gpc_kg_dia','Generación per cápita (kg/hab/día)',1,'.2f'],['util_rec','Utilización de la capacidad de clasificación (%)',100,'.0f']];
+  const g = document.getElementById('esc-grid');
+  if (!g.children.length) charts.forEach((_,i)=>{ const d=document.createElement('div'); d.className='card'; d.innerHTML=`<div id="esc-${i}" class="plot" style="height:340px"></div>`; g.appendChild(d); });
+  charts.forEach(([v,t,mul,tf],i)=>{
+    plot('esc-'+i, shown().map(s=>({x:Y, y:CITY[c].res[s][v].map(z=>z*mul), name:SC[s].label, mode:'lines', line:{color:scenColor(s), width:s==='BAU'?2:2.5, dash:s==='BAU'?'dash':'solid'},
+        hovertemplate:`${s}: %{y:${tf==='.2f'?'.2f':tf==='.0f'?'.1f':',.0f'}}<extra></extra>`})),
+      baseLayout({title:{text:t}, hovermode:'x unified', showlegend:i===0, legend:{orientation:'h', y:-0.2, x:0, font:{size:11, color:css('--text-secondary')}},
+        yaxis:{gridcolor:css('--grid'), tickformat:tf, rangemode:'tozero'}, annotations:endLabels(c,v,mul), margin:{l:58,r:40,t:44,b:i===0?70:36}}));
+  });
+  const iy = Y.length-1;
+  document.getElementById('esc-tab').innerHTML = `<table><thead><tr><th>Escenario</th><th>Generación 2050</th><th>Aprovechado 2050</th><th>Tasa 2050</th><th>Dispuesto + sin capacidad 2050</th><th>Evitado acumulado vs BAU</th><th>Sin capacidad licenciada (acum.)</th><th>Vida útil</th></tr></thead><tbody>` +
+    Object.keys(SC).map(s=>{ const r=P.res[s]; return `<tr><td><span style="color:${shown().includes(s)?scenColor(s):'transparent'}">■</span> ${esc(SC[s].label)}</td><td class="num">${fmtT(r.G[iy])}</td><td class="num">${fmtT(r.aprovechado_t[iy])}</td><td class="num">${pct(r.tasa_aprovechamiento[iy])}</td><td class="num">${fmtT(r.dispuesto_total_t[iy])}</td><td class="num">${fmtT(r.desviacion_acum_vs_bau_t[iy])}</td><td class="num">${fmtT(r.Overflow.reduce((a,b)=>a+b,0))}</td><td class="num">${lifeTxt(r.life)}</td></tr>`; }).join('') + '</tbody></table>';
+}
+
+/* ------------------------------------------------------------- 4. flujos */
+function renderFlows() {
+  const c=S.city, s=S.main, i=yi(S.year), r=CITY[c].res[s];
+  const g = k => r[k][i];
+  const nodes = ['Generación potencial','Prevenido','Generado','No recolectado','Recolectado','Mezclado','Reciclables separados','Orgánicos separados','Materiales recuperados','Orgánicos tratados','Rechazos','Sin capacidad de proceso','Relleno sanitario','Sin capacidad licenciada'];
+  const ix = Object.fromEntries(nodes.map((n,j)=>[n,j]));
+  const fL = g('Ld')>0? g('Lf')/g('Ld') : 1, fO = 1-fL;
+  const flows = [['Generación potencial','Prevenido',g('Prevented')],['Generación potencial','Generado',g('G')],['Generado','No recolectado',g('U')],['Generado','Recolectado',g('C')],
+    ['Recolectado','Mezclado',g('Mixed')],['Recolectado','Reciclables separados',g('Sr')],['Recolectado','Orgánicos separados',g('So')],
+    ['Reciclables separados','Materiales recuperados',g('Rrec')],['Reciclables separados','Rechazos',g('Rej_r')],['Reciclables separados','Sin capacidad de proceso',g('Excess_r')],
+    ['Orgánicos separados','Orgánicos tratados',g('Kout')],['Orgánicos separados','Rechazos',g('Rej_o')],['Orgánicos separados','Sin capacidad de proceso',g('Excess_o')],
+    ['Mezclado','Relleno sanitario',g('Mixed')*fL],['Mezclado','Sin capacidad licenciada',g('Mixed')*fO],['Rechazos','Relleno sanitario',(g('Rej_r')+g('Rej_o'))*fL],['Rechazos','Sin capacidad licenciada',(g('Rej_r')+g('Rej_o'))*fO],
+    ['Sin capacidad de proceso','Relleno sanitario',(g('Excess_r')+g('Excess_o'))*fL],['Sin capacidad de proceso','Sin capacidad licenciada',(g('Excess_r')+g('Excess_o'))*fO]].filter(f=>f[2]>0.5);
+  const nc = {'Prevenido':css('--s3'),'Materiales recuperados':css('--s3'),'Orgánicos tratados':css('--s3'),'No recolectado':css('--crit'),'Sin capacidad licenciada':css('--crit'),'Sin capacidad de proceso':css('--serious'),
+    'Reciclables separados':css('--s4'),'Orgánicos separados':css('--s3'),'Relleno sanitario':css('--bau'),'Rechazos':css('--fit')};
+  const hex2rgba=(h,a)=>{h=h.replace('#','');return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`;};
+  plot('sankey', [{type:'sankey', arrangement:'snap', node:{label:nodes, pad:16, thickness:14, color:nodes.map(n=>nc[n]||css('--s1')), line:{width:0}, hovertemplate:'%{label}: %{value:,.0f} t/año<extra></extra>'},
+     link:{source:flows.map(f=>ix[f[0]]), target:flows.map(f=>ix[f[1]]), value:flows.map(f=>f[2]), color:flows.map(f=>hex2rgba(nc[f[1]]||css('--s1'),0.32)),
+       hovertemplate:'%{source.label} → %{target.label}: %{value:,.0f} t/año<extra></extra>'}}],
+    baseLayout({title:{text:`Balance de materia ${S.year} · ${CITY[c].ciudad} · ${SC[s].label} (t/año)`}, margin:{l:10,r:10,t:46,b:10}}));
+  document.getElementById('sankey-n').textContent = `Cada tonelada generada termina prevenida, no recolectada, recuperada, tratada, dispuesta o sin capacidad licenciada. Generado ${fmtT(g('G'))}; tasa de aprovechamiento ${pct(r.tasa_aprovechamiento[i])}.`;
+  plot('cap', [
+    {x:Y, y:r.Krec, name:'Capacidad de clasificación', mode:'lines', line:{color:css('--s4'), width:2, dash:'dash'}},
+    {x:Y, y:r.Prec, name:'Procesado en clasificación', mode:'lines', line:{color:css('--s4'), width:2.5}},
+    {x:Y, y:r.Korg, name:'Capacidad de orgánicos', mode:'lines', line:{color:css('--s3'), width:2, dash:'dash'}},
+    {x:Y, y:r.Porg, name:'Orgánicos procesados', mode:'lines', line:{color:css('--s3'), width:2.5}},
+    {x:Y, y:Y.map((_,j)=>r.Excess_r[j]+r.Excess_o[j]), name:'Separado sin capacidad de proceso', type:'bar', marker:{color:css('--serious'), opacity:0.55}}],
+    baseLayout({title:{text:`Capacidad instalada y utilización · ${SC[s].label}`}, hovermode:'x unified', yaxis:{gridcolor:css('--grid'), tickformat:',.3~s'}}));
+}
+
+/* ------------------------------------------------------------- 5. comparación */
+function renderCompare() {
+  const s=S.main, v=S.hind, ord=[...CODES].sort((a,b)=>val(b,s,v,2035)-val(a,s,v,2035));
+  plot('heat', [{type:'heatmap', x:Y, y:ord.map(c=>`${CITY[c].ciudad} (${CITY[c].nivel})`), z:ord.map(c=>CITY[c].res[s][v].map(z=>INDS[v][1]==='pct'?100*z:z)),
+     colorscale:[[0,css('--seq-1')],[0.5,css('--seq-4')],[1,css('--seq-7')]], xgap:1, ygap:1, colorbar:{thickness:10, tickfont:{color:css('--text-secondary')}},
+     hovertemplate:'%{y} · %{x}: %{z:,.2f}<extra></extra>'}],
+    baseLayout({title:{text:`${INDS[v][0]} · ${SC[s].label} · (entre paréntesis: nivel de confiabilidad)`}, margin:{l:200,r:20,t:46,b:40}, yaxis:{automargin:true, tickfont:{size:11}}}));
+}
+
+/* ------------------------------------------------------------- 6. método */
+function renderMethod() {
+  const n = {A:0,B:0,C:0,D:0}; CODES.forEach(c=>n[CITY[c].nivel]++);
+  document.getElementById('met-text').innerHTML = `<h3>Qué contiene esta página</h3>
+   <p><b>Datos.</b> Población: DANE, proyecciones municipales 2018–2042 (2025); 2043–2050 extensión estimada. Disposición final: SSPD, bases 2019–2024 y Anexo 1 del informe 2018.
+   Aprovechamiento: SSPD, bases 2020–2024 (materiales inorgánicos por familia) y capacidad de las ECA. Cobertura de recolección: supuesta (95 %).</p>
+   <p><b>Modelo.</b> Dinámica de Sistemas con 8 niveles (capacidad remanente de disposición, capacidad de clasificación y de orgánicos, inventario de materiales,
+   adopción de la separación, capacidad organizativa de recicladores, experiencia y disposición acumulada) y 8 bucles de realimentación; Euler con paso de 0,25 años;
+   balance de materia verificado en cada paso (error relativo &lt; 10⁻⁹).</p>
+   <p><b>Calibración.</b> Por ciudad, ajuste 2018–2022 y validación fuera de muestra 2023–2024 sobre la disposición (y el aprovechamiento cuando es plausible).
+   Niveles: A ${n.A}, B ${n.B}, C ${n.C}, D ${n.D}. A = sMAPE de validación ≤ 10 % y de ajuste ≤ 15 %; B ≤ 25 %; C = error alto o sin validación; D = sin datos.</p>
+   <p><b>Vida útil.</b> Se deriva de la fecha final de vida útil licenciada del sitio principal reportada a la SSPD, asignada a la ciudad en proporción a su disposición.
+   Después de esa fecha, la disposición se contabiliza como «sin capacidad licenciada».</p>
+   <p><b>Alcance de esta versión.</b> Los 12 escenarios están precalculados con los parámetros calibrados. Para modificar palancas, parámetros o la caracterización
+   física, o para ejecutar Monte Carlo y Morris, use la aplicación Streamlit.</p>`;
+  document.getElementById('met-cal').innerHTML = '<table><thead><tr><th>Ciudad</th><th>Nivel</th><th>sMAPE ajuste</th><th>sMAPE validación</th><th>Tasa per cápita inicial</th></tr></thead><tbody>' +
+    [...CODES].sort((a,b)=>CITY[a].nivel.localeCompare(CITY[b].nivel)||CITY[a].ciudad.localeCompare(CITY[b].ciudad)).map(c=>{const P=CITY[c];
+      return `<tr><td>${esc(P.ciudad)}</td><td><span class="lvl">${P.nivel}</span></td><td class="num">${fmt(P.smape_fit,1)} %</td><td class="num">${P.smape_val==null?'—':fmt(P.smape_val,1)+' %'}</td><td class="num">${P.calib.params.g_growth!=null?pct(P.calib.params.g_growth,2):'—'}</td></tr>`;}).join('') + '</tbody></table>';
+  const rows = CODES.flatMap(c=>CITY[c].flags.map(f=>[CITY[c].ciudad,f.alerta,f.severidad,f.detalle]));
+  document.getElementById('met-q').innerHTML = '<table><thead><tr><th>Ciudad</th><th>Alerta</th><th>Severidad</th><th>Detalle</th></tr></thead><tbody>' +
+    rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('') + '</tbody></table>';
+}
+
+/* ------------------------------------------------------------- orquestación */
+function render() {
+  renderChips();
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected', b.dataset.k===S.tab));
+  TABS.forEach(([k])=>document.getElementById('t-'+k).hidden = k!==S.tab);
+  ({nac:renderNational, ciu:renderCity, esc:renderScenarios, flu:renderFlows, com:renderCompare, met:renderMethod})[S.tab]();
+}
+initControls(); render();
+</script>
+</body>
+</html>
