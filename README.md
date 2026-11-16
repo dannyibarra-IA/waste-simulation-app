@@ -15,9 +15,17 @@ Contribuciones de la versión 3.0: ver [`CHANGELOG.md`](CHANGELOG.md).
 |---|---|
 | Población 2018–2042, 32 capitales | **Oficial** (DANE, actualización del 30-jul-2025) |
 | Población 2043–2050 | **Estimada** (extensión documentada de la serie DANE) |
-| Residuos dispuestos y aprovechados por ciudad (SSPD) | Se cargan desde `data/raw/sspd_*.csv|xlsx`. Mientras falten, la ciudad es **exploratoria** |
-| Capacidad remanente de rellenos | Solo cuando hay registro con fuente; si no, **supuesta** y señalada en toda la interfaz |
-| Composición física | Referencia nacional (70 % orgánicos, CATF 2024) y supuesto de 20 % reciclables, hasta cargar la caracterización de cada PGIRS |
+| Disposición final 2018–2024, 32 capitales | **Observada** (SSPD: bases 2019–2024; Anexo 1 del informe 2018) |
+| Aprovechamiento 2020–2024 | **Observado** en 27 capitales (SSPD; por familia de material). Bogotá y Villavicencio reportan más del 20 % del flujo y se acotan |
+| Capacidad de rellenos | Derivada de la **fecha final de vida útil licenciada** reportada a la SSPD (31 capitales) |
+| Capacidad de clasificación inicial | Capacidad operativa de las ECA reportada a la SSPD |
+| Cobertura de recolección | **Supuesta** (95 %): no está en las bases cargadas |
+| Composición física | Referencia nacional y supuesto, salvo que el usuario ingrese la caracterización de la ciudad (página Composición) |
+
+**Calibración y validación fuera de muestra** (ajuste 2018–2022, validación 2023–2024, sMAPE de la disposición):
+- **Nivel A (22):** Armenia, Barranquilla, Bogotá D. C., Bucaramanga, Ibagué, Manizales, Mocoa, Montería, Neiva, Pasto, Pereira, Popayán, Riohacha, San Andrés, San José de Cúcuta, San José del Guaviare, Santa Marta, Sincelejo, Tunja, Valledupar, Villavicencio, Yopal.
+- **Nivel B (5):** Cartagena de Indias, Florencia, Medellín, Mitú, Puerto Carreño.
+- **Nivel C (5):** Arauca, Cali, Inírida, Leticia, Quibdó. Son series con discontinuidades fuertes.
 
 La aplicación nunca inventa datos para completar registros: cada valor lleva fuente, año, unidad, tipo (observado, proyección oficial, estimado, supuesto o simulado) y calidad.
 
@@ -57,6 +65,6 @@ python -m pytest                 # verificación estructural, validación, inter
 streamlit run app.py
 ```
 
-Para cargar datos de la SSPD, copie los archivos como `data/raw/sspd_<nombre>.xlsx` (o `.csv`) y ejecute `python data/build_data.py`. Las columnas se reconocen automáticamente: código DIVIPOLA, año, toneladas dispuestas y aprovechadas, sitio de disposición, cobertura, capacidad y vida útil.
+Para actualizar los datos de la SSPD, copie las bases nuevas como `data/raw/sspd/sspd_DF_<año>.xlsx` (disposición final) o `data/raw/sspd/sspd_AA_<año>.xlsx` (aprovechamiento) y ejecute `python data/build_data.py`. El script importa los datos, aplica los controles de calidad, recalibra las 32 capitales y guarda la versión de los datos.
 
 Despliegue en Streamlit Community Cloud: ver [`docs/deployment.md`](docs/deployment.md).

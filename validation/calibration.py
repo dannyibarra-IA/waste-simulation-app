@@ -54,8 +54,7 @@ def calibrate_city(repo, code: str, n_val: int = 2, base_overrides: dict | None 
     if not np.isfinite(init.get("R_obs", np.nan)) and len(apr_obs):
         # el aprovechamiento empieza a reportarse después del año inicial: se usa el primer valor reportado como condición inicial
         init["R_obs"] = float(apr_obs.iloc[0])
-        k = init.get("kappa_obs") if np.isfinite(init.get("kappa_obs", np.nan)) else par0["kappa0"]
-        init["W_obs"] = (float(obs["dispuesto_t"].iloc[0]) + init["R_obs"]) / k   # generación coherente con la condición inicial
+        init["C_obs"] = float(obs["dispuesto_t"].iloc[0]) + init["R_obs"]   # recolectado coherente con la condición inicial
         res["nota_inicial"] = f"Condición inicial de aprovechamiento tomada de {int(apr_obs.index[0])} (primer año reportado)."
 
     n_apr_fit = int(obs.loc[obs.index.isin(fit_years), "aprovechado_t"].notna().sum())

@@ -25,6 +25,8 @@ Generado desde el código con `python docs/build_dictionary.py`.
 | cobertura_recoleccion | Cobertura de recolección | fracción |
 | eca_numero | Instalaciones de aprovechamiento (ECA) | número |
 | relleno_nombre | Sistema de disposición final | texto |
+| tipo_sitio | Tipo de sitio de disposición | texto |
+| eca_capacidad_t | Capacidad operativa de ECA | t/año |
 | capacidad_remanente_t | Capacidad remanente de disposición | t |
 | vida_util_reportada_anios | Vida útil reportada | años |
 
@@ -52,7 +54,7 @@ Generado desde el código con `python docs/build_dictionary.py`.
 | Spill | Inventario no comercializado a disposición | t/año |
 | Ld | Demanda de disposición | t/año |
 | Lf | Dispuesto en relleno | t/año |
-| Overflow | Déficit de capacidad de disposición | t/año |
+| Overflow | Disposición sin capacidad licenciada (déficit) | t/año |
 | Prevented | Prevenido en la fuente | t/año |
 | CapAdd_Q | Ampliación de capacidad de disposición | t/año |
 | Q | Capacidad remanente de disposición | t |
@@ -79,7 +81,9 @@ Generado desde el código con `python docs/build_dictionary.py`.
 | Parámetro      | Descripción                                                    | Unidad                  |   Defecto | Rango        | Clase      | Fuente                                                                                                                                                                     |
 |:---------------|:---------------------------------------------------------------|:------------------------|----------:|:-------------|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | g_pc0          | Generación per cápita inicial                                  | kg/hab/día              |     0.75  | 0.45 – 1.2   | referencia | DNP, CEMPRE y CEPAL (2021). Encuesta a municipios sobre gestión de residuos sólidos domiciliarios 2019 – Colombia (promedio nacional 0,75 kg/hab/día).                     |
-| g_growth       | Crecimiento anual de la generación per cápita                  | 1/año                   |     0.005 | -0.01 – 0.02 | supuesto   | Supuesto del observatorio                                                                                                                                                  |
+| g_growth       | Crecimiento per cápita de corto plazo (año base)               | 1/año                   |     0.005 | -0.03 – 0.03 | supuesto   | Supuesto del observatorio                                                                                                                                                  |
+| g_lr           | Crecimiento per cápita de largo plazo                          | 1/año                   |     0.005 | 0.0 – 0.015  | supuesto   | Supuesto del observatorio                                                                                                                                                  |
+| tau_g          | Tiempo de convergencia de la tasa per cápita                   | años                    |     5     | 2.0 – 10.0   | supuesto   | Supuesto del observatorio                                                                                                                                                  |
 | s_org          | Fracción orgánica                                              | fracción                |     0.7   | 0.5 – 0.8    | referencia | CATF (2024). Colombia waste sector fact sheet (los orgánicos representan cerca del 70 % del flujo).                                                                        |
 | s_rec          | Fracción reciclable (papel, cartón, plástico, vidrio, metal)   | fracción                |     0.2   | 0.12 – 0.3   | supuesto   | Supuesto del observatorio                                                                                                                                                  |
 | kappa0         | Cobertura de recolección inicial                               | fracción                |     0.95  | 0.8 – 1.0    | supuesto   | Supuesto del observatorio                                                                                                                                                  |

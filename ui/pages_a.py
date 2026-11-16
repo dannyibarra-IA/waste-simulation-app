@@ -174,10 +174,46 @@ def page_profile():
             rows.append(dict(Variable=label, Valor=val, Unidad=unit, Año=int(last["anio"]), Tipo=last["tipo_dato"], Calidad=last["calidad"], Fuente=last["fuente"]))
     table(pd.DataFrame(rows), hide_index=True)
 
+    st.markdown("#### " + tr("Disposición final", "Final disposal"))
+    site, tip, ubi, reg, ffin = (p.text(v) for v in ("relleno_nombre", "tipo_sitio", "sitio_ubicacion", "sitio_regional", "fecha_fin_vida_util"))
+    if site is not None:
+        life = p.series("vida_util_reportada_anios")
+        st.markdown(tr(
+            f"- **Sitio principal ({int(site['anio'])}):** {site['valor']}" + (f" · {tip['valor'].capitalize()}" if tip is not None else "") +
+            (f" · ubicado en {ubi['valor']}" if ubi is not None else "") + (" · **regional** (compartido con otros municipios)" if reg is not None and reg['valor'] == 'SI' else "") +
+            (f"\n- **Fecha final de vida útil licenciada:** {ffin['valor']} ({life.iloc[-1]:.1f} años al 31-dic-{int(life.index[-1])})" if ffin is not None and len(life) else "") +
+            f"\n- **Capacidad en el modelo:** {m['provenance'].get('capacidad', 'SUPUESTA (sin vida útil reportada)')}",
+            f"- **Main site:** {site['valor']}\n- **Capacity in the model:** {m['provenance'].get('capacidad', 'ASSUMED')}"))
+        if len(life) > 1:
+            f = go.Figure(go.Scatter(x=life.index, y=life.values, mode="lines+markers", line=dict(color=C["red"], width=2)))
+            f.add_hline(y=0, line=dict(color=C["grey"], dash="dot"))
+            f.update_layout(title=tr("Vida útil licenciada reportada en cada informe SSPD (años)", "Licensed life reported in each SSPD report (years)"), height=280)
+            f.update_xaxes(tickformat="d")
+            show(f, "pr_life")
+    else:
+        st.info(tr("Sin información de sitio de disposición.", "No disposal-site information."))
+
+    st.markdown("#### " + tr("Calidad de datos", "Data quality"))
+    from core.quality import LABELS, city_flags
+    fl = city_flags(p)
+    if fl:
+        for f_ in fl:
+            (st.error if f_["severidad"] == "alta" else st.warning)(f"**{LABELS[f_['codigo']][0 if s.lang == 'es' else 1]}.** {f_['detalle']}")
+    else:
+        st.success(tr("No se detectan problemas de calidad en las series SSPD de esta ciudad.", "No data-quality issues detected."))
+
     st.markdown("#### " + tr("Parámetros usados para esta ciudad", "Parameters used for this city"))
     par, origin = city_params(r, s.city, s.get("param_overrides", {}).get(s.city))
     origin.update(m["origin"])
-    pt = pd.DataFrame([dict(Parámetro=k, Descripción=PARAMS[k].label_es if s.lang == "es" else PARAMS[k].label_en, Valor=par[k], Unidad=PARAMS[k].unit,
+    iv = m.get("init_values", {})
+    derived = {"g_pc0": tr("derivado: recolectado SSPD / (cobertura · población)", "derived from SSPD collected tonnes"),
+               "A0": origin.get("A0", ""), "eta_r": tr("derivada para reproducir el aprovechamiento observado", "derived to reproduce observed recovery")}
+    vals = dict(par)
+    for k, ik in (("g_pc0", "g_pc0"), ("A0", "A0"), ("eta_r", "eta0")):
+        if ik in iv and np.isfinite(iv[ik]) and not (k == "eta_r" and abs(iv[ik] - par["eta_r"]) < 1e-9):
+            vals[k] = iv[ik]
+            origin[k] = derived[k] if k != "g_pc0" or not m.get("exploratory") else origin[k]
+    pt = pd.DataFrame([dict(Parámetro=k, Descripción=PARAMS[k].label_es if s.lang == "es" else PARAMS[k].label_en, Valor=round(vals[k], 4), Unidad=PARAMS[k].unit,
                             Origen=origin.get(k, PARAMS[k].kind)) for k in par])
     if not (s.mode in ("Científico", "Scientific")):
         pt = pt[pt["Parámetro"].isin(["g_pc0", "s_org", "s_rec", "kappa0", "A0", "Q0_years"])]
@@ -213,20 +249,45 @@ def page_trends():
     dsim = df[df.escenario == s.scenario_focus].set_index("anio")
     obs_d, obs_a = p.series("dispuesto_t"), p.series("aprovechado_t")
     exploratory_notice(_meta_of(meta, s.scenario_focus, s.city))
+    cal = r.calibration.get(s.city, {})
+    extra_d, extra_a = [], []
+    if cal.get("status") == "calibrado" and cal.get("series"):
+        ser = cal["series"]
+        yrs = ser["years"]
+        extra_d.append(go.Scatter(x=yrs, y=ser["sim_disp"], name=tr("Ajuste del modelo (calibración)", "Model fit (calibration)"), mode="lines",
+                                  line=dict(color=C["purple"], width=2, dash="dot")))
+        if cal.get("uso_aprovechamiento", True):
+            extra_a.append(go.Scatter(x=yrs, y=ser["sim_apr"], name=tr("Ajuste del modelo (calibración)", "Model fit (calibration)"), mode="lines",
+                                      line=dict(color=C["purple"], width=2, dash="dot")))
     c3, c4 = st.columns(2)
     with c3:
-        show(line_obs_sim(dsim["dispuesto_total_t"], obs_d, tr("Disposición final (t/año)", "Final disposal (t/yr)"), "t/año",
-                          tr(f"Simulado · {scen_label(s.scenario_focus)}", "Simulated"), tr("Observado SSPD", "Observed SSPD"), C["grey"]), "tr_disp")
+        f = line_obs_sim(dsim["dispuesto_total_t"], obs_d, tr("Disposición final (t/año)", "Final disposal (t/yr)"), "t/año",
+                         tr(f"Proyección · {scen_label(s.scenario_focus)}", "Projection"), tr("Observado SSPD", "Observed SSPD"), C["grey"], extra=extra_d)
+        if cal.get("years_val"):
+            f.add_vrect(x0=cal["years_val"][0] - 0.5, x1=cal["years_val"][-1] + 0.5, fillcolor="rgba(107,91,149,.08)", line_width=0,
+                        annotation_text=tr("validación", "validation"), annotation_position="top left")
+        show(f, "tr_disp")
     with c4:
-        show(line_obs_sim(dsim["aprovechado_t"], obs_a, tr("Aprovechamiento (t/año)", "Recovery (t/yr)"), "t/año",
-                          tr(f"Simulado · {scen_label(s.scenario_focus)}", "Simulated"), tr("Observado SSPD", "Observed SSPD"), C["green"]), "tr_apr")
+        f = line_obs_sim(dsim["Rrec"], obs_a, tr("Aprovechamiento de materiales inorgánicos (t/año)", "Inorganic recovery (t/yr)"), "t/año",
+                         tr(f"Proyección · {scen_label(s.scenario_focus)}", "Projection"), tr("Observado SSPD", "Observed SSPD"), C["green"], extra=extra_a)
+        show(f, "tr_apr")
+    if cal.get("status") == "calibrado":
+        v = cal.get("validation", {}).get("dispuesto", {})
+        st.caption(tr(f"Calibración {cal['years_fit'][0]}–{cal['years_fit'][-1]} (sMAPE de ajuste {cal['fit']['dispuesto']['sMAPE']:.1f} %)" +
+                      (f"; validación fuera de muestra {cal['years_val'][0]}–{cal['years_val'][-1]}: sMAPE {v['sMAPE']:.1f} %, sesgo {v['sesgo_pct']:+.1f} %." if v.get("n") else ".") +
+                      ("" if cal.get("uso_aprovechamiento", True) else " El aprovechamiento se excluyó de la calibración por superar el potencial reciclable plausible."),
+                      "Calibration and out-of-sample validation shown with dotted purple line."))
     if obs_d.empty:
         st.caption(tr("No hay series SSPD cargadas para esta ciudad: solo se muestra la trayectoria simulada.", "No SSPD series loaded for this city."))
     c5, c6 = st.columns(2)
     with c5:
         obs_pc = (obs_d + obs_a.reindex(obs_d.index).fillna(0)) * 1000 / p.pop["poblacion_total"].reindex(obs_d.index) / 365 if len(obs_d) else None
-        show(line_obs_sim(dsim["gpc_kg_dia"], obs_pc, tr("Generación per cápita (kg/hab/día)", "Per-capita generation"), "kg/hab/día",
-                          tr("Simulado", "Simulated"), tr("Observado (dispuesto + aprovechado)", "Observed"), C["gold"], fmt=".2f"), "tr_pc")
+        sim_pc = dsim["C"] * 1000 / dsim["pop"] / 365
+        show(line_obs_sim(sim_pc, obs_pc, tr("Residuos recolectados per cápita (kg/hab/día)", "Collected waste per capita"), "kg/hab/día",
+                          tr("Simulado (recolectado)", "Simulated (collected)"), tr("Observado (dispuesto + aprovechado SSPD)", "Observed"), C["gold"], fmt=".2f"), "tr_pc")
+        if len(obs_a) and len(obs_d) and obs_a.index.min() > obs_d.index.min():
+            st.caption(tr(f"El aprovechamiento se reporta desde {obs_a.index.min()}: antes de ese año el observado incluye solo lo dispuesto.",
+                          f"Recovery reported from {obs_a.index.min()} only."))
     with c6:
         base = dsim.index.min()
         f = go.Figure()
@@ -240,43 +301,90 @@ def page_trends():
 
 # ------------------------------------------------------------------------------------------------ 4
 def page_composition():
+    from core.simulation_engine import COMPOSITION_FAMILIES, composition_fractions
     s = st.session_state
     r = repo()
     p = r.profile(s.city)
     hero(tr(f"Composición de residuos · {p.ciudad}", f"Waste composition · {p.ciudad}"),
-         tr("Fracciones que determinan el potencial material de reciclaje y de tratamiento de orgánicos.", "Fractions that set the material potential."))
+         tr("Fracciones que determinan el potencial material de reciclaje y de tratamiento de orgánicos. Si la ciudad no tiene caracterización cargada, "
+            "puede ingresar una (por ejemplo, la de su PGIRS) y el motor la usará en todas las simulaciones de esta sesión.",
+            "Fractions that set the material potential. Enter a characterisation (e.g. from the PGIRS) if none is loaded."))
+    allp = dict(s.get("param_overrides", {}))
+    po = dict(allp.get(s.city, {}))
+    current = po.get("caracterizacion")
+
+    st.markdown("#### " + tr("Caracterización física por familias (%)", "Physical characterisation by family (%)"))
+    st.caption(tr("Valores en porcentaje del peso. Deben sumar 100 %. Orgánicos alimenta la fracción orgánica del modelo; papel y cartón, plásticos, vidrio, metales, "
+                  "textiles y madera forman la fracción reciclable (las mismas familias que reporta la SSPD); «otros» queda como no aprovechable.",
+                  "Percent by weight; must add to 100 %."))
+    base = current["fracciones"] if current else dict(organicos=70.0, papel_carton=8.0, plasticos=8.0, vidrio=2.0, metales=1.0, textiles=1.0, madera=0.0, otros=10.0)
+    ed = pd.DataFrame([dict(clave=k, Familia=v[0] if s.lang == "es" else v[1], Porcentaje=float(base.get(k, 0.0))) for k, v in COMPOSITION_FAMILIES.items()])
+    c1, c2 = st.columns([1.3, 1])
+    with c1:
+        edited = st.data_editor(ed, hide_index=True, disabled=["clave", "Familia"], column_config={"clave": None,
+                                "Porcentaje": st.column_config.NumberColumn("%", min_value=0.0, max_value=100.0, step=0.1, format="%.1f")},
+                                key=f"comp_ed_{s.city}", width="stretch")
+        src = st.text_input(tr("Fuente de la caracterización (p. ej. «PGIRS 2020, muestreo de 7 días»)", "Source of the characterisation"),
+                            value=(current or {}).get("fuente", ""), key=f"comp_src_{s.city}")
+        tot = float(edited["Porcentaje"].sum())
+        ok = abs(tot - 100) <= 0.5
+        (st.success if ok else st.error)(tr(f"Suma: {tot:.1f} %", f"Total: {tot:.1f} %") + ("" if ok else tr(" — debe ser 100 %", " — must be 100 %")))
+        b1, b2 = st.columns(2)
+        if b1.button(tr("Usar esta caracterización", "Use this characterisation"), disabled=not ok, key="comp_apply", type="primary"):
+            fr = dict(zip(edited["clave"], edited["Porcentaje"].astype(float)))
+            po["caracterizacion"] = dict(fracciones=fr, fuente=src.strip())
+            allp[s.city] = po
+            s.param_overrides = allp
+            st.rerun()
+        if current and b2.button(tr("Quitar y volver a la referencia", "Remove and revert"), key="comp_reset"):
+            po.pop("caracterizacion", None)
+            if po:
+                allp[s.city] = po
+            else:
+                allp.pop(s.city, None)
+            s.param_overrides = allp
+            st.rerun()
     par, origin = city_params(r, s.city, s.get("param_overrides", {}).get(s.city))
     so, sr = par["s_org"], par["s_rec"]
     oth = max(1 - so - sr, 0)
-    measured = str(origin["s_org"]).startswith("medido") or str(origin["s_rec"]).startswith("medido")
-    if not measured:
-        st.warning(tr("No hay caracterización física cargada para esta ciudad. Se usan **70 % orgánicos** (CATF, 2024, referencia nacional) y **20 % reciclables** "
-                      "(supuesto). Cargue la caracterización del PGIRS en `data/raw/` para sustituirlos.",
-                      "No physical characterisation loaded: 70 % organics (CATF 2024) and 20 % recyclables (assumption)."), icon="⚠️")
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        kpi(tr("Orgánicos", "Organics"), f"{so:.0%}", origin["s_org"], tag="obs" if measured else "est")
+    measured = not str(origin["s_rec"]).startswith(("supuesto", "referencia"))
     with c2:
-        kpi(tr("Reciclables", "Recyclables"), f"{sr:.0%}", origin["s_rec"], tag="obs" if measured else "sup")
-    with c3:
-        kpi(tr("Otros / no aprovechables", "Other"), f"{oth:.0%}", tr("por diferencia", "by difference"))
+        if not measured:
+            st.warning(tr("Sin caracterización cargada ni ingresada: se usan **70 % orgánicos** (CATF, 2024, referencia nacional) y **20 % reciclables** (supuesto).",
+                          "No characterisation: 70 % organics (CATF 2024) and 20 % recyclables (assumption)."), icon="⚠️")
+        else:
+            st.info(tr(f"En uso: {origin['s_rec']}.", f"In use: {origin['s_rec']}."))
+        f = px.pie(names=[tr("Orgánicos", "Organics"), tr("Reciclables", "Recyclables"), tr("Otros", "Other")], values=[so, sr, oth], hole=0.55,
+                   color_discrete_sequence=[C["green"], C["gold"], C["grey"]], title=tr("Fracciones usadas por el motor", "Fractions used by the engine"))
+        f.update_layout(height=330)
+        show(f, "co_pie")
+
+    st.markdown("#### " + tr("Aprovechamiento reportado a la SSPD por familia de material", "SSPD-reported recovery by material family"))
+    fams = [v for v in p.obs["variable"].unique() if str(v).startswith("aprov_")]
+    if fams:
+        d = pd.DataFrame({v.replace("aprov_", "").replace("_t", "").replace("_", " ").capitalize(): p.series(v) for v in fams}).fillna(0)
+        f = px.bar(d, barmode="stack", labels=dict(value="t/año", index=tr("Año", "Year"), variable=""),
+                   title=tr("Toneladas aprovechadas por familia (observado SSPD)", "Recovered tonnes by family (observed SSPD)"))
+        f.update_layout(height=380, yaxis_tickformat=",.3s")
+        f.update_xaxes(tickformat="d")
+        show(f, "co_fam")
+        last = d.iloc[-1]
+        st.caption(tr(f"Composición del material aprovechado en {d.index[-1]}: ", f"Recovered mix in {d.index[-1]}: ") +
+                   ", ".join(f"{k} {v / max(last.sum(), 1e-9):.0%}" for k, v in last.sort_values(ascending=False).items() if v > 0) +
+                   tr(". Describe lo recuperado, no la composición de los residuos generados.", ". Describes what was recovered, not generated waste."))
+    else:
+        st.info(tr("La SSPD no reporta aprovechamiento para esta ciudad.", "No SSPD recovery reported for this city."))
+
     df, _ = results([s.city], s.scenarios)
     d = df[(df.escenario == s.scenario_focus)].set_index("anio")
-    a, b = st.columns(2)
-    with a:
-        f = px.pie(names=[tr("Orgánicos", "Organics"), tr("Reciclables", "Recyclables"), tr("Otros", "Other")], values=[so, sr, oth], hole=0.55,
-                   color_discrete_sequence=[C["green"], C["gold"], C["grey"]], title=tr("Composición usada en el modelo", "Composition used"))
-        f.update_layout(height=380)
-        show(f, "co_pie")
-    with b:
-        f = go.Figure()
-        f.add_trace(go.Scatter(x=d.index, y=d["C"] * sr, name=tr("Potencial reciclable recolectado", "Collected recyclable potential"), line=dict(color=C["gold"], dash="dot")))
-        f.add_trace(go.Scatter(x=d.index, y=d["Rrec"], name=tr("Reciclables recuperados", "Recovered recyclables"), line=dict(color=C["gold"], width=3), fill="tozeroy"))
-        f.add_trace(go.Scatter(x=d.index, y=d["C"] * so, name=tr("Potencial orgánico recolectado", "Collected organic potential"), line=dict(color=C["green"], dash="dot")))
-        f.add_trace(go.Scatter(x=d.index, y=d["Kout"], name=tr("Orgánicos tratados", "Treated organics"), line=dict(color=C["green"], width=3), fill="tozeroy"))
-        f.update_layout(title=tr(f"Potencial material vs recuperado · {scen_label(s.scenario_focus)}", "Material potential vs recovered"), height=380, yaxis_tickformat=",.3s",
-                        hovermode="x unified")
-        f.update_xaxes(tickformat="d")
-        show(f, "co_pot")
+    f = go.Figure()
+    f.add_trace(go.Scatter(x=d.index, y=d["C"] * sr, name=tr("Potencial reciclable recolectado", "Collected recyclable potential"), line=dict(color=C["gold"], dash="dot")))
+    f.add_trace(go.Scatter(x=d.index, y=d["Rrec"], name=tr("Reciclables recuperados", "Recovered recyclables"), line=dict(color=C["gold"], width=3), fill="tozeroy"))
+    f.add_trace(go.Scatter(x=d.index, y=d["C"] * so, name=tr("Potencial orgánico recolectado", "Collected organic potential"), line=dict(color=C["green"], dash="dot")))
+    f.add_trace(go.Scatter(x=d.index, y=d["Kout"], name=tr("Orgánicos tratados", "Treated organics"), line=dict(color=C["green"], width=3), fill="tozeroy"))
+    f.update_layout(title=tr(f"Potencial material frente a lo recuperado · {scen_label(s.scenario_focus)}", "Material potential vs recovered"), height=430,
+                    yaxis_tickformat=",.3s", hovermode="x unified")
+    f.update_xaxes(tickformat="d")
+    show(f, "co_pot")
     st.caption(tr("La recuperación nunca supera el potencial material recolectado (restricción física verificada en las pruebas automáticas).",
                   "Recovery never exceeds the collected material potential (verified by automated tests)."))

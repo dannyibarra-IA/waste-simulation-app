@@ -71,6 +71,7 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     lv = {k: _a(v, n) for k, v in L.items()}
     nan = np.full(n, np.nan)
     W_obs, R_obs, O_obs = (_a(init.get(k, nan), n) for k in ("W_obs", "R_obs", "O_obs"))
+    C_obs = _a(init.get("C_obs", nan), n)
     Q_obs, kappa_obs = _a(init.get("Q_obs", nan), n), _a(init.get("kappa_obs", nan), n)
     Qy_obs = _a(init.get("Q_years_obs", nan), n)
     K_obs = _a(init.get("Krec_obs", nan), n)
@@ -81,8 +82,10 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     inten = np.clip(lv["intensity"], 0.0, 2.0)
 
     # ---------- condiciones iniciales (año base) ------------------------------------------------
-    g_pc0 = np.where(np.isfinite(W_obs) & (pop[:, 0] > 0), W_obs / np.maximum(pop[:, 0], 1) / 0.365, p["g_pc0"])
     kappa0 = np.where(np.isfinite(kappa_obs), np.clip(kappa_obs, 0.0, 1.0), p["kappa0"])
+    # dato observado: recolectado C_obs (dispuesto + aprovechado); la generación se deriva con la cobertura de esta simulación
+    W_obs = np.where(np.isfinite(C_obs), C_obs / np.maximum(kappa0, 1e-6), W_obs)
+    g_pc0 = np.where(np.isfinite(W_obs) & (pop[:, 0] > 0), W_obs / np.maximum(pop[:, 0], 1) / 0.365, p["g_pc0"])
     W0 = pop[:, 0] * g_pc0 * 0.365
     C0 = W0 * kappa0
     E0 = np.clip(p["E0"], 0.01, 0.99)
@@ -264,8 +267,23 @@ def consistent_init(years, pop, P: dict, L: dict, init: dict, iters: int = 4, dt
     Iteración de punto fijo: se reescalan W_obs y R_obs hasta que el total simulado del primer año reproduce el observado.
     """
     init = {k: np.array(v, dtype=float, copy=True) for k, v in init.items()}
-    if "W_obs" not in init:
+    key = "C_obs" if "C_obs" in init else ("W_obs" if "W_obs" in init else None)
+    if key is None:
         return init
+    target = np.array(init[key], dtype=float, copy=True)
+    target_R = np.array(init.get("R_obs", np.full_like(target, np.nan)), dtype=float, copy=True)
+    y2 = np.asarray(years)[:2] if len(years) > 1 else np.asarray(years)
+    pp = np.atleast_2d(pop)[:, :len(y2)]
+    for _ in range(iters):
+        out = simulate(y2, pp, P, L, init=init, dt=dt, track_balance=False)
+        sim = out["C" if key == "C_obs" else "W"][:, 0]
+        Rsim = out["Rrec"][:, 0]
+        ok = np.isfinite(target) & (sim > 0)
+        init[key] = np.where(ok, init[key] * target / np.where(ok, sim, 1), init[key])
+        ok_r = np.isfinite(target_R) & (Rsim > 0)
+        if "R_obs" in init:
+            init["R_obs"] = np.where(ok_r, init["R_obs"] * target_R / np.where(ok_r, Rsim, 1), init["R_obs"])
+    return init
     target_W = np.array(init["W_obs"], dtype=float, copy=True)
     target_R = np.array(init.get("R_obs", np.full_like(target_W, np.nan)), dtype=float, copy=True)
     y2 = np.asarray(years)[:2] if len(years) > 1 else np.asarray(years)

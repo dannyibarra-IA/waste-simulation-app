@@ -23,5 +23,17 @@ Autor original: Danny Ibarra Vega. Contribución técnica de la versión 3.0, co
 - Exportación a CSV, Excel, JSON, ZIP reproducible y PDF, con identificador de ejecución.
 - 72 pruebas automáticas.
 
+### Datos SSPD integrados (2026-11-16)
+- Disposición final 2018–2024 de las 32 capitales: bases 2019–2024 y Anexo 1 del informe 2018 (PDF).
+- Aprovechamiento 2020–2024 por familia de material y ECA con su capacidad operativa. Los archivos AA2018, AA2019 y los anexos de 2020, 2021 y 2024 recibidos corresponden al sector de **acueducto y alcantarillado** y no se usan.
+- Control de calidad: aprovechamiento por encima del potencial (Bogotá, Villavicencio), discontinuidades, sitios no autorizados, vida útil vencida o inestable.
+- Correcciones al motor detectadas al usar datos reales:
+  - Condición inicial coherente con totales anuales (iteración de punto fijo).
+  - El aprovechamiento se compara solo con materiales inorgánicos.
+  - La generación observada se deriva del tonelaje recolectado y la cobertura.
+  - La tasa per cápita calibrada converge a una tendencia de largo plazo.
+- Calibración de las 32 capitales: 22 en nivel A, 5 en B y 5 en C.
+- Caracterización física por familias ingresada por el usuario.
+
 ### Conservado
 - La v2 completa en `legacy/app_v2.py`, junto con su libro de datos.

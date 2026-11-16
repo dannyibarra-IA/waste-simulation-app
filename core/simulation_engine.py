@@ -113,7 +113,7 @@ def _overrides_for(po: dict | None, code: str):
     """`po` puede ser global ({parámetro: valor}) o por ciudad ({divipola: {parámetro: valor}})."""
     if not po:
         return None
-    if any(isinstance(v, dict) for v in po.values()):
+    if all(k == "*" or (len(k) == 5 and k.isdigit()) for k in po):
         merged = dict(po.get("*", {}))
         merged.update(po.get(code, {}))
         return merged
@@ -130,7 +130,7 @@ def run(repo: Repository, codes, scenario: str = "BAU", lever_overrides: dict | 
         par, origin = city_params(repo, c, _overrides_for(param_overrides, c))
         init, prov = repo.base_observations(c, base_year)
         origin["A0"] = "derivado del aprovechamiento observado" if np.isfinite(init["R_obs"]) else "supuesto"
-        if np.isfinite(init["W_obs"]):
+        if np.isfinite(init["C_obs"]):
             origin["g_pc0"] = "medido (SSPD)"
         if np.isfinite(init["kappa_obs"]):
             origin["kappa0"] = "medido"
@@ -138,9 +138,9 @@ def run(repo: Repository, codes, scenario: str = "BAU", lever_overrides: dict | 
         plist.append(par)
         inits.append(init)
         meta.append(dict(divipola=c, ciudad=repo.name(c), origin=origin, provenance=prov,
-                         exploratory=not np.isfinite(init.get("W_obs", np.nan))))
+                         exploratory=not np.isfinite(init.get("C_obs", np.nan))))
     P = {k: np.array([p[k] for p in plist]) for k in plist[0]}
-    keys = ("W_obs", "R_obs", "O_obs", "Q_obs", "kappa_obs", "Q_years_obs", "Krec_obs")
+    keys = ("C_obs", "R_obs", "O_obs", "Q_obs", "kappa_obs", "Q_years_obs", "Krec_obs")
     I = {k: np.array([i.get(k, np.nan) for i in inits], dtype=float) for k in keys}
     L = levers_for(scenario, lever_overrides)
     POP = np.vstack(pops)
@@ -152,6 +152,7 @@ def run(repo: Repository, codes, scenario: str = "BAU", lever_overrides: dict | 
         m["A0_clipped"] = bool(out["init"]["A0_clipped"][i])
         m["life"] = float(out["life"][i])
         m["balance"] = float(out["balance_max_rel_error"])
+        m["init_values"] = {k: float(out["init"][k][i]) for k in ("g_pc0", "kappa0", "A0", "eta0", "Q0", "Krec0", "W0")}
     return out, meta
 
 

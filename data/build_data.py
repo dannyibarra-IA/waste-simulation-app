@@ -155,9 +155,7 @@ def main():
     repo = Repository(OUT)
     cal = {}
     for c in repo.codes:
-        r = calibrate_city(repo, c)
-        r.pop("series", None) if False else None
-        cal[c] = r
+        cal[c] = calibrate_city(repo, c)
     (OUT / "calibracion.json").write_text(json.dumps(cal, indent=1, ensure_ascii=False, default=float), encoding="utf-8")
     ok = sum(1 for v in cal.values() if v["status"] == "calibrado")
     print(f"calibración: {ok}/32 ciudades calibradas")

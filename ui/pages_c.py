@@ -211,18 +211,20 @@ def page_uncertainty():
                   "Sobol is not offered online (≥10⁴ runs); Morris ranks influence with r·(k+1) runs."))
 
 
-@st.cache_data(show_spinner=False)
-def _calibration_table(data_key: str):
-    from ui.common import get_repo
-    from validation.calibration import calibrate_city
+def _calibration_table():
     from validation.reliability import assess
-    r = get_repo()
+    r = repo()
     rows = []
     for c in r.codes:
-        res = calibrate_city(r, c)
+        res = r.calibration.get(c, {"status": "sin_datos", "params": {}})
         a = assess(r.profile(c), res)
-        rows.append(dict(ciudad=r.name(c), estado=res["status"], nivel=a["nivel"], sMAPE_ajuste=a.get("calibracion_sMAPE"), sMAPE_validacion=a.get("validacion_sMAPE"),
-                         parametros=json.dumps({k: round(v, 4) for k, v in res.get("params", {}).items()}), nota=res.get("nota", "")))
+        rows.append(dict(ciudad=r.name(c), estado=res["status"], nivel=a["nivel"],
+                         ajuste=f"{res['years_fit'][0]}-{res['years_fit'][-1]}" if res.get("years_fit") else "",
+                         validacion=f"{res['years_val'][0]}-{res['years_val'][-1]}" if res.get("years_val") else "",
+                         sMAPE_ajuste=a.get("calibracion_sMAPE"), sMAPE_validacion=a.get("validacion_sMAPE"),
+                         g_growth_inicial=res.get("params", {}).get("g_growth"), g_growth_fin_serie=res.get("g_growth_fin_serie"),
+                         p_base=res.get("params", {}).get("p_base"), usa_aprovechamiento=res.get("uso_aprovechamiento"),
+                         en_limite=", ".join(res.get("at_bound", []))))
     return pd.DataFrame(rows)
 
 
@@ -274,8 +276,11 @@ def page_methods():
 **Población.** DANE, *Proyecciones de población municipal por área geográfica 2018-2042* (actualización del 30 de julio de 2025; modelo de componentes de cohortes).
 2018 = base censal conciliada; 2019-2042 = proyección oficial; 2043-2050 = **estimado** por el observatorio (tasa media logarítmica 2037-2042 de cada municipio).
 
-**Residuos.** Superintendencia de Servicios Públicos Domiciliarios (SSPD): informes nacionales de disposición final y de aprovechamiento, SUI. Se importan desde
-`data/raw/sspd_*.csv|xlsx` con `core/sspd_import.py`. Registros documentales puntuales en `data/raw/registros_documentales.csv` (cada uno con URL).
+**Residuos (SSPD).** Bases de los Informes Nacionales de Disposición Final 2019-2024 (toneladas por municipio atendido y sitio, tipo de sitio, regionalidad,
+fecha final de vida útil); Anexo 1 del Informe de Disposición Final 2018 (extraído del PDF; promedio ton/día × 365); bases de los Informes Nacionales de
+Aprovechamiento 2020-2024 (toneladas por familia de material; Estaciones de Clasificación y Aprovechamiento con su capacidad operativa). Importadas con
+`core/sspd_import.py`; controles de calidad en `core/quality.py`. Registros documentales puntuales en `data/raw/registros_documentales.csv` (con URL).
+La generación observada se estima como (dispuesto + aprovechado) / cobertura; la cobertura de recolección no está en estas bases y se mantiene como supuesto (95 %).
 
 **Referencias nacionales usadas como respaldo** (solo cuando la ciudad no tiene dato propio): 0,75 kg/hab/día (DNP, CEMPRE y CEPAL, 2021, *Encuesta a municipios sobre gestión
 de residuos sólidos domiciliarios 2019*); 70 % de orgánicos (CATF, 2024, *Colombia waste sector fact sheet*).
@@ -310,7 +315,15 @@ Un modelo que solo superó pruebas de programación **no** se presenta como vali
 **Incertidumbre.** Monte Carlo (distribución triangular sobre el rango del registro; semilla reproducible y exportable), tornado y Morris. La incertidumbre de escenario y la
 estructural se tratan por separado.
 """, "Structural verification, calibration, metrics, reliability levels and uncertainty protocol."))
-        table(_calibration_table(r.data_version.get("residuos_observados.csv", "")), hide_index=True, height=380)
+        cal = _calibration_table()
+        st.markdown(tr(f"**Resultado actual:** {(cal.nivel == 'A').sum()} capitales en nivel A, {(cal.nivel == 'B').sum()} en B, {(cal.nivel == 'C').sum()} en C y "
+                       f"{(cal.nivel == 'D').sum()} en D.", f"**Current:** A={(cal.nivel == 'A').sum()}, B={(cal.nivel == 'B').sum()}, C={(cal.nivel == 'C').sum()}."))
+        table(cal, hide_index=True, height=420, column_config={"g_growth_inicial": st.column_config.NumberColumn(format="%.4f"),
+                                                                "g_growth_fin_serie": st.column_config.NumberColumn(format="%.4f"),
+                                                                "p_base": st.column_config.NumberColumn(format="%.4f")})
+        st.markdown("##### " + tr("Control de calidad de las series SSPD", "SSPD data-quality checks"))
+        from core.quality import quality_table
+        table(quality_table(r, s.lang), hide_index=True, height=320)
     with t5:
         st.markdown(tr("""
 - Motor separado de la interfaz (`core/`), con niveles, flujos y bucles explícitos; la v2 era un balance de masa con rampas exógenas sin realimentación.

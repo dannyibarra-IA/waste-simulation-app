@@ -31,6 +31,8 @@ PROFILE_VARIABLES = [
     ("cobertura_recoleccion", "Cobertura de recolección", "fracción"),
     ("eca_numero", "Instalaciones de aprovechamiento (ECA)", "número"),
     ("relleno_nombre", "Sistema de disposición final", "texto"),
+    ("tipo_sitio", "Tipo de sitio de disposición", "texto"),
+    ("eca_capacidad_t", "Capacidad operativa de ECA", "t/año"),
     ("capacidad_remanente_t", "Capacidad remanente de disposición", "t"),
     ("vida_util_reportada_anios", "Vida útil reportada", "años"),
 ]
@@ -132,7 +134,7 @@ class Repository:
         s = self.profile(code).pop[col]
         return s.reindex(years).interpolate(limit_direction="both").to_numpy(float)
 
-    def base_observations(self, code: str, base_year: int, kappa_default: float = np.nan) -> tuple[dict, dict]:
+    def base_observations(self, code: str, base_year: int) -> tuple[dict, dict]:
         """Observaciones del año base (o el más reciente anterior) y su procedencia."""
         p = self.profile(code)
         prov = {}
@@ -140,14 +142,12 @@ class Repository:
         y_a, apr = p.latest("aprovechado_t", base_year)
         y_k, kap = p.latest("cobertura_recoleccion", base_year)
         y_q, cap = p.latest("capacidad_remanente_t", base_year + 1)
-        init = dict(W_obs=np.nan, R_obs=np.nan, O_obs=np.nan, Q_obs=np.nan, kappa_obs=np.nan)
+        init = dict(C_obs=np.nan, R_obs=np.nan, O_obs=np.nan, Q_obs=np.nan, kappa_obs=np.nan)
         if np.isfinite(kap):
             init["kappa_obs"] = kap
             prov["kappa"] = f"observado {y_k}"
-        k_used = kap if np.isfinite(kap) else kappa_default
         from core.quality import RECOVERY_SHARE_MAX, recovery_usable
-        apr_ok = recovery_usable(p)
-        if np.isfinite(apr) and np.isfinite(disp) and not apr_ok:
+        if np.isfinite(apr) and np.isfinite(disp) and not recovery_usable(p):
             capped = disp * RECOVERY_SHARE_MAX / (1 - RECOVERY_SHARE_MAX)
             prov["aprovechado_ajuste"] = (f"aprovechado SSPD {y_a} ({apr:,.0f} t) supera el potencial plausible; se acota a {capped:,.0f} t "
                                           f"({RECOVERY_SHARE_MAX:.0%} del flujo) para la condición inicial")
@@ -159,11 +159,14 @@ class Repository:
             if y_d != base_year:
                 pp = self.pop_series(code, [y_d, base_year])
                 scale = pp[1] / pp[0]
-            init["W_obs"] = tot * scale / (k_used if np.isfinite(k_used) and k_used > 0 else 1.0)
-            prov["generacion"] = f"estimada de dispuesto+aprovechado SSPD {y_d}" + (" (escalada por población)" if scale != 1 else "")
+            init["C_obs"] = tot * scale
+            prov["generacion"] = f"recolectado = dispuesto + aprovechado SSPD {y_d}" + (" (escalado por población)" if scale != 1 else "") + "; generación = recolectado / cobertura"
         if np.isfinite(apr):
             init["R_obs"] = apr
             prov["aprovechado"] = f"observado SSPD {y_a}"
+        elif np.isfinite(disp) and len(p.series("aprovechado_t")) == 0:
+            init["R_obs"] = 0.0
+            prov["aprovechado"] = "sin aprovechamiento formal reportado a la SSPD (se parte de cero)"
         if np.isfinite(cap):
             init["Q_obs"] = cap
             prov["capacidad"] = f"reportada {y_q}"

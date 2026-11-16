@@ -101,9 +101,18 @@ def exploratory_notice(meta_row):
         msgs.append(tr("La capacidad remanente de disposición no está reportada: se supone igual a `Q0_years` años de la disposición del año base. "
                        "La vida útil resultante **no es un dato**.",
                        "Remaining disposal capacity is not reported; it is assumed as `Q0_years` years of base disposal. The resulting landfill life **is not data**."))
+    prov = meta_row.get("provenance", {})
+    if "LICENCIA VENCIDA" in str(prov.get("capacidad", "")):
+        msgs.append(tr("La vida útil licenciada del sitio principal reportada a la SSPD ya venció: el modelo arranca con capacidad remanente cero y toda la disposición "
+                       "se contabiliza como **disposición sin capacidad licenciada**. Si existe una ampliación aprobada, regístrela en «Ajustes de política → Ampliación».",
+                       "The site's licensed life reported to SSPD has expired: all disposal counts as beyond licensed capacity. Register any approved expansion."))
+    if "aprovechado_ajuste" in prov:
+        msgs.append(tr("El aprovechamiento reportado supera el potencial reciclable plausible del flujo municipal; para la condición inicial se acota al 20 % "
+                       "y la serie se excluye de la calibración (ver «Perfil de ciudad → Calidad de datos»).",
+                       "Reported recovery exceeds plausible potential; capped at 20 % for the initial condition and excluded from calibration."))
     if meta_row.get("A0_clipped"):
-        msgs.append(tr("El aprovechamiento observado supera el potencial estructural del modelo con la composición supuesta; la adopción inicial quedó topada. "
-                       "Revise la fracción reciclable o la eficiencia de captura.",
+        msgs.append(tr("El aprovechamiento reportado supera lo que el modelo puede recuperar con la fracción reciclable en uso (20 % por defecto): el primer año "
+                       "subestima el aprovechamiento y sobrestima la disposición. Ingrese la caracterización de la ciudad en la página **Composición de residuos**.",
                        "Observed recovery exceeds the model's structural potential with the assumed composition; initial adoption was capped."))
     for m in msgs:
         st.warning(m, icon="⚠️")
