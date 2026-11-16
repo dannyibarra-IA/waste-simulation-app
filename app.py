@@ -1335,3 +1335,19 @@ with tab9:
         show_df(out_sim)
 
 st.markdown("<div class='footer-note'>Designed as an institutional-academic observatory interface: robust, interpretable and communication-ready.</div>", unsafe_allow_html=True)
+
+
+# ==========================================
+# VISUAL UPGRADE 3.0
+# ==========================================
+from visual_upgrade import render_visual_dashboard
+
+render_visual_dashboard(
+    results=results,
+    city_coords=city_coords,
+    selected_year=y1,
+    selected_city=selected_city,
+    scenario_label=selected_scenario,
+    source_label=data_source_label,
+)
+
