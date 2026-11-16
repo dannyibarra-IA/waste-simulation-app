@@ -10,7 +10,7 @@ import pandas as pd
 from core.data import Repository
 from core.parameters import DEFAULTS, PARAMS
 from core.scenarios import levers_for
-from core.system_dynamics import simulate
+from core.system_dynamics import consistent_init, simulate
 
 BASE_YEAR = 2024
 END_YEAR = 2050
@@ -36,7 +36,7 @@ OUTPUT_COLUMNS = {
     "Spill": ("Inventario no comercializado a disposición", "Unsold stock to disposal", "t/año"),
     "Ld": ("Demanda de disposición", "Disposal demand", "t/año"),
     "Lf": ("Dispuesto en relleno", "Landfilled", "t/año"),
-    "Overflow": ("Déficit de capacidad de disposición", "Disposal capacity deficit", "t/año"),
+    "Overflow": ("Disposición sin capacidad licenciada (déficit)", "Disposal beyond licensed capacity (deficit)", "t/año"),
     "Prevented": ("Prevenido en la fuente", "Prevented at source", "t/año"),
     "CapAdd_Q": ("Ampliación de capacidad de disposición", "Disposal capacity added", "t/año"),
     "Q": ("Capacidad remanente de disposición", "Remaining disposal capacity", "t"),
@@ -55,20 +55,58 @@ OUTPUT_COLUMNS = {
 }
 
 
-def city_params(repo: Repository, code: str, overrides: dict | None = None) -> tuple[dict, dict]:
-    """Parámetros de una ciudad: defectos del registro, sustituidos por datos medidos y por ajustes del usuario."""
+def city_params(repo: Repository, code: str, overrides: dict | None = None, use_calibration: bool = True) -> tuple[dict, dict]:
+    """Parámetros de una ciudad: defectos del registro, sustituidos por calibración, datos medidos y ajustes del usuario (en ese orden)."""
     prof = repo.profile(code)
     par = dict(DEFAULTS)
     origin = {k: PARAMS[k].kind for k in par}
+    cal = repo.calibration.get(code) if use_calibration else None
+    if cal and cal.get("status") == "calibrado":
+        v = cal.get("validation", {}).get("dispuesto", {})
+        tag = (f"calibrado SSPD {cal['years_fit'][0]}-{cal['years_fit'][-1]}" +
+               (f", validado {cal['years_val'][0]}-{cal['years_val'][-1]} (sMAPE {v['sMAPE']:.1f} %)" if v.get("n") else ", sin validación fuera de muestra"))
+        if "g_growth" in cal["params"]:
+            par["g_growth"], origin["g_growth"] = cal["g_growth_fin_serie"], tag + f"; tasa vigente en {cal['anio_final']}"
+        if "p_base" in cal["params"]:
+            par["p_base"], origin["p_base"] = cal["params"]["p_base"], tag
     for var, key in (("frac_organicos", "s_org"), ("frac_reciclables", "s_rec")):
         y, v = prof.latest(var)
         if np.isfinite(v):
             par[key], origin[key] = v, f"medido ({y})"
     if overrides:
+        comp = overrides.get("caracterizacion")
+        if comp:
+            so, sr = composition_fractions(comp["fracciones"])
+            par["s_org"], par["s_rec"] = so, sr
+            lab = "caracterización ingresada por el usuario" + (f" ({comp['fuente']})" if comp.get("fuente") else "")
+            origin["s_org"] = origin["s_rec"] = lab
         for k, v in overrides.items():
             if k in par and v is not None:
                 par[k], origin[k] = float(v), "ajustado por el usuario"
     return par, origin
+
+
+COMPOSITION_FAMILIES = {
+    # clave: (etiqueta ES, etiqueta EN, grupo del modelo)
+    "organicos": ("Orgánicos (alimentos, poda)", "Organics (food, garden)", "org"),
+    "papel_carton": ("Papel y cartón", "Paper and cardboard", "rec"),
+    "plasticos": ("Plásticos", "Plastics", "rec"),
+    "vidrio": ("Vidrio", "Glass", "rec"),
+    "metales": ("Metales", "Metals", "rec"),
+    "textiles": ("Textiles", "Textiles", "rec"),
+    "madera": ("Madera", "Wood", "rec"),
+    "otros": ("Otros no aprovechables (sanitarios, inertes, peligrosos domiciliarios)", "Other non-recoverable", "oth"),
+}
+
+
+def composition_fractions(fr: dict) -> tuple[float, float]:
+    """Convierte una caracterización por familias (en %) en las fracciones orgánica y reciclable del modelo."""
+    tot = sum(max(float(v), 0.0) for v in fr.values())
+    if tot <= 0:
+        raise ValueError("La caracterización suma cero.")
+    so = sum(max(float(v), 0.0) for k, v in fr.items() if COMPOSITION_FAMILIES.get(k, ("", "", "oth"))[2] == "org") / tot
+    sr = sum(max(float(v), 0.0) for k, v in fr.items() if COMPOSITION_FAMILIES.get(k, ("", "", "oth"))[2] == "rec") / tot
+    return so, sr
 
 
 def _overrides_for(po: dict | None, code: str):
@@ -102,10 +140,12 @@ def run(repo: Repository, codes, scenario: str = "BAU", lever_overrides: dict | 
         meta.append(dict(divipola=c, ciudad=repo.name(c), origin=origin, provenance=prov,
                          exploratory=not np.isfinite(init.get("W_obs", np.nan))))
     P = {k: np.array([p[k] for p in plist]) for k in plist[0]}
-    keys = ("W_obs", "R_obs", "O_obs", "Q_obs", "kappa_obs", "Q_years_obs")
+    keys = ("W_obs", "R_obs", "O_obs", "Q_obs", "kappa_obs", "Q_years_obs", "Krec_obs")
     I = {k: np.array([i.get(k, np.nan) for i in inits], dtype=float) for k in keys}
     L = levers_for(scenario, lever_overrides)
-    out = simulate(years, np.vstack(pops), P, L, init=I, dt=dt)
+    POP = np.vstack(pops)
+    I = consistent_init(years, POP, P, levers_for("BAU"), I, dt=dt)   # totales anuales observados → flujos instantáneos
+    out = simulate(years, POP, P, L, init=I, dt=dt)
     out["pop"] = np.vstack(pops)
     for i, m in enumerate(meta):
         m["capacity_assumed"] = bool(out["init"]["Q_assumed"][i])

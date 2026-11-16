@@ -14,7 +14,7 @@ import pandas as pd
 from core.parameters import PARAMS
 from core.scenarios import levers_for
 from core.simulation_engine import city_params
-from core.system_dynamics import simulate
+from core.system_dynamics import consistent_init, simulate
 
 OUTPUTS = {
     "dispuesto_acum": "Disposición acumulada a 2050 (Mt)",
@@ -27,7 +27,8 @@ def _batch(repo, code, scenario, P, n, lever_overrides, base_year, end_year):
     years = np.arange(base_year, end_year + 1)
     init, _ = repo.base_observations(code, base_year)
     pop = np.tile(repo.pop_series(code, years), (n, 1))
-    out = simulate(years, pop, P, levers_for(scenario, lever_overrides), init={k: np.full(n, v) for k, v in init.items()}, track_balance=False)
+    ini = consistent_init(years, pop, P, levers_for("BAU"), {k: np.full(n, v, dtype=float) for k, v in init.items()})
+    out = simulate(years, pop, P, levers_for(scenario, lever_overrides), init=ini, track_balance=False)
     disp = out["Lf"] + out["Overflow"]
     return dict(dispuesto_acum=disp.sum(1) / 1e6, tasa_aprov_2050=100 * (out["Rrec"][:, -1] + out["Kout"][:, -1]) / np.maximum(out["G"][:, -1], 1e-9),
                 vida_util=np.minimum(out["life"], 100.0))

@@ -73,6 +73,7 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     W_obs, R_obs, O_obs = (_a(init.get(k, nan), n) for k in ("W_obs", "R_obs", "O_obs"))
     Q_obs, kappa_obs = _a(init.get("Q_obs", nan), n), _a(init.get("kappa_obs", nan), n)
     Qy_obs = _a(init.get("Q_years_obs", nan), n)
+    K_obs = _a(init.get("Krec_obs", nan), n)
 
     t0 = years[0]
     steps_per_year = int(round(1.0 / dt))
@@ -85,9 +86,14 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     W0 = pop[:, 0] * g_pc0 * 0.365
     C0 = W0 * kappa0
     E0 = np.clip(p["E0"], 0.01, 0.99)
-    eta0 = np.clip(p["eta_r"], 0.0, 0.95)
-    A_from_obs = R_obs / np.maximum(C0 * p["s_rec"] * eta0 * (1 - p["rho_r0"]), 1e-9)
-    A0 = np.where(np.isfinite(R_obs), np.clip(A_from_obs, 0.0, 0.95 * p["A_max"]), p["A0"])
+    eta_def = np.clip(p["eta_r"], 0.0, 0.95)
+    # Condición inicial coherente con el aprovechamiento observado: primero se ajusta la adopción A0 (hasta 0,9·A_max);
+    # si no alcanza, se deriva la eficiencia de captura η0 (hasta 0,95). Solo si ni así se reproduce el dato, se acota y se señala.
+    A_from_obs = R_obs / np.maximum(C0 * p["s_rec"] * eta_def * (1 - p["rho_r0"]), 1e-9)
+    A0 = np.where(np.isfinite(R_obs), np.clip(A_from_obs, 0.0, 0.9 * p["A_max"]), p["A0"])
+    eta_needed = R_obs / np.maximum(C0 * p["s_rec"] * A0 * (1 - p["rho_r0"]), 1e-9)
+    eta0 = np.where(np.isfinite(R_obs) & (eta_needed > eta_def), np.clip(eta_needed, eta_def, 0.95), eta_def)
+    A_clipped = np.isfinite(R_obs) & (eta_needed > 0.95 + 1e-9)
     route_from_obs = O_obs / np.maximum(C0 * p["s_org"] * A0 * p["eta_o"] * (1 - p["rho_o"]), 1e-9)
     route0 = np.where(np.isfinite(O_obs), np.clip(route_from_obs, 0.0, 1.0), p["org_route0"])
     Sr0 = C0 * p["s_rec"] * A0 * eta0
@@ -99,7 +105,7 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
 
     st = dict(
         Q=np.where(np.isfinite(Q_obs), Q_obs, np.where(np.isfinite(Qy_obs), Qy_obs, p["Q0_years"]) * Ld0),
-        CumL=np.zeros(n), Krec=Sr0 / util0, Korg=So0 / util0,
+        CumL=np.zeros(n), Krec=np.where(np.isfinite(K_obs), np.maximum(K_obs, Sr0), Sr0 / util0), Korg=So0 / util0,
         I=Rrec0 * p["tau_sell"], E=E0.copy(), A=A0.copy(),
         X=np.maximum(Sr0 * 5.0, 1.0),  # supuesto: 5 años de experiencia previa equivalente
     )
@@ -127,7 +133,8 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
             dr = (r_next - r) / dt
 
             # --- generación y prevención
-            gpc = g_pc0 * np.exp(p["g_growth"] * (t - t0))
+            tau = np.maximum(p["tau_g"], 1e-6)
+            gpc = g_pc0 * np.exp(p["g_lr"] * (t - t0) + (p["g_growth"] - p["g_lr"]) * tau * (1 - np.exp(-(t - t0) / tau)))
             W = popt * gpc * 0.365
             prev = np.clip(lv["prev"] * inten * r, 0, 1) * p["prev_max"]
             G = W * (1 - prev)
@@ -246,6 +253,29 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     out["years"] = years.astype(int)
     out["life"] = life
     out["balance_max_rel_error"] = bal_max
-    out["init"] = dict(A0_clipped=np.isfinite(R_obs) & (A_from_obs > 0.95 * p["A_max"]), g_pc0=g_pc0, kappa0=kappa0, A0=A0, route0=route0, W0=W0, Ld0=Ld0, Q0=Q_init,
-                       Q_assumed=~np.isfinite(Q_obs) & ~np.isfinite(Qy_obs), Krec0=Sr0 / util0, D0=D0)
+    out["init"] = dict(A0_clipped=A_clipped, eta0=eta0, g_pc0=g_pc0, kappa0=kappa0, A0=A0, route0=route0, W0=W0, Ld0=Ld0, Q0=Q_init,
+                       Q_assumed=~np.isfinite(Q_obs) & ~np.isfinite(Qy_obs), Krec0=np.where(np.isfinite(K_obs), np.maximum(K_obs, Sr0), Sr0 / util0), D0=D0)
     return out
+
+
+def consistent_init(years, pop, P: dict, L: dict, init: dict, iters: int = 4, dt: float = 0.25) -> dict:
+    """
+    Las observaciones SSPD son TOTALES ANUALES; el motor necesita FLUJOS INSTANTÁNEOS al inicio del año base.
+    Iteración de punto fijo: se reescalan W_obs y R_obs hasta que el total simulado del primer año reproduce el observado.
+    """
+    init = {k: np.array(v, dtype=float, copy=True) for k, v in init.items()}
+    if "W_obs" not in init:
+        return init
+    target_W = np.array(init["W_obs"], dtype=float, copy=True)
+    target_R = np.array(init.get("R_obs", np.full_like(target_W, np.nan)), dtype=float, copy=True)
+    y2 = np.asarray(years)[:2] if len(years) > 1 else np.asarray(years)
+    pp = np.atleast_2d(pop)[:, :len(y2)]
+    for _ in range(iters):
+        out = simulate(y2, pp, P, L, init=init, dt=dt, track_balance=False)
+        Wsim, Rsim = out["W"][:, 0], out["Rrec"][:, 0]
+        ok_w = np.isfinite(target_W) & (Wsim > 0)
+        init["W_obs"] = np.where(ok_w, init["W_obs"] * target_W / np.where(ok_w, Wsim, 1), init["W_obs"])
+        ok_r = np.isfinite(target_R) & (Rsim > 0)
+        if "R_obs" in init:
+            init["R_obs"] = np.where(ok_r, init["R_obs"] * target_R / np.where(ok_r, Rsim, 1), init["R_obs"])
+    return init

@@ -9,7 +9,7 @@ import numpy as np
 
 
 LEVELS = {
-    "A": "Validado fuera de muestra (sMAPE de validación ≤ 10 %)",
+    "A": "Validado fuera de muestra (sMAPE de validación ≤ 10 % y de ajuste ≤ 15 %)",
     "B": "Validado con error moderado (sMAPE de validación entre 10 % y 25 %)",
     "C": "Calibrado sin validación fuera de muestra, o validación con error alto",
     "D": "Exploratorio: sin series históricas de residuos; resultados condicionados a supuestos",
@@ -29,10 +29,16 @@ def assess(profile, calib: dict | None, mc_life=None) -> dict:
         if val and val.get("n", 0) > 0:
             out["validacion_sMAPE"] = round(val["sMAPE"], 1)
             level = "A" if val["sMAPE"] <= 10 else ("B" if val["sMAPE"] <= 25 else "C")
+            if level == "A" and fit_s > 15:
+                level = "B"
+                notes.append(f"Ajuste histórico con error alto (sMAPE {fit_s:.1f} %); el nivel se limita a B.")
         else:
             notes.append("Sin años reservados para validación fuera de muestra.")
         if calib.get("at_bound"):
-            notes.append(f"Parámetros en el límite del rango: {', '.join(calib['at_bound'])} (posible error estructural o de datos).")
+            notes.append(f"Parámetros en el límite del rango: {', '.join(calib['at_bound'])}. Con g_growth en el límite suele indicar que la disposición "
+                         "reportada no acompaña el crecimiento poblacional proyectado por el DANE (migración, cobertura o cambios de reporte).")
+        if not calib.get("uso_aprovechamiento", True):
+            notes.append("La serie de aprovechamiento se excluyó de la calibración por superar el potencial reciclable plausible.")
     else:
         notes.append("Sin serie histórica de residuos suficiente: simulación exploratoria.")
     if mc_life is not None and np.size(mc_life):

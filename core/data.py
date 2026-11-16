@@ -50,9 +50,13 @@ class CityProfile:
     completeness: dict = field(default_factory=dict)
 
     def series(self, variable: str) -> pd.Series:
-        d = self.obs[self.obs["variable"] == variable]
+        """Serie anual; si hay varias fuentes para un mismo año se prefiere la base SSPD sobre el registro documental."""
+        d = self.obs[self.obs["variable"] == variable].copy()
+        d["_rank"] = d["calidad"].map(lambda q: 1 if str(q).startswith("reportado_SSPD") else 0)
+        d = d.sort_values(["anio", "_rank"])
         v = pd.to_numeric(d["valor"], errors="coerce")
-        return pd.Series(v.values, index=d["anio"].astype(int).values).dropna().sort_index()
+        s = pd.Series(v.values, index=d["anio"].astype(int).values).dropna()
+        return s[~s.index.duplicated(keep="last")].sort_index()
 
     def text(self, variable: str):
         d = self.obs[self.obs["variable"] == variable].sort_values("anio")
@@ -74,6 +78,8 @@ class Repository:
             columns=["divipola", "anio", "variable", "valor", "unidad", "tipo_dato", "calidad", "fuente", "nota"])
         vpath = proc_dir / "data_version.json"
         self.data_version = json.loads(vpath.read_text()) if vpath.exists() else {}
+        cpath = proc_dir / "calibracion.json"
+        self.calibration = json.loads(cpath.read_text(encoding="utf-8")) if cpath.exists() else {}
         self._profiles: dict[str, CityProfile] = {}
 
     @property
@@ -139,6 +145,13 @@ class Repository:
             init["kappa_obs"] = kap
             prov["kappa"] = f"observado {y_k}"
         k_used = kap if np.isfinite(kap) else kappa_default
+        from core.quality import RECOVERY_SHARE_MAX, recovery_usable
+        apr_ok = recovery_usable(p)
+        if np.isfinite(apr) and np.isfinite(disp) and not apr_ok:
+            capped = disp * RECOVERY_SHARE_MAX / (1 - RECOVERY_SHARE_MAX)
+            prov["aprovechado_ajuste"] = (f"aprovechado SSPD {y_a} ({apr:,.0f} t) supera el potencial plausible; se acota a {capped:,.0f} t "
+                                          f"({RECOVERY_SHARE_MAX:.0%} del flujo) para la condición inicial")
+            apr = min(apr, capped)
         if np.isfinite(disp):
             tot = disp + (apr if np.isfinite(apr) else 0.0)
             # escalar la observación al año base con la población si es de un año anterior
@@ -157,6 +170,12 @@ class Repository:
         else:
             y_v, vida = p.latest("vida_util_reportada_anios", base_year + 2)
             if np.isfinite(vida):
-                init["Q_years_obs"] = vida
-                prov["capacidad"] = f"derivada de la vida útil reportada ({vida:g} años, {y_v})"
+                rem = max(vida - (base_year - y_v), 0.0)
+                init["Q_years_obs"] = rem
+                prov["capacidad"] = (f"derivada de la vida útil licenciada reportada ({vida:.1f} años a dic-{y_v}; {rem:.1f} años desde {base_year}), "
+                                     "asignada en proporción a la disposición de la ciudad" + ("; LICENCIA VENCIDA" if vida <= 0 else ""))
+        y_e, ecap = p.latest("eca_capacidad_t", base_year)
+        if np.isfinite(ecap):
+            init["Krec_obs"] = ecap
+            prov["capacidad_clasificacion"] = f"capacidad operativa de ECA reportada SSPD {y_e}"
         return init, prov

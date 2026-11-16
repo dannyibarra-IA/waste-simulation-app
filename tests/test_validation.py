@@ -27,7 +27,7 @@ def twin_repo(tmp_path):
     pop = r0.pop_series(CODE, years)[None, :]
     true = dict(DEFAULTS, g_growth=0.012, p_base=0.02)
     out = simulate(years, pop, true, levers_for("BAU"), init=dict(W_obs=np.array([140e3]), R_obs=np.array([9e3]), kappa_obs=np.array([0.95])))
-    d, a = out["Lf"][0] + out["Overflow"][0], out["Rrec"][0] + out["Kout"][0]
+    d, a = out["Lf"][0] + out["Overflow"][0], out["Rrec"][0]
     rows = []
     for i, y in enumerate(years):
         rows += [dict(divipola=CODE, anio=y, variable="dispuesto_t", valor=d[i], unidad="t/año", tipo_dato="sintetico", calidad="prueba", fuente="test", nota=""),
@@ -52,8 +52,10 @@ def test_twin_calibration_recovers_parameters(twin_repo):
     assert rel["nivel"] in ("A", "B")
 
 
-def test_no_data_is_exploratory():
-    repo = Repository()
+def test_no_data_is_exploratory(tmp_path):
+    for f in ("capitales.csv", "poblacion.csv"):
+        shutil.copy(PROC / f, tmp_path / f)
+    repo = Repository(tmp_path)   # repositorio sin observaciones de residuos
     res = calibrate_city(repo, "97001")
     assert res["status"] in ("sin_datos", "insuficiente")
     assert assess(repo.profile("97001"), res)["nivel"] == "D"

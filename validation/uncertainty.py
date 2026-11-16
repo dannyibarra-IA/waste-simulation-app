@@ -12,7 +12,7 @@ import pandas as pd
 from core.parameters import PARAMS
 from core.scenarios import levers_for
 from core.simulation_engine import city_params
-from core.system_dynamics import simulate
+from core.system_dynamics import consistent_init, simulate
 
 # Parámetros que no se muestrean porque se miden o determinan el estado observado
 FIXED_IF_MEASURED = {"g_pc0", "kappa0", "A0"}
@@ -41,7 +41,8 @@ def monte_carlo(repo, code: str, scenario: str, n: int = 300, seed: int = 202611
     P = {k: (samples[k].to_numpy() if k in samples else np.full(n, base[k])) for k in base}
     init, _ = repo.base_observations(code, base_year)
     pop = np.tile(repo.pop_series(code, years), (n, 1))
-    out = simulate(years, pop, P, levers_for(scenario, lever_overrides), init={k: np.full(n, v) for k, v in init.items()}, track_balance=False)
+    ini = consistent_init(years, pop, P, levers_for("BAU"), {k: np.full(n, v, dtype=float) for k, v in init.items()})
+    out = simulate(years, pop, P, levers_for(scenario, lever_overrides), init=ini, track_balance=False)
     disp = out["Lf"] + out["Overflow"]
     rate = (out["Rrec"] + out["Kout"]) / np.maximum(out["G"], 1e-9)
     q = lambda a: dict(p05=np.percentile(a, 5, 0), p25=np.percentile(a, 25, 0), p50=np.percentile(a, 50, 0),

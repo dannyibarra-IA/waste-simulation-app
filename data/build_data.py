@@ -113,7 +113,10 @@ def build_waste_observations() -> pd.DataFrame:
     """Une las observaciones de residuos disponibles: importaciones SSPD y registros documentales verificados."""
     from core.sspd_import import load_all_sspd  # import tardío para que el script funcione sin la app
 
-    frames = [load_all_sspd(RAW)]
+    report = []
+    frames = [load_all_sspd(RAW, report)]
+    for r in report:
+        print("  ·", r)
     doc = ROOT / "raw" / "registros_documentales.csv"
     if doc.exists():
         frames.append(pd.read_csv(doc, dtype={"divipola": str}))
@@ -146,7 +149,19 @@ def main():
     pop.to_csv(OUT / "poblacion.csv", index=False)
     obs = build_waste_observations()
     obs.to_csv(OUT / "residuos_observados.csv", index=False)
-    version = {p.name: file_hash(p) for p in sorted(OUT.glob("*.csv"))}
+    # calibración por ciudad contra las series SSPD (se guarda para que la app no recalibre en cada sesión)
+    from core.data import Repository
+    from validation.calibration import calibrate_city
+    repo = Repository(OUT)
+    cal = {}
+    for c in repo.codes:
+        r = calibrate_city(repo, c)
+        r.pop("series", None) if False else None
+        cal[c] = r
+    (OUT / "calibracion.json").write_text(json.dumps(cal, indent=1, ensure_ascii=False, default=float), encoding="utf-8")
+    ok = sum(1 for v in cal.values() if v["status"] == "calibrado")
+    print(f"calibración: {ok}/32 ciudades calibradas")
+    version = {p.name: file_hash(p) for p in sorted(list(OUT.glob("*.csv")) + [OUT / "calibracion.json"])}
     version["generado_por"] = "data/build_data.py"
     (OUT / "data_version.json").write_text(json.dumps(version, indent=2, ensure_ascii=False))
     print(f"capitales: {len(caps)} · población: {len(pop)} filas · observaciones de residuos: {len(obs)} filas")

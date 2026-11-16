@@ -30,8 +30,13 @@ def test_levers_close_city_specific_gaps():
 
 
 def test_disruption_reduces_processing_during_window():
+    """S9 con y sin interrupción: el procesamiento nunca aumenta y cae donde la capacidad es la restricción activa."""
+    from core.simulation_engine import run
     r = Repository()
-    df, _ = run_scenarios(r, r.codes[:2], ["BAU", "S9"])
-    a = df[(df.escenario == "BAU") & (df.anio == 2030)]["Prec"].to_numpy()
-    b = df[(df.escenario == "S9") & (df.anio == 2030)]["Prec"].to_numpy()
-    assert np.all(b < a)
+    codes = r.codes
+    a, _ = run(r, codes, "S9", {"disrupt_dur": 0.0})
+    b, _ = run(r, codes, "S9")
+    i = list(a["years"]).index(2030)
+    assert np.all(b["Prec"][:, i] <= a["Prec"][:, i] * 1.01 + 1e-6)   # ±1 %: realimentación de precios
+    assert np.any(b["Prec"][:, i] < a["Prec"][:, i] - 1e-6)
+    assert b["Excess_r"][:, i].sum() > a["Excess_r"][:, i].sum()
