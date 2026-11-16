@@ -38,6 +38,7 @@ OUTPUT_COLUMNS = {
     "Lf": ("Dispuesto en relleno", "Landfilled", "t/año"),
     "Overflow": ("Déficit de capacidad de disposición", "Disposal capacity deficit", "t/año"),
     "Prevented": ("Prevenido en la fuente", "Prevented at source", "t/año"),
+    "CapAdd_Q": ("Ampliación de capacidad de disposición", "Disposal capacity added", "t/año"),
     "Q": ("Capacidad remanente de disposición", "Remaining disposal capacity", "t"),
     "CumL": ("Disposición acumulada", "Cumulative landfilled", "t"),
     "Krec": ("Capacidad de clasificación", "Sorting capacity", "t/año"),
@@ -110,6 +111,7 @@ def run(repo: Repository, codes, scenario: str = "BAU", lever_overrides: dict | 
         m["capacity_assumed"] = bool(out["init"]["Q_assumed"][i])
         m["A0_clipped"] = bool(out["init"]["A0_clipped"][i])
         m["life"] = float(out["life"][i])
+        m["balance"] = float(out["balance_max_rel_error"])
     return out, meta
 
 
