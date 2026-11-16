@@ -2,3 +2,4 @@ streamlit
 pandas
 plotly>=5.20
 openpyxl
+reportlab>=4.2,<5
