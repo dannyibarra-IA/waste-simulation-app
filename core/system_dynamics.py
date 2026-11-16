@@ -72,6 +72,7 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     nan = np.full(n, np.nan)
     W_obs, R_obs, O_obs = (_a(init.get(k, nan), n) for k in ("W_obs", "R_obs", "O_obs"))
     Q_obs, kappa_obs = _a(init.get("Q_obs", nan), n), _a(init.get("kappa_obs", nan), n)
+    Qy_obs = _a(init.get("Q_years_obs", nan), n)
 
     t0 = years[0]
     steps_per_year = int(round(1.0 / dt))
@@ -97,7 +98,7 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     D0 = np.maximum(Rrec0 * (1 + p["mkt_headroom"]), 1e-9)
 
     st = dict(
-        Q=np.where(np.isfinite(Q_obs), Q_obs, p["Q0_years"] * Ld0),
+        Q=np.where(np.isfinite(Q_obs), Q_obs, np.where(np.isfinite(Qy_obs), Qy_obs, p["Q0_years"]) * Ld0),
         CumL=np.zeros(n), Krec=Sr0 / util0, Korg=So0 / util0,
         I=Rrec0 * p["tau_sell"], E=E0.copy(), A=A0.copy(),
         X=np.maximum(Sr0 * 5.0, 1.0),  # supuesto: 5 años de experiencia previa equivalente
@@ -245,6 +246,6 @@ def simulate(years, pop, P: dict, L: dict, init: dict | None = None, dt: float =
     out["years"] = years.astype(int)
     out["life"] = life
     out["balance_max_rel_error"] = bal_max
-    out["init"] = dict(A0_clipped=np.isfinite(R_obs) & (A_from_obs > 0.95 * p["A_max"]), g_pc0=g_pc0, kappa0=kappa0, A0=A0, route0=route0, W0=W0, Ld0=Ld0, Q0=np.where(np.isfinite(Q_obs), Q_obs, p["Q0_years"] * Ld0),
-                       Q_assumed=~np.isfinite(Q_obs), Krec0=Sr0 / util0, D0=D0)
+    out["init"] = dict(A0_clipped=np.isfinite(R_obs) & (A_from_obs > 0.95 * p["A_max"]), g_pc0=g_pc0, kappa0=kappa0, A0=A0, route0=route0, W0=W0, Ld0=Ld0, Q0=Q_init,
+                       Q_assumed=~np.isfinite(Q_obs) & ~np.isfinite(Qy_obs), Krec0=Sr0 / util0, D0=D0)
     return out
