@@ -120,7 +120,7 @@ border-radius:12px 12px 0 0;border:1px solid var(--border);border-bottom:none;}
 # =========================================================
 # CONSTANTS
 # =========================================================
-DATA_FILE = "simulacion_residuos_2025_2050.xlsx"
+DATA_FILE = str(Path(__file__).resolve().parent / "simulacion_residuos_2025_2050.xlsx")  # v3: ruta relativa a legacy/
 EXPECTED_LONG_COLS = {"Ciudad", "Año", "Tipo", "Toneladas_anio"}
 
 # Current-system levers: the starting point of every policy ramp.
