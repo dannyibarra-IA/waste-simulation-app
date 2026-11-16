@@ -1,0 +1,1057 @@
+divipola,anio,poblacion_total,poblacion_cabecera,tipo_dato,fuente
+05001,2018,2427133.0,2382405.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2019,2455336.0,2409046.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2020,2489955.0,2441882.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2021,2507620.0,2459249.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2022,2514709.0,2466239.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2023,2518480.0,2469958.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2024,2524747.0,2476134.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2025,2528343.0,2479683.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2026,2526795.0,2478217.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2027,2524037.0,2475559.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2028,2520340.0,2471984.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2029,2515817.0,2467621.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2030,2510536.0,2462542.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2031,2504515.0,2456747.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2032,2497704.0,2450208.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2033,2490104.0,2442894.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2034,2481654.0,2434790.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2035,2472359.0,2425866.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2036,2462190.0,2416105.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2037,2451127.0,2405482.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2038,2439177.0,2394006.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2039,2426320.0,2381658.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2040,2412557.0,2368426.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2041,2397892.0,2354345.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2042,2382344.0,2339392.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+05001,2043,2368820.7763439585,2326393.513181034,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2044,2355374.3164038416,2313467.2505380856,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2045,2342004.184435316,2300612.8107681675,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2046,2328709.9471675223,2287829.7947980715,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2047,2315491.1737890365,2275117.8057719828,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2048,2302347.4359339075,2262476.449039155,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2049,2289278.307667776,2249905.332141664,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+05001,2050,2276283.365474073,2237404.0648022164,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2018,1206322.0,1205283.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2019,1230835.0,1229942.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2020,1260910.0,1260153.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2021,1271797.0,1271047.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2022,1274895.0,1274152.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2023,1277216.0,1276498.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2024,1279120.0,1278419.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2025,1279344.0,1278651.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2026,1275854.0,1275180.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2027,1271416.0,1270766.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2028,1266293.0,1265671.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2029,1260642.0,1260036.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2030,1254536.0,1253948.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2031,1248047.0,1247476.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2032,1241174.0,1240625.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2033,1233976.0,1233439.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2034,1226454.0,1225938.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2035,1218618.0,1218129.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2036,1215384.0,1214900.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2037,1211795.0,1211315.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2038,1207861.0,1207389.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2039,1203579.0,1203114.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2040,1198966.0,1198507.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2041,1194028.0,1193568.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2042,1188753.0,1188298.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+08001,2043,1184197.44549317,1183747.3515920162,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2044,1179659.348840802,1179214.1301265445,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2045,1175138.6431406813,1174698.2688662105,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2046,1170635.2617469777,1170199.7013292145,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2047,1166149.1382692617,1165718.361288352,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2048,1161680.2065715261,1161254.182770039,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2049,1157228.4007712111,1156807.100053341,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+08001,2050,1152793.6552382328,1152377.0476690044,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2018,7391056.0,7366187.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2019,7533202.0,7507403.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2020,7717564.0,7690578.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2021,7804920.0,7777174.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2022,7849206.0,7820740.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2023,7883928.0,7854783.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2024,7918660.0,7888813.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2025,7942867.0,7912359.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2026,7945996.0,7914911.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2027,7943941.0,7912310.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2028,7937939.0,7905850.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2029,7928632.0,7896143.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2030,7916525.0,7883705.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2031,7901596.0,7868548.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2032,7883923.0,7850694.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2033,7863483.0,7830169.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2034,7840309.0,7806947.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2035,7814324.0,7781000.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2036,7785579.0,7752348.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2037,7754041.0,7720962.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2038,7719774.0,7686894.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2039,7682774.0,7650135.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2040,7643126.0,7610767.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2041,7600876.0,7568827.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2042,7556041.0,7524334.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+11001,2043,7517051.892812534,7485613.425942263,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2044,7478263.969085994,7447092.1097663995,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2045,7439676.190715435,7408769.026082048,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2046,7401287.524952524,7370643.154775553,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2047,7363096.944377906,7332713.48098281,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2048,7325103.426873692,7294978.995062253,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2049,7287305.955596121,7257438.69256798,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+11001,2050,7249703.5189483315,7220091.574223011,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2018,973047.0,876885.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2019,984671.0,886102.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2020,997946.0,896779.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2021,1003943.0,901144.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2022,1006609.0,902522.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2023,1008354.0,903072.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2024,1010408.0,903895.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2025,1011520.0,903881.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2026,1010995.0,902411.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2027,1010001.0,900543.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2028,1008674.0,898365.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2029,1007039.0,895940.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2030,1005215.0,893358.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2031,1003175.0,890605.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2032,1000974.0,887730.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2033,998638.0,884757.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2034,996169.0,881685.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2035,993617.0,878564.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2036,990960.0,875384.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2037,988269.0,872194.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2038,985523.0,868982.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2039,982721.0,865752.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2040,979878.0,862516.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2041,977001.0,859281.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2042,974086.0,856032.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+13001,2043,971273.9195188421,852835.7174509158,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2044,968469.9572085978,849651.3692946273,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2045,965674.0896329894,846478.9109700766,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2046,962886.293423397,843318.2980825894,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2047,960106.545278664,840169.4864032543,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2048,957334.821964901,837032.4318683026,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2049,954571.1003152928,833907.0905784934,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+13001,2050,951815.357229904,830793.4187984974,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2018,174101.0,165546.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2019,176904.0,168648.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2020,178975.0,170960.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2021,181676.0,173621.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2022,183818.0,175752.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2023,185748.0,177672.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2024,187765.0,179666.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2025,189660.0,181551.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2026,191372.0,183278.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2027,193090.0,185008.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2028,194852.0,186805.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2029,196709.0,188685.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2030,198604.0,190642.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2031,200563.0,192661.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2032,202588.0,194766.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2033,204624.0,196892.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2034,206693.0,199058.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2035,208775.0,201233.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2036,211415.0,203995.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2037,213996.0,206697.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2038,216545.0,209362.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2039,218984.0,211939.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2040,221353.0,214425.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2041,223636.0,216846.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2042,225827.0,219173.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+15001,2043,228270.56149609786,221757.1482302492,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2044,230740.56355415337,224371.76473020273,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2045,233237.29227431904,227017.2087344617,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2046,235761.03685249455,229693.8437131647,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2047,238312.08961382456,232402.0374219268,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2048,240890.74604655828,235142.16195236708,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2049,243497.30483627634,237914.59378323212,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+15001,2050,246132.06790048713,240719.71383212224,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2018,434403.0,405239.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2019,440570.0,412390.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2020,447015.0,419855.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2021,453659.0,426589.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2022,458752.0,431887.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2023,462721.0,436099.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2024,467681.0,441288.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2025,472087.0,445953.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2026,475690.0,449879.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2027,479109.0,453623.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2028,482350.0,457219.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2029,485427.0,460676.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2030,488352.0,463989.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2031,491137.0,467167.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2032,493706.0,470161.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2033,496123.0,472990.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2034,498317.0,475624.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2035,500311.0,478056.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2036,502110.0,480307.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2037,503647.0,482313.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2038,504954.0,484070.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2039,505997.0,485572.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2040,506787.0,486824.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2041,507303.0,487792.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2042,507551.0,488491.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+17001,2043,508335.4239241295,489736.0639103779,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2044,509121.06018138974,490984.3012346795,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2045,509907.9106454504,492235.7200612892,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2046,510695.9771928776,493490.32849920756,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2047,511485.2617031373,494748.1346781032,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2048,512275.76605860033,496009.14674836554,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2049,513067.4921445467,497273.3728811576,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+17001,2050,513860.44184917014,498540.8212684692,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2018,168606.0,148231.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2019,170885.0,150282.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2020,173469.0,152632.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2021,176423.0,155196.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2022,179093.0,157471.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2023,181642.0,159628.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2024,184170.0,161733.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2025,186497.0,163675.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2026,188620.0,165420.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2027,190630.0,167026.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2028,192505.0,168511.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2029,194245.0,169863.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2030,195884.0,171100.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2031,197413.0,172225.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2032,198806.0,173227.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2033,200120.0,174122.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2034,201331.0,174906.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2035,202412.0,175578.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2036,203421.0,176159.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2037,204337.0,176647.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2038,205179.0,177057.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2039,205951.0,177378.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2040,206677.0,177645.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2041,207322.0,177840.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2042,207925.0,177984.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+18001,2043,208650.12517745703,178252.61189037003,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2044,209377.77918272684,178521.62916744698,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2045,210107.97083493526,178791.05244303696,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2046,210840.70898396408,179060.88232986935,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2047,211576.00251055855,179331.1194415982,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2048,212313.860326435,179601.7643928038,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2049,213054.2913743888,179872.81779899396,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+18001,2050,213797.30462840263,180144.28027660525,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2018,318055.0,266560.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2019,324594.0,270570.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2020,331304.0,274735.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2021,336438.0,278480.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2022,340713.0,281495.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2023,344359.0,283978.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2024,348444.0,286806.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2025,352150.0,289308.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2026,355347.0,291391.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2027,358356.0,293302.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2028,361197.0,295071.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2029,363903.0,296726.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2030,366440.0,298251.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2031,368829.0,299668.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2032,371081.0,300985.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2033,373172.0,302190.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2034,375126.0,303301.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2035,376922.0,304306.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2036,378550.0,305214.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2037,380032.0,306004.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2038,381357.0,306707.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2039,382521.0,307307.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2040,383509.0,307781.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2041,384371.0,308174.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2042,385036.0,308443.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+19001,2043,386044.67910825455,308933.1278606941,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2044,387056.0006539524,309424.034553522,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2045,388069.97155948903,309915.72131607804,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2046,389086.59876539436,310408.18938792316,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2047,390105.88923038065,310901.4400105881,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2048,391127.84993138973,311395.4744275764,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2049,392152.48786364106,311890.2938843675,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+19001,2050,393179.81004067924,312385.89962842007,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2018,490068.0,431795.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2019,512113.0,450376.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2020,536621.0,471117.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2021,555190.0,487350.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2022,570701.0,500903.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2023,585985.0,514277.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2024,601259.0,527636.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2025,615987.0,540530.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2026,629217.0,552094.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2027,642125.0,563368.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2028,654794.0,574441.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2029,667252.0,585312.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2030,679551.0,596034.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2031,691674.0,606589.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2032,703618.0,616981.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2033,715390.0,627214.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2034,726996.0,637287.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2035,738417.0,647181.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2036,749680.0,656920.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2037,760746.0,666488.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2038,771672.0,675922.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2039,782402.0,685168.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2040,792981.0,694274.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2041,803407.0,703239.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2042,813654.0,712045.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+20001,2043,824669.2120972537,721523.4699032379,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2044,835833.547651834,731128.1135619357,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2045,847149.0254905529,740860.6105527269,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2046,858617.6917710113,750722.6628101241,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2047,870241.6203516022,760715.9949241397,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2048,882022.9131665219,770842.354441867,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2049,893963.7006058596,781103.5121730752,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+20001,2050,906066.1419008318,791501.2624998745,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2018,490941.0,388503.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2019,503974.0,397319.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2020,517476.0,406532.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2021,529652.0,415847.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2022,541042.0,424540.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2023,552371.0,433199.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2024,563597.0,441790.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2025,574570.0,450188.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2026,585029.0,458206.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2027,595299.0,466092.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2028,605383.0,473850.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2029,615278.0,481473.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2030,624991.0,488968.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2031,634491.0,496317.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2032,643776.0,503513.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2033,652884.0,510574.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2034,661751.0,517470.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2035,670424.0,524220.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2036,678918.0,530870.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2037,687216.0,537382.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2038,695298.0,543728.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2039,703166.0,549929.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2040,710850.0,556003.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2041,718316.0,561922.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2042,725608.0,567725.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+23001,2043,733540.0360198364,573996.1767927189,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2044,741558.7816617002,580336.6259591497,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2045,749665.1847980585,586747.1126924797,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2046,757860.2036631146,593228.4106383371,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2047,766144.8069660775,599781.3019881574,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2048,774519.9740056713,606406.5775735816,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2049,782986.6947858941,613105.0369618973,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+23001,2050,791545.9701330435,619877.4885525345,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2018,129217.0,113113.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2019,131208.0,114288.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2020,133199.0,115467.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2021,134979.0,116754.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2022,136696.0,117981.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2023,138336.0,119144.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2024,140076.0,120397.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2025,141778.0,121595.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2026,143332.0,122692.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2027,144859.0,123735.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2028,146289.0,124710.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2029,147642.0,125609.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2030,148906.0,126448.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2031,150090.0,127216.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2032,151189.0,127900.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2033,152212.0,128544.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2034,153198.0,129152.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2035,154082.0,129697.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2036,154929.0,130218.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2037,155699.0,130690.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2038,156440.0,131140.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2039,157136.0,131573.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2040,157822.0,131994.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2041,158445.0,132395.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2042,159063.0,132794.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+27001,2043,159744.47205713118,133218.84739243265,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2044,160428.86373833992,133645.05399768255,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2045,161116.1875521431,134072.62416427466,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2046,161806.45606064785,134501.56225464615,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2047,162499.68187978087,134931.87264519092,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2048,163195.87767951915,135363.55972630423,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2049,163895.05618412167,135796.62790242754,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+27001,2050,164597.23017236168,136231.08159209343,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2018,357376.0,335988.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2019,364508.0,342100.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2020,371690.0,348282.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2021,378215.0,354311.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2022,384329.0,359970.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2023,390199.0,365394.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2024,396442.0,371176.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2025,402479.0,376767.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2026,408218.0,382081.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2027,413804.0,387232.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2028,419210.0,392209.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2029,424400.0,397002.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2030,429434.0,401624.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2031,434245.0,406037.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2032,438854.0,410255.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2033,443241.0,414263.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2034,447423.0,418072.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2035,451392.0,421678.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2036,455145.0,425084.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2037,458707.0,428287.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2038,462059.0,431310.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2039,465229.0,434132.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2040,468182.0,436770.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2041,470942.0,439225.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2042,473535.0,441513.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+41001,2043,476557.63022229605,444206.81400910945,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2044,479599.55425278103,446917.0638511745,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2045,482660.89524612704,449643.84980654245,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2046,485741.7771431176,452387.27276740375,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2047,488842.3246756644,455147.43424152496,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2048,491962.66337185825,457924.43635600415,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2049,495102.9195610502,460718.3818610502,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+41001,2050,498263.22037896694,463529.3741337841,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2018,188019.0,126098.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2019,193478.0,133612.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2020,199802.0,141742.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2021,203266.0,145050.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2022,205451.0,147446.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2023,207427.0,149689.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2024,209292.0,151834.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2025,210871.0,153756.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2026,211811.0,155181.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2027,212589.0,156453.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2028,213219.0,157568.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2029,213702.0,158537.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2030,214081.0,159378.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2031,214308.0,160075.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2032,214470.0,160678.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2033,214512.0,161138.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2034,214448.0,161489.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2035,214272.0,161720.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2036,214039.0,161870.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2037,213699.0,161916.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2038,213249.0,161845.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2039,212760.0,161713.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2040,212171.0,161478.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2041,211497.0,161166.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2042,210762.0,160785.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+44001,2043,210179.4616680128,160559.74978967223,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2044,209598.53345031675,160334.81514147558,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2045,209019.21089661587,160110.1956133263,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2046,208441.48956891452,159885.89076375996,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2047,207865.36504148357,159661.90015193063,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2048,207290.83290082644,159438.22333760993,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2049,206717.88874564535,159214.85988118625,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+44001,2050,206146.5281868074,158991.8093436638,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2018,499188.0,455300.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2019,515745.0,467428.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2020,534879.0,481885.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2021,547542.0,492743.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2022,556937.0,500646.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2023,565844.0,508115.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2024,574486.0,515343.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2025,582394.0,521897.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2026,588662.0,526978.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2027,594421.0,531619.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2028,599778.0,535899.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2029,604778.0,539873.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2030,609461.0,543565.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2031,613835.0,546985.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2032,617895.0,550141.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2033,621667.0,553040.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2034,625130.0,555683.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2035,628324.0,558085.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2036,631219.0,560263.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2037,633878.0,562228.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2038,636241.0,563962.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2039,638385.0,565502.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2040,640269.0,566843.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2041,641922.0,567993.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2042,643372.0,568970.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+47001,2043,645287.7960343355,570328.0708077062,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2044,647209.2968156063,571689.3831858268,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2045,649136.5193310787,573053.9448716453,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2046,651069.4806186026,574421.7636209133,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2047,653008.1977667627,575792.8472078943,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2048,654952.6879150288,577167.2034254085,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2049,656902.9682539073,578544.8400848763,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+47001,2050,658859.0560250942,579925.7650163635,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2018,531285.0,492052.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2019,542056.0,500950.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2020,554012.0,510931.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2021,561992.0,518043.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2022,567986.0,523322.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2023,573473.0,528106.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2024,579176.0,533088.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2025,584389.0,537605.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2026,588645.0,541221.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2027,592656.0,544596.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2028,596468.0,547780.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2029,600093.0,550804.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2030,603587.0,553692.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2031,606950.0,556453.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2032,610189.0,559101.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2033,613311.0,561637.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2034,616324.0,564065.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2035,619244.0,566398.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2036,622068.0,568647.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2037,624800.0,570797.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2038,627478.0,572884.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2039,630050.0,574873.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2040,632579.0,576808.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2041,635029.0,578672.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2042,637426.0,580474.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+50001,2043,639981.6541365449,582428.9987370014,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2044,642547.5547457244,584390.5817827949,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2045,645123.7429090763,586358.7713129047,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2046,647710.2598728476,588333.589577541,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2047,650307.1470486555,590315.0589018512,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2048,652914.4460141505,592303.2016861724,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2049,655532.1985136814,594298.0404062847,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+50001,2050,658160.4464589643,596299.5976136648,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2018,392934.0,308096.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2019,395380.0,309284.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2020,397905.0,310518.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2021,399607.0,311908.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2022,400907.0,312979.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2023,401996.0,313894.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2024,403166.0,314869.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2025,404102.0,315662.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2026,404775.0,316257.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2027,405306.0,316739.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2028,405682.0,317091.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2029,405938.0,317358.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2030,406050.0,317513.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2031,406031.0,317563.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2032,405873.0,317510.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2033,405621.0,317383.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2034,405208.0,317134.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2035,404684.0,316805.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2036,404019.0,316370.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2037,403233.0,315850.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2038,402327.0,315243.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2039,401303.0,314527.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2040,400150.0,313731.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2041,398863.0,312841.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2042,397480.0,311858.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+52001,2043,396339.287209906,311065.67506684444,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2044,395201.84810822265,310275.36316141207,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2045,394067.67329991574,309487.05916928523,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2046,392936.75341691327,308700.7579890403,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2047,391809.0791180286,307916.4545322147,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2048,390684.6410888827,307134.1437232736,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2049,389563.4300418278,306353.82049957773,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+52001,2050,388445.4367158702,305575.4798113502,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2018,711714.0,685447.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2019,736089.0,708644.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2020,765533.0,736719.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2021,777903.0,748409.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2022,783029.0,753123.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2023,787444.0,757159.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2024,790984.0,760344.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2025,793211.0,762256.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2026,792180.0,761043.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2027,790552.0,759260.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2028,788565.0,757114.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2029,786358.0,754766.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2030,784007.0,752271.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2031,781563.0,749695.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2032,779061.0,747045.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2033,776497.0,744354.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2034,773913.0,741625.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2035,771292.0,738872.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2036,768651.0,736102.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2037,766019.0,733326.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2038,763377.0,730543.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2039,760713.0,727745.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2040,758062.0,724955.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2041,755417.0,722154.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2042,752748.0,719346.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+54001,2043,750121.5182943892,716582.1454698333,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2044,747504.2008856613,713828.9101574891,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2045,744896.0157978319,711086.2532620552,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2046,742296.9311664874,708354.1341393832,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2047,739706.9152383949,705632.5123014867,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2048,737125.9363711147,702921.3474159414,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2049,734553.9630326137,700220.5993052875,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+54001,2050,731990.9638008801,697530.2279464337,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2018,295208.0,287249.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2019,297241.0,289328.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2020,299485.0,291633.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2021,302063.0,294093.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2022,303588.0,295538.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2023,304311.0,296198.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2024,305676.0,297493.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2025,306682.0,298425.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2026,307103.0,298815.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2027,307420.0,299089.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2028,307599.0,299237.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2029,307691.0,299300.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2030,307641.0,299242.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2031,307534.0,299121.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2032,307267.0,298860.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2033,306907.0,298499.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2034,306399.0,298009.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2035,305744.0,297388.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2036,304997.0,296673.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2037,304092.0,295802.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2038,303026.0,294784.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2039,301827.0,293640.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2040,300477.0,292341.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2041,298951.0,290879.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2042,297298.0,289296.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+63001,2043,295957.52454946877,288012.07322422747,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2044,294623.09311683703,286733.8446536342,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2045,293294.67845046625,285461.2889989725,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2046,291972.2534215919,284194.38108323107,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2047,290655.7910237691,282933.095841137,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2048,289345.2643723214,281677.40831865947,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2049,288040.6467037917,280427.2936725166,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+63001,2050,286741.9113753954,279182.7271696836,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2018,467261.0,385831.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2019,471992.0,391143.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2020,477044.0,396745.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2021,480898.0,400608.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2022,483139.0,403115.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2023,484084.0,404531.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2024,486042.0,406831.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2025,487359.0,408608.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2026,487820.0,409683.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2027,488044.0,410578.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2028,488044.0,411319.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2029,487840.0,411905.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2030,487471.0,412376.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2031,486854.0,412663.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2032,486079.0,412825.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2033,485074.0,412805.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2034,483863.0,412618.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2035,482431.0,412246.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2036,480756.0,411700.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2037,478873.0,410963.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2038,476772.0,410023.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2039,474407.0,408860.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2040,471824.0,407473.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2041,469012.0,405894.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2042,465968.0,404089.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+66001,2043,463429.03633872775,402728.05942010274,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2044,460903.906967521,401371.70238309324,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2045,458392.5365061826,400019.9134519528,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2046,455894.8499852463,398672.67724165315,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2047,453410.77284373937,397329.9784189818,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2048,450940.23092695617,395991.801702367,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2049,448483.150484245,394658.13186170475,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+66001,2050,446039.458166806,393328.95371818426,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2018,581138.0,570756.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2019,590543.0,580133.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2020,601668.0,591209.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2021,607264.0,596738.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2022,610214.0,599666.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2023,612638.0,602080.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2024,615463.0,604881.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2025,617659.0,607060.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2026,618548.0,607951.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2027,619155.0,608570.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2028,619549.0,608987.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2029,619788.0,609227.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2030,619876.0,609341.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2031,619832.0,609325.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2032,619652.0,609181.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2033,619357.0,608925.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2034,618926.0,608542.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2035,618385.0,608044.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2036,617711.0,607419.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2037,616912.0,606681.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2038,615966.0,605804.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2039,614908.0,604821.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2040,613712.0,603696.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2041,612361.0,602443.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2042,610880.0,601056.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+68001,2043,609680.6960488096,599937.2739759915,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2044,608483.746618912,598820.6302004206,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2045,607289.1470878172,597706.0647976656,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2046,606096.8928421102,596593.5738993186,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2047,604906.9792774334,595483.1536441721,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2048,603719.4017984685,594374.800178205,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2049,602534.155818919,593268.5096545697,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+68001,2050,601351.2367614923,592164.2782335785,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2018,277775.0,249322.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2019,286099.0,255615.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2020,295008.0,262440.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2021,301886.0,268457.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2022,307953.0,273757.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2023,313864.0,278938.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2024,319888.0,284215.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2025,325685.0,289318.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2026,331045.0,294007.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2027,336231.0,298545.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2028,341271.0,302955.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2029,346132.0,307199.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2030,350835.0,311289.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2031,355374.0,315219.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2032,359731.0,318968.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2033,363885.0,322543.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2034,367870.0,325941.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2035,371683.0,329181.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2036,375316.0,332249.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2037,378785.0,335171.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2038,382083.0,337935.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2039,385214.0,340553.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2040,388204.0,343032.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2041,391057.0,345387.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2042,393773.0,347610.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+70001,2043,396841.0286971452,350152.65766278317,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2044,399932.9615220149,352713.9140655051,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2045,403048.9847203647,355293.9052520903,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2046,406189.2859890583,357892.76826158195,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2047,409354.05448737415,360510.6411354204,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2048,412543.4808483993,363147.6629247759,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2049,415757.7571905128,365803.97369793395,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+70001,2050,418997.0771289575,368479.71454773564,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2018,529634.0,492551.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2019,533745.0,495718.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2020,538183.0,499160.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2021,542584.0,503277.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2022,545946.0,506425.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2023,548695.0,508954.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2024,552035.0,512022.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2025,554947.0,514685.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2026,557317.0,516862.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2027,559515.0,518880.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2028,561557.0,520788.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2029,563432.0,522568.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2030,565198.0,524279.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2031,566788.0,525857.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2032,568264.0,527341.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2033,569526.0,528672.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2034,570630.0,529870.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2035,571525.0,530896.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2036,572251.0,531775.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2037,572737.0,532469.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2038,572989.0,532944.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2039,572989.0,533202.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2040,572758.0,533242.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2041,572262.0,533046.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2042,571509.0,532614.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+73001,2043,571263.7161340093,532643.00473796,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2044,571018.5375405076,532672.0110554405,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2045,570773.4641743134,532701.0189525279,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2046,570528.4959902645,532730.028429308,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2047,570283.6329432182,532759.0394858668,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2048,570038.8749880512,532788.0521222902,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2049,569794.2220796595,532817.0663386647,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+73001,2050,569549.6741729584,532846.0821350759,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2018,2227649.0,2172531.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2019,2248066.0,2194330.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2020,2272432.0,2220070.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2021,2282418.0,2229795.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2022,2283342.0,2230667.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2023,2280485.0,2227822.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2024,2280171.0,2227444.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2025,2277296.0,2224562.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2026,2269983.0,2217353.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2027,2261787.0,2209265.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2028,2252899.0,2200526.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2029,2243456.0,2191270.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2030,2233593.0,2181620.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2031,2223303.0,2171567.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2032,2212511.0,2161078.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2033,2201282.0,2150177.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2034,2189573.0,2138833.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2035,2177352.0,2127032.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2036,2164629.0,2114747.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2037,2151363.0,2101973.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2038,2137545.0,2088677.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2039,2123177.0,2074867.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2040,2108246.0,2060529.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2041,2092738.0,2045660.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2042,2076657.0,2030250.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+76001,2043,2062030.0281391514,2016201.7917699632,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2044,2047506.08162424,2002250.78937885,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2045,2033084.4347943426,1988396.320215964,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2046,2018764.367099742,1974637.716324703,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2047,2004545.1630659262,1960974.3143703558,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2048,1990426.1122578408,1947405.4556081204,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2049,1976406.509244395,1933930.4858513454,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+76001,2050,1962485.6535632133,1920548.7554399893,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2018,85590.0,74195.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2019,86867.0,75081.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2020,88336.0,76147.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2021,89163.0,76790.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2022,89702.0,77172.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2023,90162.0,77483.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2024,90619.0,77810.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2025,91017.0,78057.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2026,91253.0,78169.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2027,91415.0,78223.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2028,91532.0,78236.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2029,91619.0,78215.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2030,91667.0,78158.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2031,91660.0,78071.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2032,91599.0,77932.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2033,91518.0,77775.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2034,91388.0,77573.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2035,91216.0,77349.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2036,91007.0,77082.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2037,90761.0,76782.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2038,90455.0,76440.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2039,90140.0,76088.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2040,89772.0,75691.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2041,89382.0,75279.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2042,88947.0,74819.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+81001,2043,88588.57407288328,74432.46383722093,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2044,88231.59247941726,74047.92462982933,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2045,87876.04939943232,73665.37206098762,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2046,87521.93903621213,73284.79586715788,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2047,87169.25561639912,72906.18583782658,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2048,86817.99338990038,72529.53181523056,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2049,86468.14662979393,72154.82369408457,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+81001,2050,86119.70963223529,71782.05142131011,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2018,168427.0,143618.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2019,173316.0,148223.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2020,178549.0,153117.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2021,182573.0,156807.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2022,185962.0,159955.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2023,189187.0,162972.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2024,192468.0,166045.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2025,195600.0,168988.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2026,198423.0,171669.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2027,201121.0,174255.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2028,203735.0,176760.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2029,206261.0,179190.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2030,208720.0,181553.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2031,211074.0,183837.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2032,213365.0,186053.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2033,215570.0,188200.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2034,217690.0,190258.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2035,219725.0,192238.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2036,221664.0,194129.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2037,223515.0,195935.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2038,225266.0,197638.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2039,226957.0,199264.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2040,228528.0,200787.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2041,230038.0,202224.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2042,231432.0,203567.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+85001,2043,233048.73795693286,205128.70933035243,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2044,234676.77012392043,206702.39965974944,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2045,236316.17540006957,208288.16290307895,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2046,237967.03323566058,209886.0916803744,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2047,239629.42363599758,211496.2793222242,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2048,241303.42716528592,213118.81987522318,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2049,242989.12495053647,214753.80810746527,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+85001,2050,244686.59868549719,216401.339514079,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2018,56390.0,38446.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2019,58127.0,39850.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2020,59862.0,41239.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2021,61451.0,42474.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2022,62945.0,43656.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2023,64386.0,44803.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2024,65766.0,45925.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2025,67093.0,47015.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2026,68328.0,48054.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2027,69481.0,49028.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2028,70579.0,49968.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2029,71610.0,50855.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2030,72569.0,51694.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2031,73473.0,52487.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2032,74283.0,53208.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2033,75013.0,53878.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2034,75697.0,54496.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2035,76321.0,55070.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2036,76852.0,55568.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2037,77322.0,56030.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2038,77726.0,56423.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2039,78088.0,56787.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2040,78351.0,57071.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2041,78572.0,57312.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2042,78715.0,57512.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+86001,2043,78996.59713138634,57813.071099543704,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2044,79279.20165582871,58115.718284199735,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2045,79562.81717720177,58419.949804658005,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2046,79847.44731227281,58725.77395480017,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2047,80133.0956907478,59033.19907192575,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2048,80419.76595531772,59342.233536979424,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2049,80707.46176170505,59652.88577477949,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+86001,2050,80996.18677871031,59965.16425424757,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2018,55286.0,41402.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2019,55644.0,41542.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2020,56055.0,41744.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2021,56422.0,42169.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2022,56608.0,42478.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2023,56768.0,42775.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2024,56965.0,43108.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2025,57118.0,43422.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2026,57185.0,43668.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2027,57227.0,43912.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2028,57261.0,44137.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2029,57269.0,44360.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2030,57294.0,44578.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2031,57315.0,44788.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2032,57320.0,44986.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2033,57302.0,45153.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2034,57323.0,45344.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2035,57299.0,45494.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2036,57277.0,45623.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2037,57273.0,45763.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2038,57259.0,45885.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2039,57235.0,45976.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2040,57219.0,46077.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2041,57194.0,46150.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2042,57141.0,46193.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+88001,2043,57114.6365297154,46279.48363608571,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2044,57088.285222896004,46366.12918889711,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2045,57061.94607392988,46452.93696157859,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2046,57035.61907720771,46539.907257842024,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2047,57009.30422712273,46627.04038196797,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2048,56983.00151807078,46714.33663880661,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2049,56956.71094445027,46801.79633377892,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+88001,2050,56930.432500662224,46889.41977287764,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2018,48182.0,33573.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2019,49058.0,34257.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2020,49965.0,34986.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2021,50872.0,35764.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2022,51645.0,36473.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2023,52369.0,37132.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2024,53059.0,37779.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2025,53670.0,38378.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2026,54208.0,38906.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2027,54693.0,39382.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2028,55118.0,39817.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2029,55491.0,40207.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2030,55816.0,40535.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2031,56077.0,40794.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2032,56299.0,41004.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2033,56471.0,41168.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2034,56590.0,41280.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2035,56699.0,41356.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2036,56744.0,41359.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2037,56750.0,41326.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2038,56731.0,41261.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2039,56679.0,41145.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2040,56637.0,41024.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2041,56517.0,40841.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2042,56388.0,40649.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+91001,2043,56315.87757015327,40514.93672588187,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2044,56243.847387679874,40381.31560191422,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2045,56171.90933459185,40248.13516985463,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2046,56100.063293052146,40115.39397627004,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2047,56028.30914537445,39983.09057252093,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2048,55956.64677402296,39851.223514745485,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2049,55885.07606161221,39719.791363843855,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+91001,2050,55813.596890906876,39588.79268546244,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2018,31533.0,20322.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2019,32779.0,21296.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2020,34028.0,22278.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2021,35282.0,23182.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2022,36465.0,24024.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2023,37593.0,24845.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2024,38710.0,25654.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2025,39735.0,26396.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2026,40729.0,27117.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2027,41662.0,27788.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2028,42507.0,28389.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2029,43334.0,28969.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2030,44087.0,29480.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2031,44808.0,29966.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2032,45446.0,30373.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2033,46032.0,30742.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2034,46571.0,31066.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2035,47041.0,31328.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2036,47489.0,31560.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2037,47851.0,31732.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2038,48201.0,31869.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2039,48509.0,31984.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2040,48760.0,32038.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2041,48959.0,32047.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2042,49137.0,32050.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+94001,2043,49398.31799537495,32113.98140036565,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2044,49661.025719359845,32178.090526771626,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2045,49925.13056274155,32242.32763419738,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2046,50190.63995561226,32306.692978131363,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2047,50457.56136757853,32371.186814572044,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2048,50725.902307971395,32435.809400028968,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2049,50995.670326057654,32500.560991523726,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+94001,2050,51266.87301125225,32565.441846591017,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2018,52849.0,36417.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2019,53107.0,36586.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2020,53432.0,36829.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2021,53740.0,37008.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2022,53944.0,37111.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2023,54140.0,37196.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2024,54315.0,37267.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2025,54434.0,37288.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2026,54519.0,37259.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2027,54558.0,37214.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2028,54569.0,37131.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2029,54548.0,37022.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2030,54522.0,36896.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2031,54452.0,36740.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2032,54351.0,36555.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2033,54222.0,36343.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2034,54093.0,36126.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2035,53938.0,35875.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2036,53768.0,35616.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2037,53601.0,35353.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2038,53387.0,35056.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2039,53171.0,34748.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2040,52963.0,34443.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2041,52750.0,34133.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2042,52506.0,33804.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+95001,2043,52289.699093575975,33502.44145886186,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2044,52074.28924878528,33203.57305953337,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2045,51859.76679485812,32907.37080381197,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2046,51646.128076146604,32613.810907578114,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2047,51433.36945206246,32322.869798885524,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2048,51221.48729701498,32034.524116068405,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2049,51010.47800034924,31748.75070586559,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+95001,2050,50800.33796628459,31465.52662156139,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2018,29831.0,9765.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2019,30265.0,9700.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2020,30726.0,9672.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2021,31042.0,9671.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2022,31298.0,9632.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2023,31550.0,9561.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2024,31810.0,9477.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2025,32040.0,9361.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2026,32260.0,9232.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2027,32454.0,9084.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2028,32656.0,8933.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2029,32842.0,8778.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2030,33023.0,8625.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2031,33190.0,8477.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2032,33373.0,8345.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2033,33539.0,8218.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2034,33707.0,8108.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2035,33864.0,8000.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2036,34001.0,7901.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2037,34159.0,7819.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2038,34315.0,7742.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2039,34465.0,7684.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2040,34606.0,7611.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2041,34755.0,7538.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2042,34884.0,7470.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+97001,2043,35030.83615964511,7402.092016175409,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2044,35178.29039226864,7334.801367594075,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2045,35326.365299506375,7268.122442208912,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2046,35475.063493945076,7202.049678990616,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2047,35624.38759916859,7136.57756746387,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2048,35774.340249804154,7071.70064724777,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2049,35924.92409156882,7007.413507600427,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+97001,2050,36076.14178131621,6943.710786967717,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2018,20946.0,14981.0,base_censal_conciliada,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2019,21558.0,15865.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2020,22205.0,16790.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2021,22705.0,17167.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2022,23131.0,17474.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2023,23536.0,17782.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2024,23959.0,18094.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2025,24341.0,18374.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2026,24697.0,18633.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2027,25045.0,18880.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2028,25383.0,19119.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2029,25695.0,19344.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2030,26035.0,19583.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2031,26329.0,19793.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2032,26634.0,20007.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2033,26928.0,20204.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2034,27188.0,20397.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2035,27468.0,20586.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2036,27724.0,20763.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2037,27972.0,20928.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2038,28214.0,21092.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2039,28451.0,21248.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2040,28664.0,21389.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2041,28885.0,21527.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2042,29084.0,21661.0,proyeccion_oficial,"DANE (2025). Proyecciones de población municipal por área geográfica 2018-2042, actualización 30-jul-2025. Modelo de componentes de cohortes."
+99001,2043,29311.64952687481,21810.65245595517,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2044,29541.080937503106,21961.338837286516,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2045,29772.308179244028,22113.066287222508,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2046,30005.345308627057,22265.841998343058,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2047,30240.20649220649,22419.673212920487,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2048,30476.90600742267,22574.567223262842,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2049,30715.458243469904,22730.531372059595,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050
+99001,2050,30955.877702171216,22887.573052729673,estimado,Extensión del observatorio: tasa media log de 2037-2042 (DANE) aplicada a 2043-2050

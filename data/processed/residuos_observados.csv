@@ -1,0 +1,4 @@
+divipola,anio,variable,valor,unidad,tipo_dato,calidad,fuente,nota
+13001,2017,relleno_nombre,Parque Ambiental Loma de Los Cocos (Caribe Verde S.A. E.S.P.),texto,observado,documental,"SSPD, Informe de seguimiento a sitios de disposición final – Caribe Verde, https://www.superservicios.gov.co/sites/default/files/inline-files/caribe_verde_s.a._e.s.p.pdf",Ubicado en Turbana (Bolívar)
+76001,2024,relleno_nombre,Relleno Sanitario Regional Colomba – El Guabal (Yotoco),texto,observado,documental,"Alcaldía de Santiago de Cali (2024), https://www.cali.gov.co/planeacion/publicaciones/185124/",Relleno regional compartido con otros municipios del Valle del Cauca
+76001,2024,vida_util_reportada_anios,6.5,años,observado,documental,"CVC, comunicado del 11-oct-2024, citado por la Alcaldía de Cali, https://www.cali.gov.co/planeacion/publicaciones/185124/",Condicionado a la viabilidad técnica y ambiental de la ocupación del sitio; relleno compartido
