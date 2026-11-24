@@ -1,0 +1,2 @@
+-r requirements.txt
+git+https://github.com/RMI/SWEET_python.git@631325f268798755c117621602c12a05b0facc7d
